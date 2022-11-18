@@ -63,13 +63,13 @@ export const mgmtServiceApi = baseApi.injectEndpoints({
       }),
       transformResponse: (response: any) => response.data,
     }),
-    fetchAllGradeLevels: builder.query<void, FetchAllBOIEmployees>({
-      query: (body) => ({
+    fetchAllGradeLevels: builder.query<void, void>({
+      query: () => ({
         url: `${urlTemplate}/FetchAllGradeLevels'`,
       }),
       transformResponse: (response: any) => response.data,
     }),
-    createBOIEmployee: builder.query<void, CreateBOIEmployee>({
+    createBOIEmployee: builder.mutation<void, CreateBOIEmployee>({
       query: (body) => {
         return {
           url: `${urlTemplate}/CreateBOIEmployee`,
@@ -78,7 +78,7 @@ export const mgmtServiceApi = baseApi.injectEndpoints({
         };
       },
     }),
-    editBOIEmployee: builder.query<void, EditBOIEmployee>({
+    editBOIEmployee: builder.mutation<void, EditBOIEmployee>({
       query: (body) => {
         return {
           url: `${urlTemplate}/EditBOIEmployee`,
@@ -88,4 +88,13 @@ export const mgmtServiceApi = baseApi.injectEndpoints({
       },
     }),
   }),
+  overrideExisting: false,
 });
+
+export const {
+  useFetchAllBOIEmployeesQuery,
+  useFetchBOIEmployeeByIdQuery,
+  useFetchAllGradeLevelsQuery,
+  useCreateBOIEmployeeMutation,
+  useEditBOIEmployeeMutation,
+} = mgmtServiceApi;
