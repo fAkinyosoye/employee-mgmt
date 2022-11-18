@@ -4,8 +4,9 @@ import { TestPageOne, TestPageTwo } from "../components/pages";
 const PageRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<TestPageOne />} />
+      <Route index element={<TestPageOne />} />
       <Route path="/testPage" element={<TestPageTwo />} />
+      <Route path="*" element={<TestPageTwo />} />
     </Routes>
   );
 };
