@@ -1,52 +1,19 @@
 import Select from "react-select";
 import { useController } from "react-hook-form";
 
-// import { colourStyles } from "../helper/goToTop";
-
-interface SelectProps {
-  className?: string;
-  onChange?: any;
-  name?: string;
-  isLoading?: boolean;
-  options?: object;
-  rules?: string;
-  isMulti?: boolean;
-  isOptionDisabled?: boolean;
-  value?: any;
-  type: string;
-  label?: string;
-  placeholder?: string;
-  required?: boolean;
-  error?: string;
-  bgColor?: string;
-  register?: object;
-  id?: string;
-  pattern?: any;
-  onClick?: any;
-  disabled?: boolean;
-  autoComplete?: any;
-  width?: any;
-  minLength?: number;
-  maxLength?: number;
-  ifRounded?: boolean;
-  readOnly?: boolean;
-  customOnChange?: Function;
-}
-
-const CustomSelect = (props: SelectProps) => {
-  const {
-    options,
-    isLoading,
-    placeholder,
-    name,
-    control,
-    error,
-    label,
-    customOnChange,
-    rules,
-    isMulti,
-    isOptionDisabled,
-  } = props;
+const CustomSelect = ({
+  options,
+  isLoading,
+  placeholder,
+  name,
+  control,
+  error,
+  label,
+  customOnChange,
+  rules,
+  isMulti,
+  isOptionDisabled,
+}: any) => {
   const { field } = useController({ name, control, rules });
 
   return (
@@ -54,11 +21,11 @@ const CustomSelect = (props: SelectProps) => {
       <label className="text-sm font-normal text-blueTwo">{label}</label>
       <Select
         options={options}
-        onChange={(val) => {
+        onChange={(val: any) => {
           customOnChange && customOnChange(val);
           isMulti
             ? // onchange for react-select multi options
-              field.onChange(val.map((val) => val.value))
+              field.onChange(val.map((val: any) => val.value))
             : field.onChange(val.value);
         }}
         isLoading={isLoading}
