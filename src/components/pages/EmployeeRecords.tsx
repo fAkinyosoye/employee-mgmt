@@ -1,22 +1,10 @@
 import React, { useCallback } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+// import { Controller, useForm } from "react-hook-form";
+// import { toast } from "react-toastify";
 
-import { Button, CustomSelect, Input, Table } from "../atoms";
+import { Table } from "../atoms";
 
-const TestPageOne = () => {
-  const { control } = useForm();
-  const testValues = [
-    {
-      label: "Option1",
-      value: "Option1",
-    },
-    {
-      label: "Option2",
-      value: "Option2",
-    },
-  ];
-
+const EmployeeRecords = () => {
   const getData = useCallback(() => {
     const dummyData = [
       {
@@ -81,24 +69,8 @@ const TestPageOne = () => {
 
   const data = React.useMemo(() => getData(), [getData]);
 
-  // toast("Toast message");
-
   return (
-    <div className="mt-8 mx-10">
-      <Input type="text" />
-      <CustomSelect control={control} options={testValues} name="testSelect" />
-      <Button
-        type="button"
-        text="Sample Button"
-        bgColor="#FF0000"
-        isLoading={true}
-      />
-      <Button
-        type="button"
-        text="Sample Button"
-        className="font-bold text-white"
-      />
-
+    <div>
       <Table
         data={data}
         columns={columns}
@@ -111,4 +83,4 @@ const TestPageOne = () => {
   );
 };
 
-export { TestPageOne };
+export { EmployeeRecords };

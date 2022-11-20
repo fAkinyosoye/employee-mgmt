@@ -41,7 +41,7 @@ const Login = () => {
     setIsLoading(true);
     try {
       console.log(data);
-      navigate("/");
+      navigate("/employee-records");
       // const res = await login(data).unwrap();
       // if (res.statusCode === 200) {
       //   alert("success");
