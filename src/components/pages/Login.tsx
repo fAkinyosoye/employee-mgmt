@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 import logoImg from "../../assets/images/uploadedwebclientlogo.jpg";
 import { useLoginMutation } from "../../redux/services/auth-services";
@@ -49,9 +49,9 @@ const Login = () => {
       //   navigate("/");
       //   console.log(res);
       // }
-      toast.success("Success!");
+      // toast.success("Success!");
     } catch (error: any) {
-      alert("error");
+      toast.error(error);
       console.log(error);
       setIsLoading(false);
     }

@@ -32,6 +32,7 @@ const Table = ({
               Click the button below to learn more
             </p>
             <Button
+              type="button"
               text={emptyStateText}
               className="text-white mt-4 border-none"
               bgColor="#201CFF"

@@ -10,6 +10,7 @@ const EmployeeRecords = () => {
       {
         id: "1",
         name: "Employee One",
+        email: "employeeone@boi.ng",
         grade: "Assistant Banking officer",
         status: "active",
         phoneNumber: "08139500243",

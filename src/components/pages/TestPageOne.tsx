@@ -46,12 +46,12 @@ const TestPageOne = () => {
       dummyData &&
       dummyData?.map((item, i) => {
         return {
-          name: <p className="text-xs font-normal">{item?.name}</p>,
+          name: <p className="text-sm font-normal">{item?.name}</p>,
           phoneNumber: (
-            <p className="text-xs font-normal">{item?.phoneNumber}</p>
+            <p className="text-sm font-normal">{item?.phoneNumber}</p>
           ),
-          status: <p className="text-xs font-normal">{item?.status}</p>,
-          grade: <p className="text-xs font-normal">{item?.grade}</p>,
+          status: <p className="text-sm font-normal">{item?.status}</p>,
+          grade: <p className="text-sm font-normal">{item?.grade}</p>,
         };
       });
     return [...(result || [])];
