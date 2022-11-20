@@ -69,9 +69,9 @@ const Login = () => {
       <form
         // onSubmit={(e: any) => submitHandler(e)}
         onSubmit={handleSubmit(submit)}
-        className="mx-auto my-auto w-4/5 lg:w-3/5 xl:w-2/5 flex flex-col gap-y-4"
+        className="mx-auto my-auto w-4/5 lg:w-3/5 xl:w-2/5 flex flex-col"
       >
-        <Header1 className="text-center" mt="5rem" mb="0">
+        <Header1 className="text-center" mt="2rem" mb="0">
           Login
         </Header1>
         <Subtitle className="text-center">
@@ -107,7 +107,7 @@ const Login = () => {
           isLoading={isLoading}
           text="Submit"
           type="submit"
-          className="mt-5"
+          className="mt-2"
         />
       </form>
     </div>

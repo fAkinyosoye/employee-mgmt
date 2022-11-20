@@ -59,8 +59,6 @@ const Input = (props: InputProps) => {
         style={{
           border: error ? "1px solid red" : "",
           backgroundColor: readOnly ? "#ACB5BD" : "",
-          fontSize: "14px",
-          lineHeight: "17px",
           //   borderRadius: ifRounded && "6px",
         }}
       />

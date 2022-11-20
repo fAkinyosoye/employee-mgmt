@@ -9,7 +9,7 @@ interface TextType {
 }
 
 export const Header1 = styled.h1<TextType>`
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
   color: ${({ color }: TextType) => color ?? Colors.boiGreen};
   margin-top: ${({ mt }: TextType) => mt ?? "2rem"};
@@ -19,7 +19,7 @@ export const Header1 = styled.h1<TextType>`
 export const Label = styled.p<TextType>`
   font-weight: bold;
   color: ${({ color }: TextType) => color ?? Colors.boiGreen};
-  // margin-bottom: ${({ mb }: TextType) => mb ?? "1rem"};
+  margin-bottom: ${({ mb }: TextType) => mb ?? "0.5rem"};
 `;
 
 export const Subtitle = styled.p<TextType>`
