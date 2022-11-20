@@ -59,11 +59,13 @@ const Input = (props: InputProps) => {
         style={{
           border: error ? "1px solid red" : "",
           backgroundColor: readOnly ? "#ACB5BD" : "",
+          fontSize: "14px",
+          lineHeight: "17px",
           //   borderRadius: ifRounded && "6px",
         }}
       />
       <span>
-        <p className="text-red-500 text-xs"> {error}</p>
+        <p className="text-red-500 mt-3 text-sm">{error}</p>
       </span>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 import logoImg from "../../assets/images/uploadedwebclientlogo.jpg";
 import { useLoginMutation } from "../../redux/services/auth-services";
@@ -13,10 +14,10 @@ export type LoginRequest = {
 
 const Login = () => {
   const [login] = useLoginMutation();
-  const [formData, setFormData] = useState<LoginRequest>({
-    emailOrUserName: "Freeman",
-    password: "Liberia",
-  });
+  // const [formData, setFormData] = useState<LoginRequest>({
+  //   emailOrUserName: "Freeman",
+  //   password: "Liberia",
+  // });
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -39,13 +40,16 @@ const Login = () => {
   const submit = async (data: LoginRequest): Promise<void> => {
     setIsLoading(true);
     try {
-      const res = await login(formData).unwrap();
-      if (res.status === "success") {
-        alert("success");
-        setIsLoading(false);
-        navigate("/");
-        console.log(res);
-      }
+      console.log(data);
+      navigate("/");
+      // const res = await login(data).unwrap();
+      // if (res.statusCode === 200) {
+      //   alert("success");
+      //   setIsLoading(false);
+      //   navigate("/");
+      //   console.log(res);
+      // }
+      toast.success("Success!");
     } catch (error: any) {
       alert("error");
       console.log(error);

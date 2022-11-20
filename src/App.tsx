@@ -5,10 +5,9 @@ import { ToastContainer } from "react-toastify";
 import { PageRouter } from "./router";
 
 function App() {
-  console.log(import.meta.env.VITE_BASE_URL,)
+  console.log(import.meta.env.VITE_BASE_URL);
   return (
     <>
-      <PageRouter />
       <ToastContainer
         progressClassName="toastProgress"
         bodyClassName="toastBody"
@@ -16,7 +15,9 @@ function App() {
         icon={false}
         closeButton={true}
         hideProgressBar
+        position="top-center"
       />
+      <PageRouter />
     </>
   );
 }

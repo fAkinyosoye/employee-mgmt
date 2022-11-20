@@ -40,14 +40,15 @@ const Button = ({
       onClick={onClick}
       disabled={isLoading}
     >
-      {ifIcon && <img src={icon} alt="cloud" className="pr-2 w-5 h-5" />}
+      {ifIcon && <img src={icon} alt="cloud" className="pr-2 w-8 h-8" />}
       {isLoading ? (
-        <div className="flex items-center justify-center">
+        <div className="w-full flex flex-row items-center justify-center">
           <svg
-            className="animate-spin h-5 w-5 text-white"
+            className="animate-spin h-8 w-8 text-white"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
+            style={{ color: "white" }}
           >
             <circle
               className="opacity-25"
