@@ -1,46 +1,55 @@
 import React, { ChangeEvent, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import logoImg from "../../assets/images/uploadedwebclientlogo.jpg";
 import { useLoginMutation } from "../../redux/services/auth-services";
 import { Button, Header1, Input, Label, Subtitle } from "../atoms";
 
-export type FormData = {
+export type LoginRequest = {
   emailOrUserName: string;
   password: string;
 };
 
 const Login = () => {
   const [login] = useLoginMutation();
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<LoginRequest>({
     emailOrUserName: "Freeman",
     password: "Liberia",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleFormDataChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<LoginRequest>();
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const navigate = useNavigate();
 
-  const submitHandler = async (e: any): Promise<void> => {
-    e.preventDefault();
-    // setIsLoading(true);
+  // const handleFormDataChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
+
+  const submit = async (data: LoginRequest): Promise<void> => {
+    setIsLoading(true);
     try {
       const res = await login(formData).unwrap();
       if (res.status === "success") {
         alert("success");
+        setIsLoading(false);
+        navigate("/");
         console.log(res);
-        // message.success(res.message);
-        // setIsLoading(false);
       }
     } catch (error: any) {
       alert("error");
       console.log(error);
-      // message.error(error?.data?.message);
-      // setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -54,7 +63,8 @@ const Login = () => {
         className="mx-auto my-10"
       />
       <form
-        onSubmit={(e: any) => submitHandler(e)}
+        // onSubmit={(e: any) => submitHandler(e)}
+        onSubmit={handleSubmit(submit)}
         className="mx-auto my-auto w-4/5 lg:w-3/5 xl:w-2/5 flex flex-col gap-y-4"
       >
         <Header1 className="text-center" mt="5rem" mb="0">
@@ -63,21 +73,38 @@ const Login = () => {
         <Subtitle className="text-center">
           Sign in to the Employee Management Portal
         </Subtitle>
+
         <Label>Email or Username</Label>
         <Input
-          type="text"
-          name="emailOrUserName"
-          onChange={handleFormDataChange}
+          type="email"
+          placeholder="login@boi.ng"
+          register={{
+            ...register("emailOrUserName", {
+              required: "This field is required",
+            }),
+          }}
+          error={errors?.emailOrUserName?.message}
         />
 
         <Label>Password</Label>
         <Input
           type="password"
-          name="password"
-          onChange={handleFormDataChange}
+          placeholder="********"
+          register={{
+            ...register("password", {
+              required: "This field is required",
+              minLength: 8,
+            }),
+          }}
+          error={errors?.password?.message}
         />
 
-        <Button text="Submit" type="submit" className="mt-5" />
+        <Button
+          isLoading={isLoading}
+          text="Submit"
+          type="submit"
+          className="mt-5"
+        />
       </form>
     </div>
   );
