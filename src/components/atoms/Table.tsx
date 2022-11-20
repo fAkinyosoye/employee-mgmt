@@ -63,7 +63,7 @@ const Table = ({
                       {headerGroup.headers.map((column: any) => (
                         <th
                           {...column.getHeaderProps()}
-                          className="border border-blackTwo font-normal whitespace-nowrap text-sm uppercase p-2 text-left font-bold"
+                          className="border border-blackTwo whitespace-nowrap text-sm uppercase p-2 text-left font-bold"
                         >
                           {column.render("Header")}
                         </th>
@@ -81,10 +81,15 @@ const Table = ({
                         // onClick={() => onClick(row.original)}
                       >
                         {row.cells.map((cell: any) => {
+                          console.log(cell);
                           return (
                             <td
                               {...cell.getCellProps()}
-                              className="border border-blackTwo whitespace-nowrap font-normal p-2 text-base"
+                              className={`border border-blackTwo whitespace-nowrap p-2 text-base ${
+                                cell?.column?.id === "view"
+                                  ? "cursor-pointer font-bold hover:text-boiGreen "
+                                  : "cursor-default font-normal"
+                              }`}
                             >
                               {cell.render("Cell")}
                             </td>

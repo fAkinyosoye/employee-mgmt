@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { Link } from "react-router-dom";
 // import { Controller, useForm } from "react-hook-form";
 // import { toast } from "react-toastify";
 
@@ -27,6 +28,11 @@ const EmployeeRecords = () => {
         role: <p className="text-xs font-normal">{role}</p>,
         grade: <p className="text-xs font-normal">{grade}</p>,
         status: <p className="text-xs font-normal">{staffStatus}</p>,
+        view: (
+          <Link to="/" className="text-xs font-normal text-primary">
+            View more
+          </Link>
+        ),
       };
     });
     return [...(result || [])];
@@ -57,6 +63,10 @@ const EmployeeRecords = () => {
       {
         Header: "Status",
         accessor: "status",
+      },
+      {
+        Header: "",
+        accessor: "view",
       },
     ],
     []
