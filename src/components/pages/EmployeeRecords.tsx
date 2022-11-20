@@ -3,46 +3,32 @@ import React, { useCallback } from "react";
 // import { toast } from "react-toastify";
 
 import { Table } from "../atoms";
+import { dummyData } from "../utilities/employeeDummyData";
 
 const EmployeeRecords = () => {
   const getData = useCallback(() => {
-    const dummyData = [
-      {
-        id: "1",
-        name: "Employee One",
-        email: "employeeone@boi.ng",
-        grade: "Assistant Banking officer",
-        status: "active",
-        phoneNumber: "08139500243",
-      },
-      {
-        id: "2",
-        name: "Employee Two",
-        grade: "Assistant Banking officer",
-        status: "active",
-        phoneNumber: "08139500243",
-      },
-      {
-        id: "3",
-        name: "Employee Three",
-        grade: "Assistant Banking officer",
-        status: "active",
-        phoneNumber: "08139500243",
-      },
-    ];
-
-    const result =
-      dummyData &&
-      dummyData?.map((item, i) => {
-        return {
-          name: <p className="text-xs font-normal">{item?.name}</p>,
-          phoneNumber: (
-            <p className="text-xs font-normal">{item?.phoneNumber}</p>
-          ),
-          status: <p className="text-xs font-normal">{item?.status}</p>,
-          grade: <p className="text-xs font-normal">{item?.grade}</p>,
-        };
-      });
+    const result = dummyData?.map((item, i) => {
+      const {
+        firstname,
+        middleinitial,
+        lastname,
+        division,
+        unit,
+        role,
+        grade,
+        staffStatus,
+      } = item;
+      return {
+        name: (
+          <p className="text-xs font-normal">{`${firstname} ${middleinitial}. ${lastname}`}</p>
+        ),
+        division: <p className="text-xs font-normal">{division}</p>,
+        unit: <p className="text-xs font-normal">{unit}</p>,
+        role: <p className="text-xs font-normal">{role}</p>,
+        grade: <p className="text-xs font-normal">{grade}</p>,
+        status: <p className="text-xs font-normal">{staffStatus}</p>,
+      };
+    });
     return [...(result || [])];
   }, []);
 
@@ -53,16 +39,24 @@ const EmployeeRecords = () => {
         accessor: "name",
       },
       {
-        Header: "Phone Number",
-        accessor: "phoneNumber",
+        Header: "Division",
+        accessor: "division",
       },
       {
-        Header: "STATUS",
-        accessor: "status",
+        Header: "Unit",
+        accessor: "unit",
+      },
+      {
+        Header: "Role",
+        accessor: "role",
       },
       {
         Header: "Grade",
         accessor: "grade",
+      },
+      {
+        Header: "Status",
+        accessor: "status",
       },
     ],
     []
@@ -75,7 +69,7 @@ const EmployeeRecords = () => {
       <Table
         data={data}
         columns={columns}
-        emptyStateText="About Customers"
+        emptyStateText="Employee Info"
         isLoading={false}
         ifHover
         ifPagination
