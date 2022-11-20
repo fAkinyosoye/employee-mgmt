@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  font-size: 62.5%;
+  /* assuming browser default sizing is 16px, this turns it to 10px */
+  --font-size--mobile: 1.2rem; /* 12px */
+  --font-size--small: 1.4rem; /* 14px */
+  --font-size--default: 1.6rem; /* 16px */
+  --font-size--big: 1.8rem; /* 18px */
+  --font-size--large: 2.4rem; /* 24px */
+  --font-size--extra-large: 3.2rem; /* 24px */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto Slab", serif;
+  font-size: 16px;
+  /* just in case it's an old browser that doesn't support rem */
+  font-size: var(--font-size--default);
+  /* 1.6 * 10 === 16px */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,5 +1,6 @@
-import { Loader } from "../atoms/Loader";
 import { useTable } from "react-table";
+
+import { Loader } from "../atoms/Loader";
 
 // import { OystrPagination } from "./OystrPagination";
 import { Button } from "./Button";

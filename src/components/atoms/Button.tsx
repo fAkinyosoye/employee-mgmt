@@ -1,22 +1,42 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
+import styled from "styled-components";
+
+import { Colors } from "./Colors";
+
+type ButtonProps = {
+  ifIcon?: any;
+  icon?: any;
+  text: string;
+  bgColor?: string;
+  className?: string;
+  paddingY?: string;
+  paddingX?: string;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  isLoading?: boolean;
+  type: "button" | "submit" | "reset" | undefined;
+  size?: string;
+};
 
 const Button = ({
   ifIcon,
   icon,
   text,
-  bgColor = "rgba(7, 199, 39, 0.7)",
+  bgColor = Colors.boiGreen,
   className,
   paddingY = "3",
   paddingX = "4",
   onClick,
   isLoading,
-}: any) => {
+  type,
+  size,
+}: ButtonProps) => {
   return (
     <button
-      className={`flex whitespace-nowrap items-center text-green-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-${paddingX} py-${paddingY} mr-2 mb-2 focus:outline-none ${className}`}
+      className={`flex whitespace-nowrap items-center text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-${paddingX} py-${paddingY} mr-2 mb-2 focus:outline-none w-full ${className}`}
       style={{
         backgroundColor: bgColor,
       }}
+      type={type}
       onClick={onClick}
       disabled={isLoading}
     >
@@ -45,10 +65,21 @@ const Button = ({
           </svg>
         </div>
       ) : (
-        <span className="text-red-900">{text}</span>
+        <BtnText>{text}</BtnText>
       )}
     </button>
   );
 };
 
 export { Button };
+
+const BtnText: any = styled.span`
+  color: white;
+  width: 100%;
+  font-size: ${(props: ButtonProps) =>
+    props.size === "lg"
+      ? "var(--font-size--large)"
+      : props.size === "sm"
+      ? "var(--font-size--small)"
+      : "var(--font-size--default)"};
+`;

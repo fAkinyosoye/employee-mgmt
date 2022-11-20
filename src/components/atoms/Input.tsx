@@ -42,12 +42,12 @@ const Input = (props: InputProps) => {
   } = props;
   return (
     <div className="mb-4">
-      <label
+      {/* <label
         htmlFor={name}
         className="text-sm md:text-base font-normal text-grey pb-2 inline-block"
       >
         {label}
-      </label>
+      </label> */}
       <input
         readOnly={readOnly}
         type={type}
@@ -55,7 +55,7 @@ const Input = (props: InputProps) => {
         id={id}
         {...register}
         placeholder={placeholder}
-        className="h-[34px] placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-lightBlack rounded-md px-[6px] py-3 shadow-sm focus:outline-none focus:border-primary focus:ring-primary focus:ring-1 text-sm"
+        className="h-[34px] placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-lightBlack rounded-md px-[6px] shadow-sm focus:outline-none focus:border-primary focus:ring-primary focus:ring-1 text-sm"
         style={{
           border: error ? "1px solid red" : "",
           backgroundColor: readOnly ? "#ACB5BD" : "",

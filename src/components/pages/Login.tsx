@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 
 import logoImg from "../../assets/images/uploadedwebclientlogo.jpg";
 import { useLoginMutation } from "../../redux/services/auth-services";
-import { Input } from "../atoms";
+import { Button, Header1, Input, Label, Subtitle } from "../atoms";
 
 export type FormData = {
   emailOrUserName: string;
@@ -32,7 +32,7 @@ const Login = () => {
       const res = await login(formData).unwrap();
       if (res.status === "success") {
         alert("success");
-        console.log(res)
+        console.log(res);
         // message.success(res.message);
         // setIsLoading(false);
       }
@@ -45,15 +45,42 @@ const Login = () => {
   };
 
   return (
-    <div className="my-8 mx-10">
-      <img src={logoImg} alt="logoImg" />
-      <form onSubmit={(e: any) => submitHandler(e)}>
-        <Input type="text" name="emailOrUserName" onChange={handleFormDataChange} />
-        <Input type="password" name="password" onChange={handleFormDataChange} />
-        <button type="submit">Submit</button>
-      </form>
-      </div>
-  )
-}
+    <div className="mt-20">
+      <img
+        src={logoImg}
+        alt="logoImg"
+        width="270px"
+        height="54px"
+        className="mx-auto my-10"
+      />
+      <form
+        onSubmit={(e: any) => submitHandler(e)}
+        className="mx-auto my-auto w-4/5 lg:w-3/5 xl:w-2/5 flex flex-col gap-y-4"
+      >
+        <Header1 className="text-center" mt="5rem" mb="0">
+          Login
+        </Header1>
+        <Subtitle className="text-center">
+          Sign in to the Employee Management Portal
+        </Subtitle>
+        <Label>Email or Username</Label>
+        <Input
+          type="text"
+          name="emailOrUserName"
+          onChange={handleFormDataChange}
+        />
 
-export { Login }
+        <Label>Password</Label>
+        <Input
+          type="password"
+          name="password"
+          onChange={handleFormDataChange}
+        />
+
+        <Button text="Submit" type="submit" className="mt-5" />
+      </form>
+    </div>
+  );
+};
+
+export { Login };
