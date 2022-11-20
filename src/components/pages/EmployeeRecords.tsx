@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 // import { Controller, useForm } from "react-hook-form";
 // import { toast } from "react-toastify";
 
-import { Table } from "../atoms";
+import { Header1, Subtitle, Table } from "../atoms";
 import { dummyData } from "../utilities/employeeDummyData";
 
 const EmployeeRecords = () => {
@@ -65,15 +65,24 @@ const EmployeeRecords = () => {
   const data = React.useMemo(() => getData(), [getData]);
 
   return (
-    <div>
-      <Table
-        data={data}
-        columns={columns}
-        emptyStateText="Employee Info"
-        isLoading={false}
-        ifHover
-        ifPagination
-      />
+    <div className="mt-20">
+      <Header1 className="text-center" mt="2rem" mb="0">
+        Employee Records
+      </Header1>
+      <Subtitle className="text-center">
+        View all employee records here:
+      </Subtitle>
+
+      <div className="px-4 py-5">
+        <Table
+          data={data}
+          columns={columns}
+          emptyStateText="Employee Info"
+          isLoading={false}
+          ifHover
+          ifPagination
+        />
+      </div>
     </div>
   );
 };

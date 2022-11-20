@@ -55,7 +55,7 @@ const Table = ({
             <div className="overflow-auto">
               <table
                 {...getTableProps()}
-                className="w-full table min-w-full overflow-x-auto text-blackTwo px-5"
+                className="w-full table-auto min-w-full overflow-x-auto text-blackTwo px-5"
               >
                 <thead>
                   {headerGroups.map((headerGroup: any) => (
@@ -63,7 +63,7 @@ const Table = ({
                       {headerGroup.headers.map((column: any) => (
                         <th
                           {...column.getHeaderProps()}
-                          className="font-normal whitespace-nowrap text-sm uppercase py-6 text-left"
+                          className="border border-blackTwo font-normal whitespace-nowrap text-sm uppercase p-2 text-left font-bold"
                         >
                           {column.render("Header")}
                         </th>
@@ -84,7 +84,7 @@ const Table = ({
                           return (
                             <td
                               {...cell.getCellProps()}
-                              className="whitespace-nowrap font-normal py-3 text-base"
+                              className="border border-blackTwo whitespace-nowrap font-normal p-2 text-base"
                             >
                               {cell.render("Cell")}
                             </td>
