@@ -1,5 +1,5 @@
-import Select from "react-select";
 import { useController } from "react-hook-form";
+import Select from "react-select";
 
 // import { colourStyles } from "../helper/goToTop";
 
