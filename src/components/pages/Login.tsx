@@ -85,6 +85,7 @@ const Login = () => {
 
         <Label>Username</Label>
         <Input
+          className="mb-2"
           type="username"
           placeholder="username"
           register={{

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from "react";
-
 // import { Controller, useForm } from "react-hook-form";
 // import { toast } from "react-toastify";
 
@@ -14,6 +13,7 @@ import { Button, Header1, Subtitle, Table } from "../atoms";
 
 const EmployeeRecords = () => {
   const navigate = useNavigate();
+
   const {
     data: employeeData,
     refetch,
@@ -34,7 +34,7 @@ const EmployeeRecords = () => {
 
   const getData = useCallback(() => {
     const goToSinglePage = (item: any) => {
-      navigate(`/employee-records/${item?.employeeid}`, {
+      navigate(`employee-records/${item?.employeeid}`, {
         state: item,
       });
     };

@@ -19,6 +19,7 @@ interface InputProps {
   minLength?: number;
   maxLength?: number;
   ifRounded?: boolean;
+  showLabel?: boolean;
   // maxLength?: any;
   //   refs?: any;
   //   onKeyUp?: any;
@@ -39,15 +40,18 @@ const Input = (props: InputProps) => {
     readOnly,
     register,
     ifRounded,
+    showLabel,
   } = props;
   return (
     <div className={`${className}`}>
-      {/* <label
-        htmlFor={name}
-        className="text-sm md:text-base font-normal text-grey pb-2 inline-block"
-      >
-        {label}
-      </label> */}
+      {showLabel && (
+        <label
+          htmlFor={name}
+          className="text-sm md:text-base font-normal text-grey pb-2 inline-block"
+        >
+          {label}
+        </label>
+      )}
       <input
         readOnly={readOnly}
         type={type}

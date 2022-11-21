@@ -1,9 +1,18 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
-import { CustomSelect, Header1, Input, Label, Subtitle } from "../atoms";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  Button,
+  CustomSelect,
+  Header1,
+  Input,
+  Label,
+  Subtitle,
+} from "../atoms";
 
 const EmployeeDetails = () => {
+  const navigate = useNavigate();
+
   const { state } = useLocation();
 
   const { register, control } = useForm({
@@ -30,18 +39,34 @@ const EmployeeDetails = () => {
       </Header1>
       <Subtitle className="text-center">View Employee Detail</Subtitle>
 
-      <div className="flex items-center gap-10 mb-4">
+      <div>
+        <Button
+          isLoading={false}
+          // icon={<FontAwesomeIcon icon="fa-solid fa-plus" />}
+          text="Go back"
+          type="button"
+          className="py-2 w-48 ml-auto mr-4 lg:mr-12"
+          size="sm"
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
+      </div>
+
+      <div className="flex items-center gap-10 mb-4 mt-10">
         <Input
           type="text"
           className="basis-[30%]"
           label="First Name"
           register={register("firstname")}
+          showLabel
         />
         <Input
           type="text"
           className="basis-[30%]"
           label="Middle Initial"
           register={register("middleinitial")}
+          showLabel
         />
 
         <Input
@@ -49,6 +74,7 @@ const EmployeeDetails = () => {
           className="basis-[30%]"
           label="Last Name"
           register={register("lastname")}
+          showLabel
         />
       </div>
 
@@ -58,6 +84,7 @@ const EmployeeDetails = () => {
           className="basis-[30%]"
           label="User Name"
           register={register("username")}
+          showLabel
         />
 
         <Input
@@ -65,6 +92,7 @@ const EmployeeDetails = () => {
           className="basis-[30%]"
           label="Role"
           register={register("role")}
+          showLabel
         />
 
         <Input
@@ -72,6 +100,7 @@ const EmployeeDetails = () => {
           className="basis-[30%]"
           label="Role"
           register={register("grade")}
+          showLabel
         />
 
         {/* <CustomSelect
@@ -94,18 +123,21 @@ const EmployeeDetails = () => {
           className="basis-[30%]"
           label="Division"
           register={register("division")}
+          showLabel
         />
         <Input
           type="text"
           className="basis-[30%]"
           label="Department"
           register={register("department")}
+          showLabel
         />
         <Input
           type="text"
           className="basis-[30%]"
           label="Unit"
           register={register("unit")}
+          showLabel
         />
       </div>
 
@@ -115,18 +147,21 @@ const EmployeeDetails = () => {
           className="basis-[30%]"
           label="Location"
           register={register("location")}
+          showLabel
         />
         <Input
           type="text"
           className="basis-[30%]"
           label="Account Number"
           register={register("accountnumber")}
+          showLabel
         />
         <Input
           type="text"
           className="basis-[30%]"
           label="Sort Code"
           register={register("sortcode")}
+          showLabel
         />
       </div>
     </form>
