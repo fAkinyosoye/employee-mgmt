@@ -91,7 +91,7 @@ const EmployeeRecords = () => {
         accessor: "status",
       },
       {
-        Header: "",
+        Header: "Actions",
         accessor: "view",
       },
     ],
