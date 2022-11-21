@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 
 import {
+  ComponentsPage,
   EmployeeRecords,
   Login,
-  TestPageOne,
   TestPageTwo,
 } from "../components/pages";
 
@@ -13,7 +13,7 @@ const PageRouter = () => {
       <Route index element={<Login />} />
       <Route path="/employee-records" element={<EmployeeRecords />} />
       <Route path="/table" element={<TestPageTwo />} />
-      <Route path="/testPage" element={<TestPageOne />} />
+      <Route path="/components" element={<ComponentsPage />} />
       <Route path="*" element={<TestPageTwo />} />
     </Routes>
   );

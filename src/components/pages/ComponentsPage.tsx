@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import { Button, CustomSelect, Input, Table } from "../atoms";
 
-const TestPageOne = () => {
+const ComponentsPage = () => {
   const { control } = useForm();
   const testValues = [
     {
@@ -81,7 +81,7 @@ const TestPageOne = () => {
 
   const data = React.useMemo(() => getData(), [getData]);
 
-  // toast("Toast message");
+  toast("Toast message");
 
   return (
     <div className="mt-8 mx-10">
@@ -111,4 +111,4 @@ const TestPageOne = () => {
   );
 };
 
-export { TestPageOne };
+export { ComponentsPage };

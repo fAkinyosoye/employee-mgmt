@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-unassigned-import
 import "./App.css";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { PageRouter } from "./router";
 
@@ -11,7 +12,7 @@ function App() {
       <ToastContainer
         progressClassName="toastProgress"
         bodyClassName="toastBody"
-        autoClose={5000}
+        autoClose={3000}
         icon={false}
         closeButton={true}
         hideProgressBar
