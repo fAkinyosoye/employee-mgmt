@@ -81,7 +81,6 @@ const Table = ({
                         // onClick={() => onClick(row.original)}
                       >
                         {row.cells.map((cell: any) => {
-                          console.log(cell);
                           return (
                             <td
                               {...cell.getCellProps()}

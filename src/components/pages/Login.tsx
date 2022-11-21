@@ -56,6 +56,7 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+  console.log(errors?.password);
 
   return (
     <div className="mt-20">
@@ -100,7 +101,11 @@ const Login = () => {
               minLength: 8,
             }),
           }}
-          error={errors?.password?.message}
+          error={
+            errors?.password?.type === "minLength"
+              ? "Minimum of 8 characters"
+              : errors?.password?.message
+          }
         />
 
         <Button

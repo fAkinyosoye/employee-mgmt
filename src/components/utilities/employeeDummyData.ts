@@ -12,7 +12,7 @@ type DummyDataType = {
   location: string;
   accountnumber: string;
   sortcode: string;
-  staffStatus: number | string;
+  staffStatus: "Active" | "Inactive";
   createdDateTime: string;
   createdBy: string | null;
   lastUpdatedDateTime: string;
@@ -35,7 +35,7 @@ const dummyData: DummyDataType[] = [
     location: "Lagos",
     accountnumber: "0123456799",
     sortcode: "123456789",
-    staffStatus: 0,
+    staffStatus: "Active",
     createdDateTime: "0001-01-01T00:00:00+00:00",
     createdBy: null,
     lastUpdatedDateTime: "0001-01-01T00:00:00+00:00",
@@ -77,7 +77,7 @@ const dummyData: DummyDataType[] = [
     location: "Lagos",
     accountnumber: "9876543210",
     sortcode: "98765",
-    staffStatus: 0,
+    staffStatus: "Active",
     createdDateTime: "0001-01-01T00:00:00+00:00",
     createdBy: null,
     lastUpdatedDateTime: "0001-01-01T00:00:00+00:00",
@@ -98,7 +98,7 @@ const dummyData: DummyDataType[] = [
     location: "Lagos",
     accountnumber: "0123456799",
     sortcode: "123456789",
-    staffStatus: 0,
+    staffStatus: "Inactive",
     createdDateTime: "0001-01-01T00:00:00+00:00",
     createdBy: null,
     lastUpdatedDateTime: "0001-01-01T00:00:00+00:00",
@@ -119,7 +119,7 @@ const dummyData: DummyDataType[] = [
     location: "Lagos",
     accountnumber: "0075243336",
     sortcode: "232150029",
-    staffStatus: "Inactive", // is this a string or boolean field
+    staffStatus: "Active", // is this a string or boolean field
     createdDateTime: "2022-11-17T18:52:16.929217+01:00",
     createdBy: "Cofoma",
     lastUpdatedDateTime: "0001-01-01T00:00:00+00:00",
@@ -140,7 +140,7 @@ const dummyData: DummyDataType[] = [
     location: "Lagos",
     accountnumber: "9876543210",
     sortcode: "98765",
-    staffStatus: 0,
+    staffStatus: "Inactive",
     createdDateTime: "0001-01-01T00:00:00+00:00",
     createdBy: null,
     lastUpdatedDateTime: "0001-01-01T00:00:00+00:00",
@@ -161,7 +161,7 @@ const dummyData: DummyDataType[] = [
     location: "Lagos",
     accountnumber: "0123456799",
     sortcode: "123456789",
-    staffStatus: 0,
+    staffStatus: "Active",
     createdDateTime: "0001-01-01T00:00:00+00:00",
     createdBy: null,
     lastUpdatedDateTime: "0001-01-01T00:00:00+00:00",
@@ -203,7 +203,7 @@ const dummyData: DummyDataType[] = [
     location: "Lagos",
     accountnumber: "9876543210",
     sortcode: "98765",
-    staffStatus: 0,
+    staffStatus: "Active",
     createdDateTime: "0001-01-01T00:00:00+00:00",
     createdBy: null,
     lastUpdatedDateTime: "0001-01-01T00:00:00+00:00",
@@ -224,7 +224,7 @@ const dummyData: DummyDataType[] = [
     location: "Lagos",
     accountnumber: "0123456799",
     sortcode: "123456789",
-    staffStatus: 0,
+    staffStatus: "Inactive",
     createdDateTime: "0001-01-01T00:00:00+00:00",
     createdBy: null,
     lastUpdatedDateTime: "0001-01-01T00:00:00+00:00",
@@ -245,7 +245,7 @@ const dummyData: DummyDataType[] = [
     location: "Lagos",
     accountnumber: "0075243336",
     sortcode: "232150029",
-    staffStatus: "Inactive", // is this a string or boolean field
+    staffStatus: "Active", // is this a string or boolean field
     createdDateTime: "2022-11-17T18:52:16.929217+01:00",
     createdBy: "Cofoma",
     lastUpdatedDateTime: "0001-01-01T00:00:00+00:00",
@@ -266,7 +266,7 @@ const dummyData: DummyDataType[] = [
     location: "Lagos",
     accountnumber: "9876543210",
     sortcode: "98765",
-    staffStatus: 0,
+    staffStatus: "Inactive",
     createdDateTime: "0001-01-01T00:00:00+00:00",
     createdBy: null,
     lastUpdatedDateTime: "0001-01-01T00:00:00+00:00",
