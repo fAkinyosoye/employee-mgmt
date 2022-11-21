@@ -42,12 +42,12 @@ const Input = (props: InputProps) => {
   } = props;
   return (
     <div className={`${className}`}>
-      <label
+      {/* <label
         htmlFor={name}
         className="text-sm md:text-base font-normal text-grey pb-2 inline-block"
       >
         {label}
-      </label>
+      </label> */}
       <input
         readOnly={readOnly}
         type={type}

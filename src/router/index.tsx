@@ -15,9 +15,9 @@ const PageRouter = () => {
       <Route index element={<Login />} />
       <Route path="/employee-records" element={<AuthLayout />}>
         <Route index element={<EmployeeRecords />} />
-        <Route path="/employee-records/:id" element={<EmployeeDetails />} />
+        <Route path="employee-records/:id" element={<EmployeeDetails />} />
         <Route path="table" element={<TestPageTwo />} />
-        <Route path="/components" element={<ComponentsPage />} />
+        <Route path="components" element={<ComponentsPage />} />
       </Route>
       <Route path="*" element={<TestPageTwo />} />
     </Routes>

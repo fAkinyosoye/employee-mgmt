@@ -47,10 +47,7 @@ const Login = () => {
         res?.statusCode === 200 &&
         res?.data?.personStaffRole === "Internal Control"
       ) {
-<<<<<<< HEAD
         localStorage.setItem("personID", res?.data?.personEmployeeID);
-=======
->>>>>>> 4ea2124e8c10d34dd1e181df90767ae6c8e5dee8
         setIsLoading(false);
         navigate("/employee-records");
       }

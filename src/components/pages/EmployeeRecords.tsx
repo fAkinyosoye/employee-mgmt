@@ -5,8 +5,11 @@ import React, { useCallback, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { useFetchAllBOIEmployeesQuery } from "../../redux/services/mgmt-services";
-import { Header1, Subtitle, Table } from "../atoms";
+import {
+  EmployeeDataType,
+  useFetchAllBOIEmployeesQuery,
+} from "../../redux/services/mgmt-services";
+import { Button, Header1, Subtitle, Table } from "../atoms";
 // import { dummyData } from "../utilities/employeeDummyData";
 
 const EmployeeRecords = () => {
@@ -28,13 +31,14 @@ const EmployeeRecords = () => {
   // navigate(`/oystr-identity/customers/${id}/cac-number/directors`, {
   //   state: companyDetails?.directors,
   // });
-  const goToSinglePage = (item: any) => {
-    navigate(`/employee-records/${item?.employeeid}`, {
-      state: item,
-    });
-  };
 
   const getData = useCallback(() => {
+    const goToSinglePage = (item: any) => {
+      navigate(`/employee-records/${item?.employeeid}`, {
+        state: item,
+      });
+    };
+
     const result = employeeData?.map((item: EmployeeDataType, i: number) => {
       const {
         firstname,
