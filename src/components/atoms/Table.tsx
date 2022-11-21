@@ -2,7 +2,6 @@ import { useTable } from "react-table";
 
 import { Loader } from "../atoms/Loader";
 
-// import { OystrPagination } from "./OystrPagination";
 import { Button } from "./Button";
 
 const Table = ({
@@ -59,11 +58,14 @@ const Table = ({
               >
                 <thead>
                   {headerGroups.map((headerGroup: any) => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
+                    <tr
+                      className="bg-boiGreen"
+                      {...headerGroup.getHeaderGroupProps()}
+                    >
                       {headerGroup.headers.map((column: any) => (
                         <th
                           {...column.getHeaderProps()}
-                          className="border border-blackTwo whitespace-nowrap text-sm uppercase p-2 text-left font-bold"
+                          className="border border-blackTwo whitespace-nowrap text-sm uppercase p-2 text-left font-normal text-white"
                         >
                           {column.render("Header")}
                         </th>

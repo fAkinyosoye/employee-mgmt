@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import styled from "styled-components";
 
 import logoImg from "../../assets/images/uploadedwebclientlogo.jpg";
 import { useLoginMutation } from "../../redux/services/auth-services";
@@ -46,6 +47,7 @@ const Login = () => {
         res?.statusCode === 200 &&
         res?.data?.personStaffRole === "Internal Control"
       ) {
+        localStorage.setItem("personID", res?.data?.personEmployeeID);
         setIsLoading(false);
         navigate("/employee-records");
       }
@@ -61,19 +63,19 @@ const Login = () => {
     }
   };
   return (
-    <div className="mt-20">
-      <img
-        src={logoImg}
-        alt="logoImg"
-        width="270px"
-        height="54px"
-        className="mx-auto my-10"
-      />
+    <Wrapper>
       <form
         // onSubmit={(e: any) => submitHandler(e)}
         onSubmit={handleSubmit(submit)}
-        className="mx-auto my-auto w-4/5 lg:w-3/5 xl:w-2/5 flex flex-col"
+        className="mx-auto my-auto w-4/5 lg:w-3/5 xl:w-2/5 flex flex-col bg-white p-5 lg:p-12 shadow-md rounded-lg"
       >
+        <img
+          src={logoImg}
+          alt="logoImg"
+          width="270px"
+          height="54px"
+          className="mx-auto mb-5"
+        />
         <Header1 className="text-center" mt="2rem" mb="0">
           Login
         </Header1>
@@ -117,8 +119,18 @@ const Login = () => {
           className="mt-2 py-2"
         />
       </form>
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.section`
+  background-color: #09dc84;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
 
 export { Login };

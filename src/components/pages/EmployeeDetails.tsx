@@ -67,25 +67,25 @@ const EmployeeDetails = () => {
           register={register("role")}
         />
 
-        <Input
+        {/* <Input
           type="text"
           className="basis-[30%]"
-          label="Role"
+          label="Grade"
           register={register("grade")}
-        />
+        /> */}
 
-        {/* <CustomSelect
+        <CustomSelect
           control={control}
-          name="disbursement_bank_code"
-          options={allBanksData}
+          name="grade"
+          //   options={allBanksData}
           label="Select Bank"
-          isLoading={getAllBanksLoading}
+          //   isLoading={getAllBanksLoading}
           placeholder="Access bank"
-          error={errors?.disbursement_bank_code?.message}
+          //   error={errors?.disbursement_bank_code?.message}
           rules={{
             required: "Bank Name is required",
           }}
-        /> */}
+        />
       </div>
 
       <div className="flex items-center gap-10 mb-4">

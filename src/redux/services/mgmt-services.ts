@@ -47,6 +47,28 @@ export type EditBOIEmployee = {
   isDeleted?: boolean;
 };
 
+export type EmployeeDataType = {
+  employeeid: string;
+  firstname: string;
+  middleinitial: string;
+  lastname: string;
+  username: string;
+  role: string;
+  grade: string;
+  division: string;
+  department: string;
+  unit: string;
+  location: string;
+  accountnumber: string;
+  sortcode: string;
+  staffStatus: "Active" | "Inactive";
+  createdDateTime: string;
+  createdBy: string | null;
+  lastUpdatedDateTime: string;
+  lastUpdatedBy: string | null;
+  isDeleted: boolean;
+};
+
 const urlTemplate = "/api/BOIEmployee";
 
 export const mgmtServiceApi = baseApi.injectEndpoints({
@@ -57,7 +79,10 @@ export const mgmtServiceApi = baseApi.injectEndpoints({
       }),
       transformResponse: (response: any) => response.data,
     }),
-    fetchAllBOIEmployees: builder.query<void, FetchAllBOIEmployees>({
+    fetchAllBOIEmployees: builder.query<
+      EmployeeDataType[],
+      FetchAllBOIEmployees
+    >({
       query: (body) => ({
         url: `${urlTemplate}/FetchAllBOIEmployee?pageNumber=${body.pageNumber}&pageSize=${body.pageSize}`,
       }),

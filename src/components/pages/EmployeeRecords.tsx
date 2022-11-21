@@ -1,11 +1,14 @@
 import React, { useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // import { Controller, useForm } from "react-hook-form";
 // import { toast } from "react-toastify";
 
-import { useFetchAllBOIEmployeesQuery } from "../../redux/services/mgmt-services";
-import { Header1, Subtitle, Table } from "../atoms";
-import { useNavigate } from "react-router-dom";
+import {
+  EmployeeDataType,
+  useFetchAllBOIEmployeesQuery,
+} from "../../redux/services/mgmt-services";
+import { Button, Header1, Subtitle, Table } from "../atoms";
 // import { dummyData } from "../utilities/employeeDummyData";
 
 const EmployeeRecords = () => {
@@ -34,7 +37,7 @@ const EmployeeRecords = () => {
   };
 
   const getData = useCallback(() => {
-    const result = employeeData?.map((item: any, i: number) => {
+    const result = employeeData?.map((item: EmployeeDataType, i: number) => {
       const {
         firstname,
         middleinitial,
@@ -47,22 +50,24 @@ const EmployeeRecords = () => {
       } = item;
       return {
         name: (
-          <p className="text-xs font-normal">{`${firstname} ${
+          <p className="text-sm font-normal">{`${firstname} ${
             middleinitial ?? ""
           } ${lastname}`}</p>
-          // <p className="text-xs font-normal">{`${firstname} ${middleinitial}. ${lastname}`}</p>
         ),
-        division: <p className="text-xs font-normal">{division}</p>,
-        unit: <p className="text-xs font-normal">{unit}</p>,
-        role: <p className="text-xs font-normal">{role}</p>,
-        grade: <p className="text-xs font-normal">{grade}</p>,
-        status: <p className="text-xs font-normal">{staffStatus}</p>,
+        division: <p className="text-sm font-normal">{division}</p>,
+        unit: <p className="text-sm font-normal">{unit}</p>,
+        role: <p className="text-sm font-normal">{role}</p>,
+        grade: <p className="text-sm font-normal">{grade}</p>,
+        status: <p className="text-sm font-normal">{staffStatus}</p>,
         view: (
-          <div
-            onClick={() => goToSinglePage(item)}
-            className="text-xs font-normal text-primary"
-          >
-            View more
+          <div>
+            <Button
+              isLoading={false}
+              text="View More"
+              type="button"
+              className="p-2 w-28"
+              size="sm"
+            />
           </div>
         ),
       };
@@ -97,7 +102,7 @@ const EmployeeRecords = () => {
         accessor: "status",
       },
       {
-        Header: "",
+        Header: "Actions",
         accessor: "view",
       },
     ],
