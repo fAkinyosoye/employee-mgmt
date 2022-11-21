@@ -107,7 +107,7 @@ const Login = () => {
           isLoading={isLoading}
           text="Submit"
           type="submit"
-          className="mt-2"
+          className="mt-2 py-2"
         />
       </form>
     </div>
