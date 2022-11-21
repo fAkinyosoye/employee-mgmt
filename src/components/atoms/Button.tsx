@@ -66,7 +66,7 @@ const Button = ({
           </svg>
         </div>
       ) : (
-        <BtnText>{text}</BtnText>
+        <BtnText size={size}>{text}</BtnText>
       )}
     </button>
   );
@@ -78,9 +78,5 @@ const BtnText: any = styled.span`
   color: white;
   width: 100%;
   font-size: ${(props: ButtonProps) =>
-    props.size === "lg"
-      ? "var(--font-size--large)"
-      : props.size === "sm"
-      ? "var(--font-size--small)"
-      : "var(--font-size--default)"};
+    props.size === "lg" ? "1.2rem" : props.size === "sm" ? "0.875rem" : "1rem"};
 `;
