@@ -300,3 +300,25 @@ const dummyData: DummyDataType[] = [
 // ];
 
 export { dummyData };
+
+// {
+//   "employeeid": "ZZZTEST",
+//   "firstname": "Test",
+//   "middleinitial": "V",
+//   "lastname": "Test",
+//   "username": "ZZZTEST",
+//   "role": "Application Developer",
+//   "grade": "Senior Banking Officer",
+//   "division": "Operations & Technology",
+//   "department": "Operations & Technology",
+//   "unit": "Operational Excellence",
+//   "location": "Lagos",
+//   "accountnumber": "0075243336",
+//   "sortcode": "232150029",
+//   "staffStatus": "Inactive",
+//   "createdDateTime": "2022-11-17T18:52:16.929217+01:00",
+//   "createdBy": "Cofoma",
+//   "lastUpdatedDateTime": "0001-01-01T00:00:00+00:00",
+//   "lastUpdatedBy": null,
+//   "isDeleted": false
+// }

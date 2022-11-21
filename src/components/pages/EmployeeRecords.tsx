@@ -3,14 +3,14 @@ import React, { useCallback, useEffect } from "react";
 // import { Controller, useForm } from "react-hook-form";
 // import { toast } from "react-toastify";
 
-import {
-  EmployeeDataType,
-  useFetchAllBOIEmployeesQuery,
-} from "../../redux/services/mgmt-services";
-import { Button, Header1, Subtitle, Table } from "../atoms";
+import { useNavigate } from "react-router-dom";
+
+import { useFetchAllBOIEmployeesQuery } from "../../redux/services/mgmt-services";
+import { Header1, Subtitle, Table } from "../atoms";
 // import { dummyData } from "../utilities/employeeDummyData";
 
 const EmployeeRecords = () => {
+  const navigate = useNavigate();
   const {
     data: employeeData,
     refetch,
@@ -24,6 +24,15 @@ const EmployeeRecords = () => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // navigate(`/oystr-identity/customers/${id}/cac-number/directors`, {
+  //   state: companyDetails?.directors,
+  // });
+  const goToSinglePage = (item: any) => {
+    navigate(`/employee-records/${item?.employeeid}`, {
+      state: item,
+    });
+  };
 
   const getData = useCallback(() => {
     const result = employeeData?.map((item: EmployeeDataType, i: number) => {
@@ -51,6 +60,7 @@ const EmployeeRecords = () => {
         view: (
           <div>
             <Button
+              onClick={() => goToSinglePage(item)}
               isLoading={false}
               text="View More"
               type="button"
