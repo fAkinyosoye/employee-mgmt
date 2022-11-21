@@ -40,20 +40,23 @@ const Login = () => {
   const submit = async (data: LoginRequest): Promise<void> => {
     setIsLoading(true);
     try {
-      // console.log(data);
       const res = await login(data).unwrap();
       if (
-        res.statusCode === 200 &&
-        res.personStaffRole === "Internal Control"
+        res?.statusCode === 200 &&
+        res?.data?.personStaffRole === "Internal Control"
       ) {
-        alert("success");
+        // console.log(res);
         setIsLoading(false);
-        console.log(res);
-        // navigate("/employee-records");
+        navigate("/employee-records");
       }
     } catch (error: any) {
-      toast.error(error);
-      console.log(error);
+      toast.error(
+        error?.data?.responseMessage ===
+          "Invalid input parameter.Main error -- Invalid username or password."
+          ? "Invalid username or password."
+          : error?.data?.responseMessage
+      );
+      // console.log(error);
       setIsLoading(false);
     }
   };
@@ -78,10 +81,10 @@ const Login = () => {
           Sign in to the Employee Management Portal
         </Subtitle>
 
-        <Label>Email or Username</Label>
+        <Label>Username</Label>
         <Input
-          type="email"
-          placeholder="login@boi.ng"
+          type="username"
+          placeholder="username"
           register={{
             ...register("emailOrUserName", {
               required: "This field is required",
