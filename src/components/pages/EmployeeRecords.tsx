@@ -1,14 +1,30 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 // import { Controller, useForm } from "react-hook-form";
 // import { toast } from "react-toastify";
 
+import { useFetchAllBOIEmployeesQuery } from "../../redux/services/mgmt-services";
 import { Header1, Subtitle, Table } from "../atoms";
-import { dummyData } from "../utilities/employeeDummyData";
+// import { dummyData } from "../utilities/employeeDummyData";
 
 const EmployeeRecords = () => {
+  const {
+    data: employeeData,
+    refetch,
+    isLoading,
+  }: any = useFetchAllBOIEmployeesQuery({
+    pageNumber: 1,
+    pageSize: 20,
+  });
+
+  useEffect(() => {
+    refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const getData = useCallback(() => {
-    const result = dummyData?.map((item, i) => {
+    const result = employeeData?.map((item: any, i: number) => {
       const {
         firstname,
         middleinitial,
@@ -21,7 +37,10 @@ const EmployeeRecords = () => {
       } = item;
       return {
         name: (
-          <p className="text-xs font-normal">{`${firstname} ${middleinitial}. ${lastname}`}</p>
+          <p className="text-xs font-normal">{`${firstname} ${
+            middleinitial ?? ""
+          } ${lastname}`}</p>
+          // <p className="text-xs font-normal">{`${firstname} ${middleinitial}. ${lastname}`}</p>
         ),
         division: <p className="text-xs font-normal">{division}</p>,
         unit: <p className="text-xs font-normal">{unit}</p>,
@@ -36,7 +55,7 @@ const EmployeeRecords = () => {
       };
     });
     return [...(result || [])];
-  }, []);
+  }, [employeeData]);
 
   const columns = React.useMemo(
     () => [
@@ -83,12 +102,12 @@ const EmployeeRecords = () => {
         View all employee records here:
       </Subtitle>
 
-      <div className="px-4 py-5">
+      <div className="px-4 lg:px-12 py-5">
         <Table
           data={data}
           columns={columns}
           emptyStateText="Employee Info"
-          isLoading={false}
+          isLoading={isLoading}
           ifHover
           ifPagination
         />

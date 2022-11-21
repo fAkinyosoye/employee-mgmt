@@ -59,7 +59,7 @@ export const mgmtServiceApi = baseApi.injectEndpoints({
     }),
     fetchAllBOIEmployees: builder.query<void, FetchAllBOIEmployees>({
       query: (body) => ({
-        url: `${urlTemplate}/FetchAllBOIEmployee?pageNumber=${body.pageNumber}&pageSize=${body.pageSize}'`,
+        url: `${urlTemplate}/FetchAllBOIEmployee?pageNumber=${body.pageNumber}&pageSize=${body.pageSize}`,
       }),
       transformResponse: (response: any) => response.data,
     }),
