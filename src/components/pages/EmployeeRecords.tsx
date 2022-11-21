@@ -1,14 +1,15 @@
 import React, { useCallback, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 // import { Controller, useForm } from "react-hook-form";
 // import { toast } from "react-toastify";
 
 import { useFetchAllBOIEmployeesQuery } from "../../redux/services/mgmt-services";
 import { Header1, Subtitle, Table } from "../atoms";
+import { useNavigate } from "react-router-dom";
 // import { dummyData } from "../utilities/employeeDummyData";
 
 const EmployeeRecords = () => {
+  const navigate = useNavigate();
   const {
     data: employeeData,
     refetch,
@@ -22,6 +23,15 @@ const EmployeeRecords = () => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // navigate(`/oystr-identity/customers/${id}/cac-number/directors`, {
+  //   state: companyDetails?.directors,
+  // });
+  const goToSinglePage = (item: any) => {
+    navigate(`/employee-records/${item?.employeeid}`, {
+      state: item,
+    });
+  };
 
   const getData = useCallback(() => {
     const result = employeeData?.map((item: any, i: number) => {
@@ -48,9 +58,12 @@ const EmployeeRecords = () => {
         grade: <p className="text-xs font-normal">{grade}</p>,
         status: <p className="text-xs font-normal">{staffStatus}</p>,
         view: (
-          <Link to="/" className="text-xs font-normal text-primary">
+          <div
+            onClick={() => goToSinglePage(item)}
+            className="text-xs font-normal text-primary"
+          >
             View more
-          </Link>
+          </div>
         ),
       };
     });

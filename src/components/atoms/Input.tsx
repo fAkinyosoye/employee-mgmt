@@ -41,13 +41,13 @@ const Input = (props: InputProps) => {
     ifRounded,
   } = props;
   return (
-    <div className="mb-4">
-      {/* <label
+    <div className={`${className}`}>
+      <label
         htmlFor={name}
         className="text-sm md:text-base font-normal text-grey pb-2 inline-block"
       >
         {label}
-      </label> */}
+      </label>
       <input
         readOnly={readOnly}
         type={type}

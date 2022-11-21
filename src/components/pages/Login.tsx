@@ -41,11 +41,11 @@ const Login = () => {
     setIsLoading(true);
     try {
       const res = await login(data).unwrap();
+      console.log(res);
       if (
         res?.statusCode === 200 &&
         res?.data?.personStaffRole === "Internal Control"
       ) {
-        // console.log(res);
         setIsLoading(false);
         navigate("/employee-records");
       }

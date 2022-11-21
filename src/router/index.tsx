@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import {
   ComponentsPage,
+  EmployeeDetails,
   EmployeeRecords,
   Login,
   TestPageTwo,
@@ -12,9 +13,9 @@ const PageRouter = () => {
     <Routes>
       <Route index element={<Login />} />
       <Route path="/employee-records" element={<EmployeeRecords />} />
+      <Route path="/employee-records/:id" element={<EmployeeDetails />} />
       <Route path="/table" element={<TestPageTwo />} />
       <Route path="/components" element={<ComponentsPage />} />
-      <Route path="*" element={<TestPageTwo />} />
     </Routes>
   );
 };

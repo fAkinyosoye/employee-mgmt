@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { PageRouter } from "./router";
 
 function App() {
-  console.log(import.meta.env.VITE_BASE_URL);
   return (
     <>
       <ToastContainer
