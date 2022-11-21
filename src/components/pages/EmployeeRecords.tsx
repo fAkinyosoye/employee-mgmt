@@ -109,6 +109,17 @@ const EmployeeRecords = () => {
         View all employee records here:
       </Subtitle>
 
+      <div>
+        <Button
+          isLoading={false}
+          // icon={<FontAwesomeIcon icon="fa-solid fa-plus" />}
+          text="Create Employee Record"
+          type="button"
+          className="py-2 w-48 ml-auto mr-4 lg:mr-12"
+          size="sm"
+        />
+      </div>
+
       <div className="px-4 lg:px-12 py-5">
         <Table
           data={data}
