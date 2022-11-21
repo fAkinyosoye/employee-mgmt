@@ -1,12 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
-import { Header1, Input, Label, Subtitle } from "../atoms";
+import { CustomSelect, Header1, Input, Label, Subtitle } from "../atoms";
 
 const EmployeeDetails = () => {
   const { state } = useLocation();
 
-  const { register } = useForm({
+  const { register, control } = useForm({
     defaultValues: {
       firstname: state?.firstname,
       middleinitial: state?.middleinitial,
@@ -24,102 +24,112 @@ const EmployeeDetails = () => {
   });
 
   return (
-    <div className="m-auto w-[70%]">
+    <form className="m-auto w-[70%]">
       <Header1 className="text-center" mt="2rem" mb="0">
         Employee Details
       </Header1>
       <Subtitle className="text-center">View Employee Detail</Subtitle>
 
-      <div className="flex items-center gap-20 mb-4">
+      <div className="flex items-center gap-10 mb-4">
         <Input
           type="text"
-          className="basis-[40%]"
+          className="basis-[30%]"
           label="First Name"
           register={register("firstname")}
         />
         <Input
           type="text"
-          className="basis-[40%]"
+          className="basis-[30%]"
           label="Middle Initial"
           register={register("middleinitial")}
         />
-      </div>
 
-      <div className="flex items-center gap-20 mb-4">
         <Input
           type="text"
-          className="basis-[40%]"
+          className="basis-[30%]"
           label="Last Name"
           register={register("lastname")}
         />
+      </div>
+
+      <div className="flex items-center gap-10 mb-4">
         <Input
           type="text"
-          className="basis-[40%]"
+          className="basis-[30%]"
           label="User Name"
           register={register("username")}
         />
-      </div>
 
-      <div className="flex items-center gap-20 mb-4">
         <Input
           type="text"
-          className="basis-[40%]"
+          className="basis-[30%]"
           label="Role"
           register={register("role")}
         />
+
         <Input
           type="text"
-          className="basis-[40%]"
-          label="Grade"
+          className="basis-[30%]"
+          label="Role"
           register={register("grade")}
         />
+
+        {/* <CustomSelect
+          control={control}
+          name="disbursement_bank_code"
+          options={allBanksData}
+          label="Select Bank"
+          isLoading={getAllBanksLoading}
+          placeholder="Access bank"
+          error={errors?.disbursement_bank_code?.message}
+          rules={{
+            required: "Bank Name is required",
+          }}
+        /> */}
       </div>
 
-      <div className="flex items-center gap-20 mb-4">
+      <div className="flex items-center gap-10 mb-4">
         <Input
           type="text"
-          className="basis-[40%]"
+          className="basis-[30%]"
           label="Division"
           register={register("division")}
         />
         <Input
           type="text"
-          className="basis-[40%]"
+          className="basis-[30%]"
           label="Department"
           register={register("department")}
         />
-      </div>
-
-      <div className="flex items-center gap-20 mb-4">
         <Input
           type="text"
-          className="basis-[40%]"
+          className="basis-[30%]"
           label="Unit"
           register={register("unit")}
         />
+      </div>
+
+      <div className="flex items-center gap-10 mb-4">
         <Input
           type="text"
-          className="basis-[40%]"
+          className="basis-[30%]"
           label="Location"
           register={register("location")}
         />
-      </div>
-
-      <div className="flex items-center gap-20 mb-4">
         <Input
           type="text"
-          className="basis-[40%]"
+          className="basis-[30%]"
           label="Account Number"
           register={register("accountnumber")}
         />
         <Input
           type="text"
-          className="basis-[40%]"
+          className="basis-[30%]"
           label="Sort Code"
           register={register("sortcode")}
         />
       </div>
-    </div>
+    </form>
   );
 };
 
