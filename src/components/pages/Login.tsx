@@ -40,24 +40,23 @@ const Login = () => {
   const submit = async (data: LoginRequest): Promise<void> => {
     setIsLoading(true);
     try {
-      console.log(data);
-      navigate("/employee-records");
-      // const res = await login(data).unwrap();
-      // if (res.statusCode === 200) {
-      //   alert("success");
-      //   setIsLoading(false);
-      //   navigate("/");
-      //   console.log(res);
-      // }
-      // toast.success("Success!");
+      // console.log(data);
+      const res = await login(data).unwrap();
+      if (
+        res.statusCode === 200 &&
+        res.personStaffRole === "Internal Control"
+      ) {
+        alert("success");
+        setIsLoading(false);
+        console.log(res);
+        // navigate("/employee-records");
+      }
     } catch (error: any) {
       toast.error(error);
       console.log(error);
       setIsLoading(false);
     }
   };
-  console.log(errors?.password);
-
   return (
     <div className="mt-20">
       <img
