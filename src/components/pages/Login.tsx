@@ -10,6 +10,7 @@ import {
   useLoginMutation,
 } from "../../redux/services/auth-services";
 import { Button, Header1, Input, Label, Subtitle } from "../atoms";
+import { dashboard } from "../utilities/routerPaths";
 
 const Login = () => {
   const [login] = useLoginMutation();
@@ -35,9 +36,9 @@ const Login = () => {
         res?.statusCode === 200 &&
         res?.data?.personStaffRole === "Internal Control"
       ) {
-        localStorage.setItem("personID", res?.data?.personEmployeeID);
+        localStorage.setItem("personEmail", res?.data?.personEmail); // change this to employeeID or token later
         setIsLoading(false);
-        navigate("/employee-records");
+        navigate(dashboard);
       }
     } catch (error: any) {
       toast.error(
@@ -56,7 +57,7 @@ const Login = () => {
       <form
         // onSubmit={(e: any) => submitHandler(e)}
         onSubmit={handleSubmit(submit)}
-        className="mx-auto my-auto w-4/5 lg:w-3/5 xl:w-2/5 flex flex-col bg-white p-5 lg:p-12 shadow-md rounded-lg"
+        className="mx-auto my-auto w-4/5 lg:w-2/5 flex flex-col bg-white p-5 lg:p-12 shadow-md rounded-lg"
       >
         <img
           src={logoImg}
@@ -74,6 +75,7 @@ const Login = () => {
 
         <Label>Username</Label>
         <Input
+          className="mb-2"
           type="username"
           placeholder="username"
           register={{

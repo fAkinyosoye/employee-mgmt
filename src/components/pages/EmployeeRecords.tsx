@@ -9,6 +9,7 @@ import { Button, Header1, Subtitle, Table } from "../atoms";
 
 const EmployeeRecords = () => {
   const navigate = useNavigate();
+
   const {
     data: employeeData,
     refetch,
@@ -28,6 +29,12 @@ const EmployeeRecords = () => {
   };
 
   const getData = useCallback(() => {
+    const goToSinglePage = (item: any) => {
+      navigate(`employee-records/${item?.employeeid}`, {
+        state: item,
+      });
+    };
+
     const result = employeeData?.map((item: EmployeeDataType, i: number) => {
       const {
         firstname,
@@ -72,7 +79,7 @@ const EmployeeRecords = () => {
       };
     });
     return [...(result || [])];
-  }, [employeeData]);
+  }, [employeeData, navigate]);
 
   const columns = React.useMemo(
     () => [
@@ -118,6 +125,16 @@ const EmployeeRecords = () => {
       <Subtitle className="text-center">
         View all employee records here:
       </Subtitle>
+
+      <div>
+        <Button
+          isLoading={false}
+          text="Create Employee Record"
+          type="button"
+          className="py-2 w-48 ml-auto mr-4 lg:mr-12"
+          size="sm"
+        />
+      </div>
 
       <div className="px-4 lg:px-12 py-5">
         <Table
