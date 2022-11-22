@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   EmployeeDataType,
@@ -24,9 +24,7 @@ const EmployeeRecords = () => {
   }, []);
 
   const goToSinglePage = (item: any) => {
-    navigate(`employee-records/${item?.employeeid}`, {
-      state: item,
-    });
+    navigate(`employee-records/${item?.employeeid}`);
   };
 
   const getData = useCallback(() => {
