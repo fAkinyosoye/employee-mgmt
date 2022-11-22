@@ -1,5 +1,6 @@
 import { useController } from "react-hook-form";
 import Select from "react-select";
+import { colourStyles } from "../utilities/helper";
 
 const CustomSelect = ({
   options,
@@ -13,11 +14,12 @@ const CustomSelect = ({
   rules,
   isMulti,
   isOptionDisabled,
+  className,
 }: any) => {
   const { field } = useController({ name, control, rules });
 
   return (
-    <div className="mt-4">
+    <div className={`${className}`}>
       <label className="text-sm font-normal text-blueTwo">{label}</label>
       <Select
         options={options}
@@ -31,7 +33,7 @@ const CustomSelect = ({
         isLoading={isLoading}
         placeholder={placeholder}
         isMulti={isMulti}
-        // styles={colourStyles}
+        styles={colourStyles}
         isOptionDisabled={isOptionDisabled}
       />
       {error && (

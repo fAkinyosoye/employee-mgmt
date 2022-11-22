@@ -90,7 +90,7 @@ export const mgmtServiceApi = baseApi.injectEndpoints({
     }),
     fetchAllGradeLevels: builder.query<void, void>({
       query: () => ({
-        url: `${urlTemplate}/FetchAllGradeLevels'`,
+        url: `${urlTemplate}/FetchAllGradeLevels`,
       }),
       transformResponse: (response: any) => response.data,
     }),

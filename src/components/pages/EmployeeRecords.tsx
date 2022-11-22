@@ -1,15 +1,11 @@
 import React, { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// import { Controller, useForm } from "react-hook-form";
-// import { toast } from "react-toastify";
-
 import {
   EmployeeDataType,
   useFetchAllBOIEmployeesQuery,
 } from "../../redux/services/mgmt-services";
 import { Button, Header1, Subtitle, Table } from "../atoms";
-// import { dummyData } from "../utilities/employeeDummyData";
 
 const EmployeeRecords = () => {
   const navigate = useNavigate();
@@ -27,11 +23,8 @@ const EmployeeRecords = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // navigate(`/oystr-identity/customers/${id}/cac-number/directors`, {
-  //   state: companyDetails?.directors,
-  // });
   const goToSinglePage = (item: any) => {
-    navigate(`/employee-records/${item?.employeeid}`, {
+    navigate(`employee-records/${item?.employeeid}`, {
       state: item,
     });
   };
@@ -60,13 +53,21 @@ const EmployeeRecords = () => {
         grade: <p className="text-sm font-normal">{grade}</p>,
         status: <p className="text-sm font-normal">{staffStatus}</p>,
         view: (
-          <div>
+          <div className="flex items-center">
             <Button
-              isLoading={false}
-              text="View More"
+              text="View"
               type="button"
-              className="p-2 w-28"
+              className="p-1 text-xs w-14 text-center"
               size="sm"
+              onClick={() => goToSinglePage(item)}
+            />
+
+            <Button
+              text="Edit"
+              type="button"
+              className="p-1 text-xs w-14 text-center"
+              size="sm"
+              onClick={() => goToSinglePage(item)}
             />
           </div>
         ),
