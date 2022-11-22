@@ -26,7 +26,7 @@ const Navbar: () => JSX.Element = () => {
   return (
     <NavWrapper show={show} className="px-4 py-5 lg:px-12">
       <div className="nav-head">
-        <NavLink to={`/${records}`}>
+        <NavLink to={dashboard}>
           <img
             src={navlogo}
             alt="boi logo cropped"
@@ -115,7 +115,7 @@ const NavWrapper: any = styled.div`
     display: flex;
     flex-direction: column;
     font-size: var(--font-size--large);
-    padding: 3rem 0 3rem 2rem;
+    padding: 2rem 0 2rem 2rem;
     margin-bottom: 0;
     gap: 1rem;
   }

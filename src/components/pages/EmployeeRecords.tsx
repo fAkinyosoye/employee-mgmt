@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from "react";
+
 // import { Controller, useForm } from "react-hook-form";
 // import { toast } from "react-toastify";
 
@@ -27,10 +28,6 @@ const EmployeeRecords = () => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // navigate(`/oystr-identity/customers/${id}/cac-number/directors`, {
-  //   state: companyDetails?.directors,
-  // });
 
   const getData = useCallback(() => {
     const goToSinglePage = (item: any) => {
@@ -76,7 +73,7 @@ const EmployeeRecords = () => {
       };
     });
     return [...(result || [])];
-  }, [employeeData]);
+  }, [employeeData, navigate]);
 
   const columns = React.useMemo(
     () => [
@@ -126,7 +123,6 @@ const EmployeeRecords = () => {
       <div>
         <Button
           isLoading={false}
-          // icon={<FontAwesomeIcon icon="fa-solid fa-plus" />}
           text="Create Employee Record"
           type="button"
           className="py-2 w-48 ml-auto mr-4 lg:mr-12"

@@ -101,7 +101,6 @@ const Table = ({
                   })}
                 </tbody>
               </table>
-              {/* {ifPagination && <OystrPagination {...pagination} />} */}
             </div>
           )}
         </>
