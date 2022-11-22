@@ -282,13 +282,16 @@ const EmployeeDetails = () => {
               readOnly
             />
           </div>
-          <Button
-            text="Update"
-            type="submit"
-            className="py-3 w-full text-center"
-            size="sm"
-            isLoading={editEmployeeIsLoading}
-          />
+
+          <div className="my-10 flex justify-center m-auto items-center">
+            <Button
+              text="Update"
+              type="submit"
+              className="py-3 w-[40%] text-center"
+              size="sm"
+              isLoading={editEmployeeIsLoading}
+            />
+          </div>
         </form>
       )}
     </>
