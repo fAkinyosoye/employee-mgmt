@@ -31,8 +31,9 @@ const Button = ({
   size,
 }: ButtonProps) => {
   return (
+    // focus:ring-4 focus:ring-blue-300
     <button
-      className={`flex whitespace-nowrap items-center text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-${paddingX} py-${paddingY} mr-2 mb-2 focus:outline-none w-full ${className}`}
+      className={`flex whitespace-nowrap items-center text-white  font-medium rounded-lg px-${paddingX} py-${paddingY} mr-2 mb-2 focus:outline-none w-full ${className}`}
       style={{
         backgroundColor: bgColor,
       }}
