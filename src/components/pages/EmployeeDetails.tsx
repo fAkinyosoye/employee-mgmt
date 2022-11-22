@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import {
   EditBOIEmployee,
   useEditBOIEmployeeMutation,
   useFetchAllGradeLevelsQuery,
+  useFetchBOIEmployeeByIdQuery,
 } from "../../redux/services/mgmt-services";
 import {
   Button,
   CustomSelect,
   Header1,
   Input,
-  // Label,
+  Loader,
   Subtitle,
 } from "../atoms";
 
 const EmployeeDetails = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const { state } = useLocation();
+  let employeeID = id ?? "";
+
   const [editEmployee] = useEditBOIEmployeeMutation();
 
   const [editEmployeeIsLoading, setEditEmployeeIsLoading] = useState(false);
@@ -31,8 +34,15 @@ const EmployeeDetails = () => {
     isLoading,
   }: any = useFetchAllGradeLevelsQuery();
 
+  const {
+    data: singleEmployeeData,
+    refetch: refetchSingleEmployee,
+    isLoading: singleEmployeeLoading,
+  }: any = useFetchBOIEmployeeByIdQuery(employeeID);
+
   useEffect(() => {
     refetch();
+    refetchSingleEmployee();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -56,34 +66,57 @@ const EmployeeDetails = () => {
     },
   ];
 
-  const { register, control, handleSubmit } = useForm({
+  const { register, control, handleSubmit, reset } = useForm({
     defaultValues: {
-      firstname: state?.firstname,
-      middleinitial: state?.middleinitial,
-      lastname: state?.lastname,
-      username: state?.username,
-      role: state?.role,
-      grade: "DGM",
-      division: state?.division,
-      department: state?.department,
-      unit: state?.unit,
-      location: state?.location,
-      accountnumber: state?.accountnumber,
-      sortcode: state?.sortcode,
-      staffStatus: state?.staffStatus,
-      createdBy: state?.createdBy,
-      lastUpdatedBy: state?.lastUpdatedBy,
-      createdDateTime: state?.createdDateTime,
-      lastUpdatedDateTime: state?.lastUpdatedDateTime,
+      firstname: singleEmployeeData && singleEmployeeData?.firstname,
+      middleinitial: singleEmployeeData?.middleinitial,
+      lastname: singleEmployeeData?.lastname,
+      username: singleEmployeeData?.username,
+      role: singleEmployeeData?.role,
+      grade: singleEmployeeData?.grade,
+      division: singleEmployeeData?.division,
+      department: singleEmployeeData?.department,
+      unit: singleEmployeeData?.unit,
+      location: singleEmployeeData?.location,
+      accountnumber: singleEmployeeData?.accountnumber,
+      sortcode: singleEmployeeData?.sortcode,
+      staffStatus: singleEmployeeData?.staffStatus,
+      createdBy: singleEmployeeData?.createdBy,
+      lastUpdatedBy: singleEmployeeData?.lastUpdatedBy,
+      createdDateTime: singleEmployeeData?.createdDateTime,
+      lastUpdatedDateTime: singleEmployeeData?.lastUpdatedDateTime,
     },
   });
+
+  useEffect(() => {
+    const defaultValues = {
+      firstname: singleEmployeeData && singleEmployeeData?.firstname,
+      middleinitial: singleEmployeeData?.middleinitial,
+      lastname: singleEmployeeData?.lastname,
+      username: singleEmployeeData?.username,
+      role: singleEmployeeData?.role,
+      grade: singleEmployeeData?.grade,
+      division: singleEmployeeData?.division,
+      department: singleEmployeeData?.department,
+      unit: singleEmployeeData?.unit,
+      location: singleEmployeeData?.location,
+      accountnumber: singleEmployeeData?.accountnumber,
+      sortcode: singleEmployeeData?.sortcode,
+      staffStatus: singleEmployeeData?.staffStatus,
+      createdBy: singleEmployeeData?.createdBy,
+      lastUpdatedBy: singleEmployeeData?.lastUpdatedBy,
+      createdDateTime: singleEmployeeData?.createdDateTime,
+      lastUpdatedDateTime: singleEmployeeData?.lastUpdatedDateTime,
+    };
+    reset(defaultValues);
+  }, [reset, singleEmployeeData]);
 
   const submitForm = async (values: EditBOIEmployee): Promise<void> => {
     setEditEmployeeIsLoading(true);
     try {
       const variables = {
         staffUsername: values?.username,
-        // employeeid: state?.employeeid,
+        employeeid: singleEmployeeData?.employeeid,
         firstname: values?.firstname,
         middleinitial: values.middleinitial,
         lastname: values?.lastname,
@@ -100,241 +133,197 @@ const EmployeeDetails = () => {
         isDeleted: false,
       };
       const res: any = await editEmployee(variables).unwrap();
-      console.log(res);
 
       if (res?.statusCode === 200) {
         setEditEmployeeIsLoading(false);
+        refetchSingleEmployee();
       }
     } catch (error: any) {
-      toast.error(
-        error?.data?.responseMessage
-        // error?.data?.responseMessage === error?.data?.responseMessage
-      );
+      setEditEmployeeIsLoading(false);
+      toast.error(error?.data?.responseMessage);
     }
   };
 
   return (
-    <form className="m-auto w-[80%]" onSubmit={handleSubmit(submitForm)}>
-      <Header1 className="text-center" mt="2rem" mb="0">
-        Employee Details
-      </Header1>
-      <Subtitle className="text-center">View Employee Detail</Subtitle>
+    <>
+      {singleEmployeeLoading ? (
+        <Loader />
+      ) : (
+        <form className="m-auto w-[80%]" onSubmit={handleSubmit(submitForm)}>
+          <Header1 className="text-center" mt="2rem" mb="0">
+            Employee Records
+          </Header1>
+          <Subtitle className="text-center">View Employee Detail</Subtitle>
 
-      <div>
-        <Button
-          isLoading={false}
-          // icon={<FontAwesomeIcon icon="fa-solid fa-plus" />}
-          text="Go back"
-          type="button"
-          className="py-2 w-48 ml-auto mr-4 lg:mr-12"
-          size="sm"
-          onClick={() => {
-            navigate(-1);
-          }}
-        />
-      </div>
+          <Button
+            isLoading={false}
+            text="Go back"
+            type="button"
+            className="py-2 w-48 ml-auto mr-4 mb-6 lg:mr-12"
+            size="sm"
+            onClick={() => {
+              navigate(-1);
+            }}
+          />
 
-      <div className="flex items-center gap-10 mb-4 mt-10">
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="First Name"
-          register={register("firstname")}
-          showLabel
-        />
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Middle Initial"
-          register={register("middleinitial")}
-          showLabel
-        />
+          <div className="flex items-center gap-10 mb-4">
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="First Name"
+              register={register("firstname")}
+              showLabel
+            />
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Middle Initial"
+              register={register("middleinitial")}
+              showLabel
+            />
 
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Last Name"
-          register={register("lastname")}
-          showLabel
-        />
-      </div>
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Last Name"
+              register={register("lastname")}
+              showLabel
+            />
+          </div>
 
-      <div className="flex items-center gap-10 mb-4">
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="User Name"
-          register={register("username")}
-          showLabel
-        />
+          <div className="flex items-center gap-10 mb-4">
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="User Name"
+              register={register("username")}
+              showLabel
+            />
 
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Role"
-          register={register("role")}
-          showLabel
-        />
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Role"
+              register={register("role")}
+              showLabel
+            />
 
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Role"
-          register={register("grade")}
-          showLabel
-        />
+            <CustomSelect
+              control={control}
+              name="grade"
+              options={gradeLevelDataFormatted}
+              label="Grade"
+              className="w-[30%]"
+              isLoading={isLoading}
+            />
+          </div>
 
-        <CustomSelect
-          control={control}
-          name="grade"
-          options={gradeLevelDataFormatted}
-          label="Grade"
-          className="w-[30%]"
-          isLoading={isLoading}
-        />
-      </div>
+          <div className="flex items-center gap-10 mb-4">
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Division"
+              register={register("division")}
+              showLabel
+            />
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Department"
+              register={register("department")}
+              showLabel
+            />
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Unit"
+              register={register("unit")}
+              showLabel
+            />
+          </div>
 
-      <div className="flex items-center gap-10 mb-4">
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Division"
-          register={register("division")}
-          showLabel
-        />
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Department"
-          register={register("department")}
-          showLabel
-        />
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Unit"
-          register={register("unit")}
-          showLabel
-        />
-      </div>
+          <div className="flex items-center gap-10 mb-4">
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Location"
+              register={register("location")}
+              showLabel
+            />
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Account Number"
+              register={register("accountnumber")}
+              showLabel
+            />
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Sort Code"
+              register={register("sortcode")}
+              showLabel
+            />
+          </div>
+          <div className="flex items-center gap-10 mb-4">
+            <CustomSelect
+              control={control}
+              name="staffStatus"
+              options={staffStatus}
+              label="Status"
+              className="w-[30%]"
+              isLoading={isLoading}
+            />
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Created By"
+              register={register("createdBy")}
+              readOnly
+              showLabel
+            />
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Created Time"
+              register={register("createdDateTime")}
+              readOnly
+              showLabel
+            />
+          </div>
 
-      <div className="flex items-center gap-10 mb-4">
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Location"
-          register={register("location")}
-          showLabel
-        />
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Account Number"
-          register={register("accountnumber")}
-          showLabel
-        />
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Sort Code"
-          register={register("sortcode")}
-          showLabel
-        />
-      </div>
-      <div className="flex items-center gap-10 mb-4">
-        <CustomSelect
-          control={control}
-          name="staffStatus"
-          options={staffStatus}
-          label="Status"
-          className="w-[30%]"
-          isLoading={isLoading}
-        />
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Created By"
-          register={register("createdBy")}
-          readOnly
-        />
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Created Time"
-          register={register("createdDateTime")}
-          readOnly
-        />
-      </div>
+          <div className="flex items-center gap-10 mb-4">
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Updated By"
+              register={register("lastUpdatedBy")}
+              readOnly
+              showLabel
+            />
+            <Input
+              type="text"
+              className="basis-[30%]"
+              label="Last Updated Time"
+              register={register("lastUpdatedDateTime")}
+              readOnly
+              showLabel
+            />
+          </div>
 
-      <div className="flex items-center gap-10 mb-4">
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Updated By"
-          register={register("lastUpdatedBy")}
-          readOnly
-        />
-        <Input
-          type="text"
-          className="basis-[30%]"
-          label="Last Updated Time"
-          register={register("lastUpdatedDateTime")}
-          readOnly
-        />
-      </div>
-      <Button
-        text="Update"
-        type="submit"
-        className="py-3 w-full text-center"
-        size="sm"
-        isLoading={editEmployeeIsLoading}
-      />
-    </form>
+          <div className="my-10 flex justify-center m-auto items-center">
+            <Button
+              text="Update"
+              type="submit"
+              className="py-3 w-[40%] text-center"
+              size="sm"
+              isLoading={editEmployeeIsLoading}
+            />
+          </div>
+        </form>
+      )}
+    </>
   );
 };
 
 export { EmployeeDetails };
-
-// form values
-
-// {
-//   "firstname": "Test Amaka",
-//   "middleinitial": "",
-//   "lastname": "Stephanie",
-//   "username": "estephanie",
-//   "role": "Intern",
-//   "grade": "DGM",
-//   "division": "Risk Management",
-//   "department": "Risk Management",
-//   "unit": "Risk Management",
-//   "location": "Lagos",
-//   "accountnumber": "0123456799",
-//   "sortcode": "123456789",
-//   "createdBy": null,
-//   "lastUpdatedBy": null,
-//   "createdDateTime": "0001-01-01T00:00:00+00:00",
-//   "lastUpdatedDateTime": "0001-01-01T00:00:00+00:00"
-// }
-
-// state values
-// {
-//   "employeeid": "ZZZWSC547",
-//   "firstname": "Test Amaka",
-//   "middleinitial": "",
-//   "lastname": "Stephanie",
-//   "username": "estephanie",
-//   "role": "Intern",
-//   "grade": "Intern",
-//   "division": "Risk Management",
-//   "department": "Risk Management",
-//   "unit": "Risk Management",
-//   "location": "Lagos",
-//   "accountnumber": "0123456799",
-//   "sortcode": "123456789",
-//   "staffStatus": "Active",
-//   "createdDateTime": "0001-01-01T00:00:00+00:00",
-//   "createdBy": null,
-//   "lastUpdatedDateTime": "0001-01-01T00:00:00+00:00",
-//   "lastUpdatedBy": null,
-//   "isDeleted": false
-// }

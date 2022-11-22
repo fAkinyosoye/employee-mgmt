@@ -73,9 +73,9 @@ const urlTemplate = "/api/BOIEmployee";
 
 export const mgmtServiceApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    fetchBOIEmployeeById: builder.query<void, FetchBOIEmployeeById>({
+    fetchBOIEmployeeById: builder.query<void, string>({
       query: (employeeId) => ({
-        url: `${urlTemplate}/FetchBOIEmployeeByEmployeeId?employeeId=${employeeId}'`,
+        url: `${urlTemplate}/FetchBOIEmployeeByEmployeeId?employeeId=${employeeId}`,
       }),
       transformResponse: (response: any) => response.data,
     }),
