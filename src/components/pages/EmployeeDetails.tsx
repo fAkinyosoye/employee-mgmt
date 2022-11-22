@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-<<<<<<< HEAD
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -9,30 +8,17 @@ import {
   useFetchAllGradeLevelsQuery,
   useFetchBOIEmployeeByIdQuery,
 } from "../../redux/services/mgmt-services";
-=======
-import { useLocation, useNavigate } from "react-router-dom";
->>>>>>> 9df0f5c316b4b0d5a4d920066a785ad24fef5401
 import {
   Button,
   CustomSelect,
   Header1,
   Input,
-<<<<<<< HEAD
   Loader,
-=======
-  Label,
->>>>>>> 9df0f5c316b4b0d5a4d920066a785ad24fef5401
   Subtitle,
 } from "../atoms";
 
 const EmployeeDetails = () => {
-<<<<<<< HEAD
   const { id } = useParams();
-=======
-  const navigate = useNavigate();
-
-  const { state } = useLocation();
->>>>>>> 9df0f5c316b4b0d5a4d920066a785ad24fef5401
 
   let employeeID = id ?? "";
 
