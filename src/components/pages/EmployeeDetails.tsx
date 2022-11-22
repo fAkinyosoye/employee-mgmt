@@ -13,7 +13,7 @@ import {
   CustomSelect,
   Header1,
   Input,
-  Label,
+  // Label,
   Subtitle,
 } from "../atoms";
 
