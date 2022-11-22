@@ -5,13 +5,11 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import logoImg from "../../assets/images/uploadedwebclientlogo.jpg";
-import { useLoginMutation } from "../../redux/services/auth-services";
+import {
+  LoginRequest,
+  useLoginMutation,
+} from "../../redux/services/auth-services";
 import { Button, Header1, Input, Label, Subtitle } from "../atoms";
-
-export type LoginRequest = {
-  emailOrUserName: string;
-  password: string;
-};
 
 const Login = () => {
   const [login] = useLoginMutation();
@@ -29,20 +27,10 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  // const handleFormDataChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
-
   const submit = async (data: LoginRequest): Promise<void> => {
     setIsLoading(true);
     try {
       const res = await login(data).unwrap();
-      console.log(res);
       if (
         res?.statusCode === 200 &&
         res?.data?.personStaffRole === "Internal Control"
@@ -62,6 +50,7 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+
   return (
     <Wrapper>
       <form

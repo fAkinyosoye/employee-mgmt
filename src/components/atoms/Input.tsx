@@ -55,10 +55,10 @@ const Input = (props: InputProps) => {
         id={id}
         {...register}
         placeholder={placeholder}
-        className="h-[34px] placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-lightBlack rounded-md px-[6px] shadow-sm focus:outline-none focus:border-primary focus:ring-primary focus:ring-1 text-sm"
+        className="h-[34px] placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-lightB;lack rounded-md px-[6px] shadow-sm focus:outline-none focus:border-primary focus:ring-primary focus:ring-1 text-sm"
         style={{
           border: error ? "1px solid red" : "",
-          backgroundColor: readOnly ? "#ACB5BD" : "",
+          backgroundColor: readOnly ? "hsl(0, 0%, 90%)" : "",
           //   borderRadius: ifRounded && "6px",
         }}
       />
