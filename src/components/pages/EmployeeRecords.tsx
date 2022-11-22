@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 // import { Controller, useForm } from "react-hook-form";
 // import { toast } from "react-toastify";
@@ -10,18 +10,26 @@ import {
   useFetchAllBOIEmployeesQuery,
 } from "../../redux/services/mgmt-services";
 import { Button, Header1, Subtitle, Table } from "../atoms";
+import Pagination from "../organisms/Pagination";
 // import { dummyData } from "../utilities/employeeDummyData";
 
 const EmployeeRecords = () => {
   const navigate = useNavigate();
+
+  const pageSize = 10;
+
+  const [currPageInfo, setCurrPageInfo] = useState<any>({
+    pageNo: 1,
+    pageSize: 10,
+  });
 
   const {
     data: employeeData,
     refetch,
     isLoading,
   }: any = useFetchAllBOIEmployeesQuery({
-    pageNumber: 1,
-    pageSize: 20,
+    pageNumber: currPageInfo.pageNo,
+    pageSize: currPageInfo.pageSize,
   });
 
   useEffect(() => {
@@ -138,8 +146,26 @@ const EmployeeRecords = () => {
           isLoading={isLoading}
           ifHover
           ifPagination
+          // initialPage={pageNumber}
+          // pagination={{
+          //   from: Number(pageNumber - 1) * pageSize + 1,
+          //   to: +pageNumber * response?.length,
+          //   total: total,
+          //   per_page: +pageSize,
+          //   current: +pageNumber,
+          // }}
         />
       </div>
+      <Pagination
+        transPerPage={currPageInfo.pageSize}
+        totalTrans={1000}
+        currentPage={currPageInfo.pageNo}
+        lastPage={5}
+        setCurrPageInfo={setCurrPageInfo}
+        pageLimit={Number(pageSize)}
+        currPageInfo={currPageInfo}
+        refetch={refetch}
+      />
     </div>
   );
 };

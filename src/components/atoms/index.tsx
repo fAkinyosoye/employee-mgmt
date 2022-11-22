@@ -6,3 +6,4 @@ export * from "./Loader";
 export * from "./Colors";
 export * from "./Text";
 export * from "./Burger";
+export * from "./Pagination";
