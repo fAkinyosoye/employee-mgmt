@@ -24,8 +24,8 @@ const EmployeeRecords = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const goToSinglePage = (item: any) => {
-    navigate(`employee-records/${item?.employeeid}`);
+  const goToEmployeePage = () => {
+    navigate(`create-employee`);
   };
 
   const getData = useCallback(() => {
@@ -62,15 +62,7 @@ const EmployeeRecords = () => {
             <Button
               text="View"
               type="button"
-              className="p-1 text-xs w-14 text-center"
-              size="sm"
-              onClick={() => goToSinglePage(item)}
-            />
-
-            <Button
-              text="Edit"
-              type="button"
-              className="p-1 text-xs w-14 text-center"
+              className="p-3 text-xs w-28"
               size="sm"
               onClick={() => goToSinglePage(item)}
             />
@@ -133,6 +125,7 @@ const EmployeeRecords = () => {
           type="button"
           className="py-2 w-48 ml-auto mr-4 lg:mr-12"
           size="sm"
+          onClick={goToEmployeePage}
         />
       </div>
 

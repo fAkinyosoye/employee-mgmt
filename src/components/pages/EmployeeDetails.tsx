@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   EditBOIEmployee,
@@ -19,6 +19,7 @@ import {
 
 const EmployeeDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   let employeeID = id ?? "";
 
@@ -149,9 +150,20 @@ const EmployeeDetails = () => {
       ) : (
         <form className="m-auto w-[80%]" onSubmit={handleSubmit(submitForm)}>
           <Header1 className="text-center" mt="2rem" mb="0">
-            Employee Details
+            Employee Records
           </Header1>
           <Subtitle className="text-center">View Employee Detail</Subtitle>
+
+          <Button
+            isLoading={false}
+            text="Go back"
+            type="button"
+            className="py-2 w-48 ml-auto mr-4 mb-6 lg:mr-12"
+            size="sm"
+            onClick={() => {
+              navigate(-1);
+            }}
+          />
 
           <div className="flex items-center gap-10 mb-4">
             <Input
@@ -159,12 +171,14 @@ const EmployeeDetails = () => {
               className="basis-[30%]"
               label="First Name"
               register={register("firstname")}
+              showLabel
             />
             <Input
               type="text"
               className="basis-[30%]"
               label="Middle Initial"
               register={register("middleinitial")}
+              showLabel
             />
 
             <Input
@@ -172,6 +186,7 @@ const EmployeeDetails = () => {
               className="basis-[30%]"
               label="Last Name"
               register={register("lastname")}
+              showLabel
             />
           </div>
 
@@ -181,6 +196,7 @@ const EmployeeDetails = () => {
               className="basis-[30%]"
               label="User Name"
               register={register("username")}
+              showLabel
             />
 
             <Input
@@ -188,6 +204,7 @@ const EmployeeDetails = () => {
               className="basis-[30%]"
               label="Role"
               register={register("role")}
+              showLabel
             />
 
             <CustomSelect
@@ -206,18 +223,21 @@ const EmployeeDetails = () => {
               className="basis-[30%]"
               label="Division"
               register={register("division")}
+              showLabel
             />
             <Input
               type="text"
               className="basis-[30%]"
               label="Department"
               register={register("department")}
+              showLabel
             />
             <Input
               type="text"
               className="basis-[30%]"
               label="Unit"
               register={register("unit")}
+              showLabel
             />
           </div>
 
@@ -227,18 +247,21 @@ const EmployeeDetails = () => {
               className="basis-[30%]"
               label="Location"
               register={register("location")}
+              showLabel
             />
             <Input
               type="text"
               className="basis-[30%]"
               label="Account Number"
               register={register("accountnumber")}
+              showLabel
             />
             <Input
               type="text"
               className="basis-[30%]"
               label="Sort Code"
               register={register("sortcode")}
+              showLabel
             />
           </div>
           <div className="flex items-center gap-10 mb-4">
@@ -256,6 +279,7 @@ const EmployeeDetails = () => {
               label="Created By"
               register={register("createdBy")}
               readOnly
+              showLabel
             />
             <Input
               type="text"
@@ -263,6 +287,7 @@ const EmployeeDetails = () => {
               label="Created Time"
               register={register("createdDateTime")}
               readOnly
+              showLabel
             />
           </div>
 
@@ -273,6 +298,7 @@ const EmployeeDetails = () => {
               label="Updated By"
               register={register("lastUpdatedBy")}
               readOnly
+              showLabel
             />
             <Input
               type="text"
@@ -280,6 +306,7 @@ const EmployeeDetails = () => {
               label="Last Updated Time"
               register={register("lastUpdatedDateTime")}
               readOnly
+              showLabel
             />
           </div>
 

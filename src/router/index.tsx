@@ -3,12 +3,14 @@ import { Route, Routes } from "react-router-dom";
 import AuthLayout from "../components/layouts/AuthLayout";
 import {
   ComponentsPage,
+  CreateEmployee,
   EmployeeDetails,
   EmployeeRecords,
   Login,
   TestPageTwo,
 } from "../components/pages";
 import {
+  createEmployee,
   dashboard,
   records,
   tablePath,
@@ -22,7 +24,8 @@ const PageRouter = () => {
         <Route index element={<EmployeeRecords />} />
         <Route path={`${records}/:id`} element={<EmployeeDetails />} />
         <Route path={tablePath} element={<TestPageTwo />} />
-        <Route path="components" element={<ComponentsPage />} />
+        <Route path={createEmployee} element={<CreateEmployee />} />
+        <Route path={createEmployee} element={<ComponentsPage />} />
       </Route>
       <Route path="*" element={<TestPageTwo />} />
     </Routes>
