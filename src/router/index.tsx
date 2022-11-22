@@ -8,15 +8,20 @@ import {
   Login,
   TestPageTwo,
 } from "../components/pages";
+import {
+  dashboard,
+  records,
+  tablePath,
+} from "../components/utilities/routerPaths";
 
 const PageRouter = () => {
   return (
     <Routes>
       <Route index element={<Login />} />
-      <Route path="/employee-records" element={<AuthLayout />}>
+      <Route path={dashboard} element={<AuthLayout />}>
         <Route index element={<EmployeeRecords />} />
-        <Route path="employee-records/:id" element={<EmployeeDetails />} />
-        <Route path="table" element={<TestPageTwo />} />
+        <Route path={`${records}/:id`} element={<EmployeeDetails />} />
+        <Route path={tablePath} element={<TestPageTwo />} />
         <Route path="components" element={<ComponentsPage />} />
       </Route>
       <Route path="*" element={<TestPageTwo />} />
