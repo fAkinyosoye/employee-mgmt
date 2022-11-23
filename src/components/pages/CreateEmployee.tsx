@@ -95,6 +95,7 @@ const CreateEmployee = () => {
       <Button
         isLoading={false}
         text="Go back"
+        backBtn
         type="button"
         className="py-2 w-48 ml-auto mr-4 mb-6 lg:mr-12"
         size="sm"
