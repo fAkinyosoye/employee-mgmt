@@ -149,7 +149,10 @@ const EmployeeDetails = () => {
       {singleEmployeeLoading ? (
         <Loader />
       ) : (
-        <form className="m-auto w-[80%]" onSubmit={handleSubmit(submitForm)}>
+        <form
+          className="m-auto w-[90%] lg:w-[80%]"
+          onSubmit={handleSubmit(submitForm)}
+        >
           <Header1 className="text-center" mt="2rem" mb="0">
             Employee Records
           </Header1>
@@ -166,17 +169,17 @@ const EmployeeDetails = () => {
             }}
           />
 
-          <div className="flex items-center gap-10 mb-4">
+          <div className="flex items-center flex-wrap gap-4 lg:gap-10 mb-4">
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="First Name"
               register={register("firstname")}
               showLabel
             />
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Middle Initial"
               register={register("middleinitial")}
               showLabel
@@ -184,17 +187,15 @@ const EmployeeDetails = () => {
 
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Last Name"
               register={register("lastname")}
               showLabel
             />
-          </div>
 
-          <div className="flex items-center gap-10 mb-4">
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="User Name"
               register={register("username")}
               showLabel
@@ -202,7 +203,7 @@ const EmployeeDetails = () => {
 
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Role"
               register={register("role")}
               showLabel
@@ -213,70 +214,62 @@ const EmployeeDetails = () => {
               name="grade"
               options={gradeLevelDataFormatted}
               label="Grade"
-              className="w-[30%]"
+              className="w-[45%] lg:w-[30%]"
               isLoading={isLoading}
             />
-          </div>
-
-          <div className="flex items-center gap-10 mb-4">
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Division"
               register={register("division")}
               showLabel
             />
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Department"
               register={register("department")}
               showLabel
             />
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Unit"
               register={register("unit")}
               showLabel
             />
-          </div>
-
-          <div className="flex items-center gap-10 mb-4">
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Location"
               register={register("location")}
               showLabel
             />
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Account Number"
               register={register("accountnumber")}
               showLabel
             />
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Sort Code"
               register={register("sortcode")}
               showLabel
             />
-          </div>
-          <div className="flex items-center gap-10 mb-4">
             <CustomSelect
               control={control}
               name="staffStatus"
               options={staffStatus}
               label="Status"
-              className="w-[30%]"
+              className="w-[45%] lg:w-[30%]"
               isLoading={isLoading}
             />
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Created By"
               register={register("createdBy")}
               readOnly
@@ -284,18 +277,15 @@ const EmployeeDetails = () => {
             />
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Created Time"
               register={register("createdDateTime")}
               readOnly
               showLabel
             />
-          </div>
-
-          <div className="flex items-center gap-10 mb-4">
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Updated By"
               register={register("lastUpdatedBy")}
               readOnly
@@ -303,13 +293,15 @@ const EmployeeDetails = () => {
             />
             <Input
               type="text"
-              className="basis-[30%]"
+              className="basis-[45%] lg:basis-[30%]"
               label="Last Updated Time"
               register={register("lastUpdatedDateTime")}
               readOnly
               showLabel
             />
           </div>
+
+          <div className="flex items-center gap-10 mb-4"></div>
 
           <div className="my-10 flex justify-center m-auto items-center">
             <Button
