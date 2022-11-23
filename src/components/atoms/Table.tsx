@@ -3,6 +3,7 @@ import { useTable } from "react-table";
 import { Loader } from "../atoms/Loader";
 
 import { Button } from "./Button";
+// import { Pagination } from "./Pagination";
 
 const Table = ({
   data,
@@ -101,6 +102,7 @@ const Table = ({
                   })}
                 </tbody>
               </table>
+              {/* {ifPagination && <Pagination {...pagination} />} */}
             </div>
           )}
         </>

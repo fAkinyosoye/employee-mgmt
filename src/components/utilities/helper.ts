@@ -19,3 +19,26 @@ export const colourStyles = {
     fontSize: "14px",
   }),
 };
+
+export const decodeLogin = (data: any) => {
+  // const user = jwt(data.data.token); // decode your token here
+  localStorage.setItem("personEmail", data?.data?.personEmail); // change this to employeeID or token later
+  // localStorage.setItem("token", data.data.token);
+  localStorage.setItem("user", JSON.stringify(data.data));
+};
+
+export const getLoginData = () => {
+  // let token: any = localStorage.getItem("token");
+  // try {
+  //   jwtDecode(token);
+  //   const { exp }: any = jwtDecode(token);
+  //   if (Date.now() >= exp * 1000) {
+  //     logoutUser();
+  //   }
+  // } catch (err) {
+  //   // return false;
+  // }
+  let rawUserData: any = localStorage.getItem("user");
+  let user = JSON.parse(rawUserData);
+  return user;
+};

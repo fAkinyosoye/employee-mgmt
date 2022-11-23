@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
@@ -10,6 +10,7 @@ import {
   useLoginMutation,
 } from "../../redux/services/auth-services";
 import { Button, Header1, Input, Label, Subtitle } from "../atoms";
+import { decodeLogin } from "../utilities/helper";
 import { dashboard } from "../utilities/routerPaths";
 
 const Login = () => {
@@ -36,6 +37,7 @@ const Login = () => {
         res?.statusCode === 200 &&
         res?.data?.personStaffRole === "Internal Control"
       ) {
+        decodeLogin(res);
         localStorage.setItem("personEmail", res?.data?.personEmail); // change this to employeeID or token later
         setIsLoading(false);
         navigate(dashboard);
@@ -52,7 +54,7 @@ const Login = () => {
     }
   };
 
-  return (
+  return !localStorage.getItem("personEmail") ? (
     <Wrapper>
       <form
         // onSubmit={(e: any) => submitHandler(e)}
@@ -111,6 +113,8 @@ const Login = () => {
         />
       </form>
     </Wrapper>
+  ) : (
+    <Navigate to={dashboard} replace={true} />
   );
 };
 

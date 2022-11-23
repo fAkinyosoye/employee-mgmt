@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+
 import {
   EditBOIEmployee,
   useEditBOIEmployeeMutation,
@@ -65,7 +66,7 @@ const EmployeeDetails = () => {
     },
   ];
 
-  const { register, control, handleSubmit, reset, setValue } = useForm({
+  const { register, control, handleSubmit, reset } = useForm({
     defaultValues: {
       firstname: singleEmployeeData && singleEmployeeData?.firstname,
       middleinitial: singleEmployeeData?.middleinitial,
@@ -88,7 +89,6 @@ const EmployeeDetails = () => {
   });
 
   useEffect(() => {
-    setValue("grade", singleEmployeeData?.grade);
     const defaultValues = {
       firstname: singleEmployeeData && singleEmployeeData?.firstname,
       middleinitial: singleEmployeeData?.middleinitial,
@@ -105,16 +105,8 @@ const EmployeeDetails = () => {
       staffStatus: singleEmployeeData?.staffStatus,
       createdBy: singleEmployeeData?.createdBy,
       lastUpdatedBy: singleEmployeeData?.lastUpdatedBy,
-      createdDateTime:
-        singleEmployeeData?.createdDateTime &&
-        new Date(singleEmployeeData?.createdDateTime)
-          ?.toISOString()
-          .substring(0, 10),
-      lastUpdatedDateTime:
-        singleEmployeeData?.lastUpdatedDateTime &&
-        new Date(singleEmployeeData?.lastUpdatedDateTime)
-          ?.toISOString()
-          .substring(0, 10),
+      createdDateTime: singleEmployeeData?.createdDateTime,
+      lastUpdatedDateTime: singleEmployeeData?.lastUpdatedDateTime,
     };
     reset(defaultValues);
   }, [reset, singleEmployeeData]);
