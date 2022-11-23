@@ -57,7 +57,7 @@ const CreateEmployee = () => {
     try {
       const variables = {
         staffUsername: "estephanie",
-        employeeid: "",
+        employeeid: "1121",
         firstname: values?.firstname,
         middleinitial: values?.middleinitial,
         lastname: values?.lastname,
@@ -76,7 +76,8 @@ const CreateEmployee = () => {
       const res: any = await createEmployee(variables).unwrap();
       if (res?.statusCode === 200) {
         setCreateEmployeeIsLoading(false);
-        refetchCreateEmployee();
+        toast(res?.responseMessage);
+        navigate("/");
       }
     } catch (error: any) {
       setCreateEmployeeIsLoading(false);
@@ -102,10 +103,10 @@ const CreateEmployee = () => {
         }}
       />
 
-      <div className="flex items-center gap-10 mb-4">
+      <div className="flex items-center flex-wrap gap-4 lg:gap-10 mb-4">
         <Input
           type="text"
-          className="basis-[30%]"
+          className="basis-[45%] lg:basis-[30%]"
           label="First Name"
           register={register("firstname", {
             required: "First name is required",
@@ -115,7 +116,7 @@ const CreateEmployee = () => {
         />
         <Input
           type="text"
-          className="basis-[30%]"
+          className="basis-[45%] lg:basis-[30%]"
           label="Middle Initial"
           register={register("middleinitial")}
           showLabel
@@ -123,7 +124,7 @@ const CreateEmployee = () => {
 
         <Input
           type="text"
-          className="basis-[30%]"
+          className="basis-[45%] lg:basis-[30%]"
           label="Last Name"
           register={register("lastname", {
             required: "Last Name is Required",
@@ -131,12 +132,10 @@ const CreateEmployee = () => {
           showLabel
           error={errors?.lastname?.message}
         />
-      </div>
 
-      <div className="flex items-center gap-10 mb-4">
         <Input
           type="text"
-          className="basis-[30%]"
+          className="basis-[45%] lg:basis-[30%]"
           label="User Name"
           register={register("username", {
             required: "Username is Required",
@@ -147,7 +146,7 @@ const CreateEmployee = () => {
 
         <Input
           type="text"
-          className="basis-[30%]"
+          className="basis-[45%] lg:basis-[30%]"
           label="Role"
           register={register("role", {
             required: "Role is Required",
@@ -161,19 +160,16 @@ const CreateEmployee = () => {
           name="grade"
           options={gradeLevelDataFormatted}
           label="Grade"
-          className="w-[30%]"
+          className="w-[45%] lg:w-[30%]"
           isLoading={isLoading}
           rules={{
             required: "Grade is required",
           }}
           error={errors?.grade?.message}
         />
-      </div>
-
-      <div className="flex items-center gap-10 mb-4">
         <Input
           type="text"
-          className="basis-[30%]"
+          className="basis-[45%] lg:basis-[30%]"
           label="Division"
           register={register("division", {
             required: "Division is Required",
@@ -184,7 +180,7 @@ const CreateEmployee = () => {
 
         <Input
           type="text"
-          className="basis-[30%]"
+          className="basis-[45%] lg:basis-[30%]"
           label="Department"
           register={register("department", {
             required: "Department is Required",
@@ -195,7 +191,7 @@ const CreateEmployee = () => {
 
         <Input
           type="text"
-          className="basis-[30%]"
+          className="basis-[45%] lg:basis-[30%]"
           label="Unit"
           register={register("unit", {
             required: "Unit is Required",
@@ -203,12 +199,9 @@ const CreateEmployee = () => {
           showLabel
           error={errors?.unit?.message}
         />
-      </div>
-
-      <div className="flex items-center gap-10 mb-4">
         <Input
           type="text"
-          className="basis-[30%]"
+          className="basis-[45%] lg:basis-[30%]"
           label="Location"
           register={register("location", {
             required: "Location is Required",
@@ -218,19 +211,29 @@ const CreateEmployee = () => {
         />
         <Input
           type="text"
-          className="basis-[30%]"
+          className="basis-[45%] lg:basis-[30%]"
           label="Account Number"
           register={register("accountnumber")}
           showLabel
         />
         <Input
           type="text"
-          className="basis-[30%]"
+          className="basis-[45%] lg:basis-[30%]"
           label="Sort Code"
           register={register("sortcode")}
           showLabel
         />
       </div>
+
+      {/* <div className="flex items-center gap-10 mb-4">
+     
+      </div> */}
+
+      {/* <div className="flex items-center gap-10 mb-4">
+       
+      </div> */}
+
+      <div className="flex items-center gap-10 mb-4"></div>
 
       <div className="my-10 flex justify-center m-auto items-center">
         <Button
