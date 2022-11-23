@@ -1,3 +1,4 @@
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -163,7 +164,7 @@ const Profile = () => {
           label="First Name"
           register={register("firstname")}
           showLabel
-          disabled
+          readOnly
         />
 
         <Input
@@ -172,7 +173,7 @@ const Profile = () => {
           label="Middle Initial"
           register={register("middleinitial")}
           showLabel
-          disabled
+          readOnly
         />
 
         <Input
@@ -181,7 +182,7 @@ const Profile = () => {
           label="Last Name"
           register={register("lastname")}
           showLabel
-          disabled
+          readOnly
         />
       </div>
 
@@ -192,7 +193,7 @@ const Profile = () => {
           label="User Name"
           register={register("username")}
           showLabel
-          disabled
+          readOnly
         />
 
         <Input
@@ -201,7 +202,7 @@ const Profile = () => {
           label="Role"
           register={register("role")}
           showLabel
-          disabled
+          readOnly
         />
 
         <CustomSelect
@@ -221,7 +222,7 @@ const Profile = () => {
           label="Division"
           register={register("division")}
           showLabel
-          disabled
+          readOnly
         />
         <Input
           type="text"
@@ -229,7 +230,7 @@ const Profile = () => {
           label="Department"
           register={register("department")}
           showLabel
-          disabled
+          readOnly
         />
         <Input
           type="text"
@@ -237,7 +238,7 @@ const Profile = () => {
           label="Unit"
           register={register("unit")}
           showLabel
-          disabled
+          readOnly
         />
       </div>
 
@@ -248,7 +249,7 @@ const Profile = () => {
           label="Location"
           register={register("location")}
           showLabel
-          disabled
+          readOnly
         />
 
         <Input
@@ -257,7 +258,7 @@ const Profile = () => {
           label="Account Number"
           register={register("accountnumber")}
           showLabel
-          disabled
+          readOnly
         />
         <Input
           type="text"
@@ -265,7 +266,7 @@ const Profile = () => {
           label="Sort Code"
           register={register("sortcode")}
           showLabel
-          disabled
+          readOnly
         />
       </div>
       <div className="flex items-center gap-10 mb-4">
@@ -284,7 +285,6 @@ const Profile = () => {
           register={register("createdBy")}
           readOnly
           showLabel
-          disabled
         />
         <Input
           type="text"
@@ -292,7 +292,6 @@ const Profile = () => {
           label="Created Time"
           register={register("createdDateTime")}
           readOnly
-          disabled
         />
       </div>
 
@@ -304,7 +303,6 @@ const Profile = () => {
           register={register("lastUpdatedBy")}
           readOnly
           showLabel
-          disabled
         />
         <Input
           type="text"
@@ -313,7 +311,6 @@ const Profile = () => {
           register={register("lastUpdatedDateTime")}
           readOnly
           showLabel
-          disabled
         />
       </div>
 

@@ -41,6 +41,7 @@ const Input = (props: InputProps) => {
     register,
     ifRounded,
     showLabel,
+    disabled,
   } = props;
   return (
     <div className={`${className}`}>
@@ -56,6 +57,7 @@ const Input = (props: InputProps) => {
         readOnly={readOnly}
         type={type}
         name={name}
+        disabled={disabled}
         id={id}
         {...register}
         placeholder={placeholder}
@@ -63,6 +65,7 @@ const Input = (props: InputProps) => {
         style={{
           border: error ? "1px solid red" : "",
           backgroundColor: readOnly ? "hsl(0, 0%, 90%)" : "",
+          cursor: readOnly ? "not-allowed" : "initial",
           //   borderRadius: ifRounded && "6px",
         }}
       />

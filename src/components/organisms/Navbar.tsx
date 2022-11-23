@@ -6,11 +6,11 @@ import styled from "styled-components";
 
 import navlogo from "../../assets/images/BOI-logo-cropped.png";
 import { Burger, Colors } from "../atoms";
-import { dashboard, profile, records } from "../utilities/routerPaths";
+import { dashboard, profile } from "../utilities/routerPaths";
 
-type NavWrapperProps = {
-  show: boolean;
-};
+// type NavWrapperProps = {
+//   show: boolean;
+// };
 
 const Navbar: () => JSX.Element = () => {
   const [show, setShow] = useState<boolean>(false);
