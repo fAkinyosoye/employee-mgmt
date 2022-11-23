@@ -105,8 +105,16 @@ const EmployeeDetails = () => {
       staffStatus: singleEmployeeData?.staffStatus,
       createdBy: singleEmployeeData?.createdBy,
       lastUpdatedBy: singleEmployeeData?.lastUpdatedBy,
-      createdDateTime: singleEmployeeData?.createdDateTime,
-      lastUpdatedDateTime: singleEmployeeData?.lastUpdatedDateTime,
+      createdDateTime:
+        singleEmployeeData?.createdDateTime &&
+        new Date(singleEmployeeData?.createdDateTime)
+          ?.toISOString()
+          .substring(0, 10),
+      lastUpdatedDateTime:
+        singleEmployeeData?.lastUpdatedDateTime &&
+        new Date(singleEmployeeData?.lastUpdatedDateTime)
+          ?.toISOString()
+          .substring(0, 10),
     };
     reset(defaultValues);
   }, [reset, singleEmployeeData]);
