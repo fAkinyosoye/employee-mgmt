@@ -175,6 +175,7 @@ const EmployeeDetails = () => {
             onClick={() => {
               navigate(-1);
             }}
+            backBtn
           />
 
           <div className="flex items-center flex-wrap gap-4 lg:gap-10 mb-4">
