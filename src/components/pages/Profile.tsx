@@ -18,7 +18,7 @@ import {
   Subtitle,
 } from "../atoms";
 
-const EmployeeDetails = () => {
+const Profile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -335,4 +335,4 @@ const EmployeeDetails = () => {
   );
 };
 
-export { EmployeeDetails };
+export { Profile };

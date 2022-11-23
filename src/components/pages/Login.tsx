@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
@@ -52,7 +52,7 @@ const Login = () => {
     }
   };
 
-  return (
+  return !localStorage.getItem("personID") ? (
     <Wrapper>
       <form
         // onSubmit={(e: any) => submitHandler(e)}
@@ -111,6 +111,8 @@ const Login = () => {
         />
       </form>
     </Wrapper>
+  ) : (
+    <Navigate to={dashboard} replace={true} />
   );
 };
 
