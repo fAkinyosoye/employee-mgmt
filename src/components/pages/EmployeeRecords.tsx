@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   EmployeeDataType,
@@ -9,15 +9,20 @@ import { Button, Header1, Subtitle, Table } from "../atoms";
 import Pagination from "../organisms/Pagination";
 // import { dummyData } from "../utilities/employeeDummyData";
 
+type CurrPageInfoTypes = {
+  pageNo: number;
+  pageSize: number;
+};
+
 const EmployeeRecords = () => {
   const navigate = useNavigate();
 
-  const pageSize = 10;
-
-  const [currPageInfo, setCurrPageInfo] = useState<any>({
+  const [currPageInfo, setCurrPageInfo] = useState<CurrPageInfoTypes>({
     pageNo: 1,
     pageSize: 10,
   });
+
+  // lower, upper limits are the indices of the first element in the page and the first in the next page
 
   const {
     data: employeeData,
@@ -44,46 +49,59 @@ const EmployeeRecords = () => {
       });
     };
 
-    const result = employeeData?.map((item: EmployeeDataType, i: number) => {
-      const {
-        firstname,
-        middleinitial,
-        lastname,
-        division,
-        unit,
-        role,
-        grade,
-        staffStatus,
-      } = item;
-      return {
-        name: (
-          <p className="text-sm font-normal">{`${firstname} ${
-            middleinitial ?? ""
-          } ${lastname}`}</p>
-        ),
-        division: <p className="text-sm font-normal">{division}</p>,
-        unit: <p className="text-sm font-normal">{unit}</p>,
-        role: <p className="text-sm font-normal">{role}</p>,
-        grade: <p className="text-sm font-normal">{grade}</p>,
-        status: <p className="text-sm font-normal">{staffStatus}</p>,
-        view: (
-          <div className="flex items-center">
-            <Button
-              text="View"
-              type="button"
-              className="p-3 text-xs w-28"
-              size="sm"
-              onClick={() => goToSinglePage(item)}
-            />
-          </div>
-        ),
-      };
-    });
+    const result = employeeData?.map(
+      (item: EmployeeDataType, index: number) => {
+        const {
+          firstname,
+          middleinitial,
+          lastname,
+          division,
+          unit,
+          role,
+          grade,
+          staffStatus,
+        } = item;
+        return {
+          id: (
+            <p>
+              {Number(currPageInfo.pageNo - 1) * currPageInfo.pageSize +
+                index +
+                1}
+            </p>
+          ),
+          name: (
+            <p className="text-sm font-normal">{`${firstname} ${
+              middleinitial ?? ""
+            } ${lastname}`}</p>
+          ),
+          division: <p className="text-sm font-normal">{division}</p>,
+          unit: <p className="text-sm font-normal">{unit}</p>,
+          role: <p className="text-sm font-normal">{role}</p>,
+          grade: <p className="text-sm font-normal">{grade}</p>,
+          status: <p className="text-sm font-normal">{staffStatus}</p>,
+          view: (
+            <div className="flex items-center">
+              <Button
+                text="View"
+                type="button"
+                className="p-3 text-xs w-28"
+                size="sm"
+                onClick={() => goToSinglePage(item)}
+              />
+            </div>
+          ),
+        };
+      }
+    );
     return [...(result || [])];
-  }, [employeeData, navigate]);
+  }, [employeeData, navigate, currPageInfo]);
 
   const columns = React.useMemo(
     () => [
+      {
+        Header: "S/N",
+        accessor: "id",
+      },
       {
         Header: "Name",
         accessor: "name",
@@ -158,11 +176,11 @@ const EmployeeRecords = () => {
       </div>
       <Pagination
         transPerPage={currPageInfo.pageSize}
-        totalTrans={1000}
+        totalTrans={672}
         currentPage={currPageInfo.pageNo}
         lastPage={5}
         setCurrPageInfo={setCurrPageInfo}
-        pageLimit={Number(pageSize)}
+        pageLimit={Number(currPageInfo.pageSize)}
         currPageInfo={currPageInfo}
         refetch={refetch}
       />
