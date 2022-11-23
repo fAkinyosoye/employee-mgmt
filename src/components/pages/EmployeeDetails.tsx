@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import {
@@ -17,6 +17,7 @@ import {
   Loader,
   Subtitle,
 } from "../atoms";
+import { staffStatus } from "../utilities/helper";
 
 const EmployeeDetails = () => {
   const { id } = useParams();
@@ -57,22 +58,12 @@ const EmployeeDetails = () => {
 
   // console.log(gradeLevelData && gradeLevelData.shift());
 
-  const staffStatus = [
-    {
-      label: "Active",
-      value: "Active",
-    },
-    {
-      label: "Inactive",
-      value: "Inactive",
-    },
-  ];
-
   const { register, control, handleSubmit, reset } = useForm({
     defaultValues: {
       firstname: singleEmployeeData && singleEmployeeData?.firstname,
       middleinitial: singleEmployeeData?.middleinitial,
       lastname: singleEmployeeData?.lastname,
+      employeeid: singleEmployeeData?.employeeid,
       username: singleEmployeeData?.username,
       role: singleEmployeeData?.role,
       grade: singleEmployeeData?.grade,
@@ -95,6 +86,7 @@ const EmployeeDetails = () => {
       firstname: singleEmployeeData && singleEmployeeData?.firstname,
       middleinitial: singleEmployeeData?.middleinitial,
       lastname: singleEmployeeData?.lastname,
+      employeeid: singleEmployeeData?.employeeid,
       username: singleEmployeeData?.username,
       role: singleEmployeeData?.role,
       grade: singleEmployeeData?.grade,
@@ -207,6 +199,14 @@ const EmployeeDetails = () => {
             <Input
               type="text"
               className="basis-[45%] lg:basis-[30%]"
+              label="Employee ID"
+              register={register("employeeid")}
+              showLabel
+            />
+
+            <Input
+              type="text"
+              className="basis-[45%] lg:basis-[30%]"
               label="User Name"
               register={register("username")}
               showLabel
@@ -228,6 +228,7 @@ const EmployeeDetails = () => {
               className="w-[45%] lg:w-[30%]"
               isLoading={isLoading}
             />
+
             <Input
               type="text"
               className="basis-[45%] lg:basis-[30%]"

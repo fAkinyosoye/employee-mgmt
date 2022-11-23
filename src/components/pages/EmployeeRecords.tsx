@@ -80,14 +80,26 @@ const EmployeeRecords = () => {
           grade: <p className="text-sm font-normal">{grade}</p>,
           status: <p className="text-sm font-normal">{staffStatus}</p>,
           view: (
-            <div className="flex items-center">
-              <Button
+            <div className="flex items-center justify-center">
+              {/* <Button
                 text="View"
                 type="button"
                 className="p-3 text-xs w-28"
                 size="sm"
                 onClick={() => goToSinglePage(item)}
-              />
+              /> */}
+              <span
+                onClick={() => goToSinglePage(item)}
+                className="bg-boiGreen text-white text-xs font-medium mr-2 px-3 py-1 rounded"
+              >
+                View
+              </span>
+              <span
+                onClick={() => goToSinglePage(item)}
+                className="bg-boiGreen text-white text-xs font-medium mr-2 px-3 py-1 rounded"
+              >
+                Edit
+              </span>
             </div>
           ),
         };

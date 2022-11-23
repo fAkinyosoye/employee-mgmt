@@ -42,3 +42,14 @@ export const getLoginData = () => {
   let user = JSON.parse(rawUserData);
   return user;
 };
+
+export const staffStatus = [
+  {
+    label: "Active",
+    value: "Active",
+  },
+  {
+    label: "Inactive",
+    value: "Inactive",
+  },
+];
