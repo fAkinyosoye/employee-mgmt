@@ -42,7 +42,7 @@ const Profile = () => {
       <Header1 className="text-center" mt="2rem" mb="0">
         User Profile
       </Header1>
-      <Subtitle className="text-center">View Employee Detail</Subtitle>
+      <Subtitle className="text-center">Your Employee Detail</Subtitle>
 
       <Button
         isLoading={false}
