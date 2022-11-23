@@ -53,22 +53,44 @@ const Input = (props: InputProps) => {
           {label}
         </label>
       )}
-      <input
-        readOnly={readOnly}
-        type={type}
-        name={name}
-        disabled={disabled}
-        id={id}
-        {...register}
-        placeholder={placeholder}
-        className="h-[34px] placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-lightBlack rounded-md px-[6px] shadow-sm focus:outline-none focus:border-primary focus:ring-primary focus:ring-1 text-sm"
-        style={{
-          border: error ? "1px solid red" : "",
-          backgroundColor: readOnly ? "hsl(0, 0%, 90%)" : "",
-          cursor: readOnly ? "not-allowed" : "initial",
-          //   borderRadius: ifRounded && "6px",
-        }}
-      />
+
+      {type === "textarea" ? (
+        <textarea
+          readOnly={readOnly}
+          cols={10}
+          rows={5}
+          name={name}
+          disabled={disabled}
+          id={id}
+          {...register}
+          placeholder={placeholder}
+          className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-lightBlack rounded-md px-[6px] shadow-sm focus:outline-none focus:border-primary focus:ring-primary focus:ring-1 text-sm"
+          style={{
+            border: error ? "1px solid red" : "",
+            backgroundColor: readOnly ? "hsl(0, 0%, 90%)" : "",
+            cursor: readOnly ? "not-allowed" : "initial",
+            //   borderRadius: ifRounded && "6px",
+          }}
+        />
+      ) : (
+        <input
+          readOnly={readOnly}
+          type={type}
+          name={name}
+          disabled={disabled}
+          id={id}
+          {...register}
+          placeholder={placeholder}
+          className="h-[34px] placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-lightBlack rounded-md px-[6px] shadow-sm focus:outline-none focus:border-primary focus:ring-primary focus:ring-1 text-sm"
+          style={{
+            border: error ? "1px solid red" : "",
+            backgroundColor: readOnly ? "hsl(0, 0%, 90%)" : "",
+            cursor: readOnly ? "not-allowed" : "initial",
+            //   borderRadius: ifRounded && "6px",
+          }}
+        />
+      )}
+
       <span>
         <p className="text-red-500 mt-3 text-sm">{error}</p>
       </span>

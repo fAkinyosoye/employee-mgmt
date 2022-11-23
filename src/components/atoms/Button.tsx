@@ -45,10 +45,7 @@ const Button = ({
       onClick={onClick}
       disabled={isLoading}
     >
-      {/* {ifIcon && <img src={icon} alt="cloud" className="pr-2 w-8 h-8" />} */}
-      {/* {ifIcon && <FontAwesomeIcon icon={icon} />} */}
-      {/* {backBtn && <FontAwesomeIcon icon={faArrowLeft} />} */}
-      {/* allow font awesome icons */}
+      {backBtn && <FontAwesomeIcon icon={faArrowLeft} />}
       {isLoading ? (
         <div className="w-full flex flex-row items-center justify-center">
           <svg

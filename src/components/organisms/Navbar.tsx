@@ -44,8 +44,12 @@ const Navbar: () => JSX.Element = () => {
           <li className={location.pathname === dashboard ? "activ" : ""}>
             <NavLink to={dashboard}>Home</NavLink>
           </li>
-          <li className={location.pathname === profile ? "activ" : ""}>
-            <Link to={profile}>Profile</Link>
+          <li
+            className={
+              location.pathname === dashboard + "/" + profile ? "activ" : ""
+            }
+          >
+            <NavLink to={profile}>Profile</NavLink>
           </li>
           <li>
             <p onClick={logout} className="cursor-pointer">
@@ -63,10 +67,14 @@ const Navbar: () => JSX.Element = () => {
           <li className={location.pathname === dashboard ? "activ" : ""}>
             <NavLink to={dashboard}>Home</NavLink>
           </li>
-          <li className={location.pathname === profile ? "activ" : ""}>
-            <Link to="">Profile</Link>
+          <li
+            className={
+              location.pathname === dashboard + "/" + profile ? "activ" : ""
+            }
+          >
+            <NavLink to={profile}>Profile</NavLink>
           </li>
-          <li className={location.pathname === profile ? "activ" : ""}>
+          <li>
             <p onClick={logout} className="cursor-pointer">
               Logout
               <FontAwesomeIcon
