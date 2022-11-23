@@ -11,6 +11,7 @@ import {
   TestPageTwo,
 } from "../components/pages";
 import {
+  components,
   createEmployee,
   dashboard,
   profile,
@@ -27,7 +28,7 @@ const PageRouter = () => {
         <Route path={`${records}/:id`} element={<EmployeeDetails />} />
         <Route path={tablePath} element={<TestPageTwo />} />
         <Route path={createEmployee} element={<CreateEmployee />} />
-        <Route path={createEmployee} element={<ComponentsPage />} />
+        <Route path={components} element={<ComponentsPage />} />
         <Route path={profile} element={<Profile />} />
       </Route>
       <Route path="*" element={<TestPageTwo />} />

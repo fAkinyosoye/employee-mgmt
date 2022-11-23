@@ -15,6 +15,7 @@ import {
   Header1,
   Input,
   Loader,
+  PasswordInput,
   Subtitle,
 } from "../atoms";
 

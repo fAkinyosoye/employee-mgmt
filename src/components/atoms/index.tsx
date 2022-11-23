@@ -7,3 +7,4 @@ export * from "./Colors";
 export * from "./Text";
 export * from "./Burger";
 export * from "./Pagination";
+export * from "./PasswordInput";
