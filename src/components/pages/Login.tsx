@@ -35,7 +35,8 @@ const Login = () => {
       const res = await login(data).unwrap();
       if (
         res?.statusCode === 200 &&
-        res?.data?.personStaffRole === "Internal Control"
+        (res?.data?.personStaffRole === "Internal Control" ||
+          res?.data?.personStaffRole === "Internal Control")
       ) {
         decodeLogin(res);
         localStorage.setItem("personEmail", res?.data?.personEmail); // change this to employeeID or token later

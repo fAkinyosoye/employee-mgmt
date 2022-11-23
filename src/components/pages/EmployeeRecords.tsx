@@ -57,7 +57,8 @@ const EmployeeRecords = () => {
           lastname,
           division,
           unit,
-          role,
+          employeeid,
+          // role,
           grade,
           staffStatus,
         } = item;
@@ -74,9 +75,10 @@ const EmployeeRecords = () => {
               middleinitial ?? ""
             } ${lastname}`}</p>
           ),
+          employeeID: <p className="text-sm font-normal">{employeeid}</p>,
           division: <p className="text-sm font-normal">{division}</p>,
           unit: <p className="text-sm font-normal">{unit}</p>,
-          role: <p className="text-sm font-normal">{role}</p>,
+          // role: <p className="text-sm font-normal">{role}</p>,
           grade: <p className="text-sm font-normal">{grade}</p>,
           status: <p className="text-sm font-normal">{staffStatus}</p>,
           view: (
@@ -107,6 +109,10 @@ const EmployeeRecords = () => {
         accessor: "name",
       },
       {
+        Header: "Employee ID",
+        accessor: "employeeID",
+      },
+      {
         Header: "Division",
         accessor: "division",
       },
@@ -114,10 +120,10 @@ const EmployeeRecords = () => {
         Header: "Unit",
         accessor: "unit",
       },
-      {
-        Header: "Role",
-        accessor: "role",
-      },
+      // {
+      //   Header: "Role",
+      //   accessor: "role",
+      // },
       {
         Header: "Grade",
         accessor: "grade",
