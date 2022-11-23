@@ -1,10 +1,13 @@
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { MouseEventHandler } from "react";
 import styled from "styled-components";
 
 import { Colors } from "./Colors";
 
 type ButtonProps = {
-  ifIcon?: any;
+  backBtn?: boolean;
+  ifIcon?: boolean;
   icon?: any;
   text: string;
   bgColor?: string;
@@ -20,6 +23,7 @@ type ButtonProps = {
 const Button = ({
   ifIcon,
   icon,
+  backBtn,
   text,
   bgColor = Colors.boiGreen,
   className,
@@ -41,7 +45,10 @@ const Button = ({
       onClick={onClick}
       disabled={isLoading}
     >
-      {ifIcon && <img src={icon} alt="cloud" className="pr-2 w-8 h-8" />}
+      {/* {ifIcon && <img src={icon} alt="cloud" className="pr-2 w-8 h-8" />} */}
+      {/* {ifIcon && <FontAwesomeIcon icon={icon} />} */}
+      {/* {backBtn && <FontAwesomeIcon icon={faArrowLeft} />} */}
+      {/* allow font awesome icons */}
       {isLoading ? (
         <div className="w-full flex flex-row items-center justify-center">
           <svg
