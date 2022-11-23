@@ -55,6 +55,8 @@ const EmployeeDetails = () => {
       };
     });
 
+  // console.log(gradeLevelData && gradeLevelData.shift());
+
   const staffStatus = [
     {
       label: "Active",
