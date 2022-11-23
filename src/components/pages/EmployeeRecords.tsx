@@ -58,7 +58,7 @@ const EmployeeRecords = () => {
         grade: <p className="text-sm font-normal">{grade}</p>,
         status: <p className="text-sm font-normal">{staffStatus}</p>,
         view: (
-          <div className="flex items-center">
+          <div className="flex items-center justify-center">
             <Button
               text="View"
               type="button"

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
-  EditBOIEmployee,
+  CreateBOIEmployee,
+  useCreateBOIEmployeeMutation,
   useFetchAllGradeLevelsQuery,
 } from "../../redux/services/mgmt-services";
 import {
@@ -17,14 +18,18 @@ import {
 
 const CreateEmployee = () => {
   const navigate = useNavigate();
+  const [createEmployee] = useCreateBOIEmployeeMutation();
 
-  const [editEmployeeIsLoading, setEditEmployeeIsLoading] = useState(false);
+  const [createEmployeeIsLoading, setCreateEmployeeIsLoading] = useState(false);
 
   const {
-    data: gradeLevelData,
+    data: createEmployeeData,
     refetch,
     isLoading,
   }: any = useFetchAllGradeLevelsQuery();
+
+  const { data: gradeLevelData, refetch: refetchCreateEmployee }: any =
+    useFetchAllGradeLevelsQuery();
 
   useEffect(() => {
     refetch();
@@ -40,37 +45,43 @@ const CreateEmployee = () => {
       };
     });
 
-  const { register, control, handleSubmit, reset } = useForm();
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const submitForm = async (values: EditBOIEmployee): Promise<void> => {
-    console.log("jhsdbfjhdsbfhsj");
-    // try {
-    //   const variables = {
-    //     staffUsername: values?.username,
-    //     firstname: values?.firstname,
-    //     middleinitial: values.middleinitial,
-    //     lastname: values?.lastname,
-    //     username: values?.username,
-    //     role: values?.role,
-    //     grade: values?.grade,
-    //     division: values?.division,
-    //     department: values?.department,
-    //     unit: values?.unit,
-    //     location: values?.location,
-    //     accountnumber: values?.accountnumber,
-    //     sortcode: values?.sortcode,
-    //     staffStatus: values?.staffStatus,
-    //     isDeleted: false,
-    //   };
-    //   // const res: any = await editEmployee(variables).unwrap();
-    //   if (res?.statusCode === 200) {
-    //     setEditEmployeeIsLoading(false);
-    //     refetchSingleEmployee();
-    //   }
-    // } catch (error: any) {
-    //   setEditEmployeeIsLoading(false);
-    //   toast.error(error?.data?.responseMessage);
-    //  }
+  const submitForm = async (values: CreateBOIEmployee): Promise<void> => {
+    try {
+      const variables = {
+        staffUsername: "estephanie",
+        employeeid: "",
+        firstname: values?.firstname,
+        middleinitial: values?.middleinitial,
+        lastname: values?.lastname,
+        username: values?.username,
+        role: values?.role,
+        grade: values?.grade,
+        division: values?.division,
+        department: values?.department,
+        unit: values?.unit,
+        location: values?.location,
+        accountnumber: values?.accountnumber,
+        sortcode: values?.sortcode,
+        staffStatus: "Active",
+        isDeleted: false,
+      };
+      const res: any = await createEmployee(variables).unwrap();
+      if (res?.statusCode === 200) {
+        setCreateEmployeeIsLoading(false);
+        refetchCreateEmployee();
+      }
+    } catch (error: any) {
+      setCreateEmployeeIsLoading(false);
+      toast.error(error?.data?.responseMessage);
+    }
   };
 
   return (
@@ -96,8 +107,11 @@ const CreateEmployee = () => {
           type="text"
           className="basis-[30%]"
           label="First Name"
-          register={register("firstname")}
+          register={register("firstname", {
+            required: "First name is required",
+          })}
           showLabel
+          error={errors?.firstname?.message}
         />
         <Input
           type="text"
@@ -111,8 +125,11 @@ const CreateEmployee = () => {
           type="text"
           className="basis-[30%]"
           label="Last Name"
-          register={register("lastname")}
+          register={register("lastname", {
+            required: "Last Name is Required",
+          })}
           showLabel
+          error={errors?.lastname?.message}
         />
       </div>
 
@@ -121,16 +138,22 @@ const CreateEmployee = () => {
           type="text"
           className="basis-[30%]"
           label="User Name"
-          register={register("username")}
+          register={register("username", {
+            required: "Username is Required",
+          })}
           showLabel
+          error={errors?.username?.message}
         />
 
         <Input
           type="text"
           className="basis-[30%]"
           label="Role"
-          register={register("role")}
+          register={register("role", {
+            required: "Role is Required",
+          })}
           showLabel
+          error={errors?.role?.message}
         />
 
         <CustomSelect
@@ -140,6 +163,10 @@ const CreateEmployee = () => {
           label="Grade"
           className="w-[30%]"
           isLoading={isLoading}
+          rules={{
+            required: "Grade is required",
+          }}
+          error={errors?.grade?.message}
         />
       </div>
 
@@ -148,22 +175,33 @@ const CreateEmployee = () => {
           type="text"
           className="basis-[30%]"
           label="Division"
-          register={register("division")}
+          register={register("division", {
+            required: "Division is Required",
+          })}
           showLabel
+          error={errors?.division?.message}
         />
+
         <Input
           type="text"
           className="basis-[30%]"
           label="Department"
-          register={register("department")}
+          register={register("department", {
+            required: "Department is Required",
+          })}
           showLabel
+          error={errors?.department?.message}
         />
+
         <Input
           type="text"
           className="basis-[30%]"
           label="Unit"
-          register={register("unit")}
+          register={register("unit", {
+            required: "Unit is Required",
+          })}
           showLabel
+          error={errors?.unit?.message}
         />
       </div>
 
@@ -172,8 +210,11 @@ const CreateEmployee = () => {
           type="text"
           className="basis-[30%]"
           label="Location"
-          register={register("location")}
+          register={register("location", {
+            required: "Location is Required",
+          })}
           showLabel
+          error={errors?.location?.message}
         />
         <Input
           type="text"
@@ -193,11 +234,11 @@ const CreateEmployee = () => {
 
       <div className="my-10 flex justify-center m-auto items-center">
         <Button
-          text="Update"
+          text="Create"
           type="submit"
           className="py-3 w-[40%] text-center"
           size="sm"
-          isLoading={editEmployeeIsLoading}
+          isLoading={createEmployeeIsLoading}
         />
       </div>
     </form>

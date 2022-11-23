@@ -65,7 +65,7 @@ const EmployeeDetails = () => {
     },
   ];
 
-  const { register, control, handleSubmit, reset } = useForm({
+  const { register, control, handleSubmit, reset, setValue } = useForm({
     defaultValues: {
       firstname: singleEmployeeData && singleEmployeeData?.firstname,
       middleinitial: singleEmployeeData?.middleinitial,
@@ -88,6 +88,7 @@ const EmployeeDetails = () => {
   });
 
   useEffect(() => {
+    setValue("grade", singleEmployeeData?.grade);
     const defaultValues = {
       firstname: singleEmployeeData && singleEmployeeData?.firstname,
       middleinitial: singleEmployeeData?.middleinitial,
@@ -104,8 +105,16 @@ const EmployeeDetails = () => {
       staffStatus: singleEmployeeData?.staffStatus,
       createdBy: singleEmployeeData?.createdBy,
       lastUpdatedBy: singleEmployeeData?.lastUpdatedBy,
-      createdDateTime: singleEmployeeData?.createdDateTime,
-      lastUpdatedDateTime: singleEmployeeData?.lastUpdatedDateTime,
+      createdDateTime:
+        singleEmployeeData?.createdDateTime &&
+        new Date(singleEmployeeData?.createdDateTime)
+          ?.toISOString()
+          .substring(0, 10),
+      lastUpdatedDateTime:
+        singleEmployeeData?.lastUpdatedDateTime &&
+        new Date(singleEmployeeData?.lastUpdatedDateTime)
+          ?.toISOString()
+          .substring(0, 10),
     };
     reset(defaultValues);
   }, [reset, singleEmployeeData]);
