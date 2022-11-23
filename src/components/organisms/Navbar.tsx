@@ -45,9 +45,9 @@ const Navbar: () => JSX.Element = () => {
             <NavLink to={dashboard}>Home</NavLink>
           </li>
           <li className={location.pathname === profile ? "activ" : ""}>
-            <Link to="">Profile</Link>
+            <Link to={profile}>Profile</Link>
           </li>
-          <li className={location.pathname === profile ? "activ" : ""}>
+          <li>
             <p onClick={logout} className="cursor-pointer">
               Logout
               <FontAwesomeIcon

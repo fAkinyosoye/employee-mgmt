@@ -7,11 +7,13 @@ import {
   EmployeeDetails,
   EmployeeRecords,
   Login,
+  Profile,
   TestPageTwo,
 } from "../components/pages";
 import {
   createEmployee,
   dashboard,
+  profile,
   records,
   tablePath,
 } from "../components/utilities/routerPaths";
@@ -26,6 +28,7 @@ const PageRouter = () => {
         <Route path={tablePath} element={<TestPageTwo />} />
         <Route path={createEmployee} element={<CreateEmployee />} />
         <Route path={createEmployee} element={<ComponentsPage />} />
+        <Route path={profile} element={<Profile />} />
       </Route>
       <Route path="*" element={<TestPageTwo />} />
     </Routes>
