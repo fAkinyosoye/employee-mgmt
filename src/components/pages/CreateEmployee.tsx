@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
 import {
   CreateBOIEmployee,
   useCreateBOIEmployeeMutation,
@@ -42,7 +43,7 @@ const CreateEmployee = () => {
     formState: { errors },
   } = useForm();
 
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const currentUser = JSON.parse(localStorage.getItem("user") ?? "");
 
   const submitForm = async (values: CreateBOIEmployee): Promise<void> => {
     setCreateEmployeeIsLoading(true);

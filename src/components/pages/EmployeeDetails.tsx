@@ -24,11 +24,19 @@ const EmployeeDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  let employeeID = id ?? "";
+  let employeeID = "";
+
+  try {
+    employeeID = decodeURIComponent(id ?? "");
+    // console.log("decoded", employeeID);
+  } catch (error) {
+    console.log(error);
+  }
 
   const [editEmployee] = useEditBOIEmployeeMutation();
 
-  const [editEmployeeIsLoading, setEditEmployeeIsLoading] = useState(false);
+  const [editEmployeeIsLoading, setEditEmployeeIsLoading] =
+    useState<boolean>(false);
 
   const {
     data: gradeLevelData,
@@ -111,18 +119,21 @@ const EmployeeDetails = () => {
               "MMMM Do YYYY, h:mm:ss a"
             ),
       lastUpdatedDateTime:
-        singleEmployeeData?.lastUpdatedDateTime &&
+        // singleEmployeeData?.lastUpdatedDateTime &&
         // new Date(singleEmployeeData?.lastUpdatedDateTime)
         //   ?.toISOString()
         //   .substring(0, 10),
-        moment(singleEmployeeData?.lastUpdatedDateTime).format(
-          "MMMM Do YYYY, h:mm:ss a"
-        ),
+        singleEmployeeData?.lastUpdatedDateTime &&
+        singleEmployeeData?.lastUpdatedDateTime === "0001-01-01T00:00:00+00:00"
+          ? null
+          : moment(singleEmployeeData?.lastUpdatedDateTime).format(
+              "MMMM Do YYYY, h:mm:ss a"
+            ),
     };
     reset(defaultValues);
   }, [reset, singleEmployeeData]);
 
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const currentUser = JSON.parse(localStorage.getItem("user") ?? "");
 
   const submitForm = async (values: EditBOIEmployee): Promise<void> => {
     setEditEmployeeIsLoading(true);
@@ -298,7 +309,6 @@ const EmployeeDetails = () => {
               register={register("location", {
                 required: "Location is Required",
               })}
-              showLabel
               error={errors?.location?.message}
             />
             <Input
