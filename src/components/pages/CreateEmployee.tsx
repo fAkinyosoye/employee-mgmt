@@ -7,14 +7,7 @@ import {
   useCreateBOIEmployeeMutation,
   useFetchAllGradeLevelsQuery,
 } from "../../redux/services/mgmt-services";
-import {
-  Button,
-  CustomSelect,
-  Header1,
-  Input,
-  Loader,
-  Subtitle,
-} from "../atoms";
+import { Button, CustomSelect, Header1, Input, Subtitle } from "../atoms";
 import { staffStatus } from "../utilities/helper";
 
 const CreateEmployee = () => {
@@ -46,7 +39,6 @@ const CreateEmployee = () => {
     register,
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
@@ -250,16 +242,6 @@ const CreateEmployee = () => {
           showLabel
         />
       </div>
-
-      {/* <div className="flex items-center gap-10 mb-4">
-     
-      </div> */}
-
-      {/* <div className="flex items-center gap-10 mb-4">
-       
-      </div> */}
-
-      <div className="flex items-center gap-10 mb-4"></div>
 
       <div className="my-10 flex justify-center m-auto items-center">
         <Button
