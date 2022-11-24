@@ -113,6 +113,7 @@ const Lists = styled.ul`
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  margin-bottom: 2rem;
   button {
     padding: 0.5rem 1rem;
     margin-right: 1rem;
