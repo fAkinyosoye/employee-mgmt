@@ -5,7 +5,8 @@ import {
   EmployeeDataType,
   useFetchAllBOIEmployeesQuery,
 } from "../../redux/services/mgmt-services";
-import { Button, Header1, Subtitle, Table } from "../atoms";
+import { Button, Header1, Input, Subtitle, Table } from "../atoms";
+import { SearchInput } from "../atoms/SearchInput";
 import Pagination from "../organisms/Pagination";
 // import { dummyData } from "../utilities/employeeDummyData";
 
@@ -57,6 +58,7 @@ const EmployeeRecords = () => {
           firstname,
           middleinitial,
           lastname,
+          username,
           division,
           unit,
           employeeid,
@@ -72,12 +74,13 @@ const EmployeeRecords = () => {
                 1}
             </p>
           ),
+          employeeID: <p className="text-sm font-normal">{employeeid}</p>,
           name: (
             <p className="text-sm font-normal">{`${firstname} ${
               middleinitial ?? ""
             } ${lastname}`}</p>
           ),
-          employeeID: <p className="text-sm font-normal">{employeeid}</p>,
+          username: <p className="text-sm font-normal">{username}</p>,
           division: <p className="text-sm font-normal">{division}</p>,
           unit: <p className="text-sm font-normal">{unit}</p>,
           // role: <p className="text-sm font-normal">{role}</p>,
@@ -119,17 +122,21 @@ const EmployeeRecords = () => {
         accessor: "id",
       },
       {
-        Header: "Name",
-        accessor: "name",
-      },
-      {
         Header: "Employee ID",
         accessor: "employeeID",
       },
       {
-        Header: "Division",
-        accessor: "division",
+        Header: "Name",
+        accessor: "name",
       },
+      {
+        Header: "Username",
+        accessor: "username",
+      },
+      // {
+      //   Header: "Division",
+      //   accessor: "division",
+      // },
       {
         Header: "Unit",
         accessor: "unit",
@@ -165,12 +172,27 @@ const EmployeeRecords = () => {
         View all employee records here:
       </Subtitle>
 
-      <div>
+      <div className="flex justify-between mx-4 lg:mx-12">
+        {/* <SearchInput placeholder="Enter employee username, email" /> */}
+        {/* <span className="flex flex-row align-middle ">
+          <Input
+            type="text"
+            className="flex flex-col justify-center m-0 mr-2 h-full"
+          />
+          <Button
+            isLoading={false}
+            text="Search"
+            type="button"
+            className="py-2 w-24 ml-auto mr-4 lg:mr-12"
+            size="sm"
+            onClick={goToEmployeePage}
+          />
+        </span> */}
         <Button
           isLoading={false}
           text="Create Employee Record"
           type="button"
-          className="py-2 w-48 ml-auto mr-4 lg:mr-12"
+          className="py-2 w-48 ml-auto"
           size="sm"
           onClick={goToEmployeePage}
         />
