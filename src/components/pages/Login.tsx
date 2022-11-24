@@ -46,6 +46,8 @@ const Login = () => {
         localStorage.setItem("personEmail", res?.data?.personEmail); // change this to employeeID or token later
         setIsLoading(false);
         navigate(dashboard);
+      } else {
+        toast.error("Unauthorised access.");
       }
     } catch (error: any) {
       toast.error(
