@@ -44,7 +44,9 @@ const EmployeeRecords = () => {
 
   const getData = useCallback(() => {
     const goToSinglePage = (item: any) => {
-      navigate(`employee-records/${item?.employeeid}`, {
+      const encoded = encodeURIComponent(item?.employeeid);
+      // console.log("encoded", encoded);
+      navigate(`employee-records/${encoded}`, {
         state: item,
       });
     };

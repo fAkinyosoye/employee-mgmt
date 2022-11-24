@@ -24,11 +24,19 @@ const EmployeeDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  let employeeID = id ?? "";
+  let employeeID = "";
+
+  try {
+    employeeID = decodeURIComponent(id ?? "");
+    // console.log("decoded", employeeID);
+  } catch (error) {
+    console.log(error);
+  }
 
   const [editEmployee] = useEditBOIEmployeeMutation();
 
-  const [editEmployeeIsLoading, setEditEmployeeIsLoading] = useState(false);
+  const [editEmployeeIsLoading, setEditEmployeeIsLoading] =
+    useState<boolean>(false);
 
   const {
     data: gradeLevelData,
