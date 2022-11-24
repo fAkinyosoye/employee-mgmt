@@ -58,7 +58,7 @@ const EmployeeDetails = () => {
 
   const gradeLevelDataFormatted =
     gradeLevelData &&
-    gradeLevelData?.map((grade: any) => {
+    gradeLevelData?.slice(1).map((grade: any) => {
       return {
         value: grade?.gradedesc,
         label: grade?.gradedesc,
@@ -329,6 +329,7 @@ const EmployeeDetails = () => {
               control={control}
               name="staffStatus"
               options={staffStatus}
+              defaultValue={singleEmployeeData?.staffStatus}
               label="Status"
               className="w-[45%] lg:w-[30%]"
               isLoading={isLoading}
