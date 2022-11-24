@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -104,14 +105,19 @@ const EmployeeDetails = () => {
       lastUpdatedBy: singleEmployeeData?.lastUpdatedBy,
       createdDateTime:
         singleEmployeeData?.createdDateTime &&
-        new Date(singleEmployeeData?.createdDateTime)
-          ?.toISOString()
-          .substring(0, 10),
+        singleEmployeeData?.createdDateTime === "0001-01-01T00:00:00+00:00"
+          ? null
+          : moment(singleEmployeeData?.createdDateTime).format(
+              "MMMM Do YYYY, h:mm:ss a"
+            ),
       lastUpdatedDateTime:
         singleEmployeeData?.lastUpdatedDateTime &&
-        new Date(singleEmployeeData?.lastUpdatedDateTime)
-          ?.toISOString()
-          .substring(0, 10),
+        // new Date(singleEmployeeData?.lastUpdatedDateTime)
+        //   ?.toISOString()
+        //   .substring(0, 10),
+        moment(singleEmployeeData?.lastUpdatedDateTime).format(
+          "MMMM Do YYYY, h:mm:ss a"
+        ),
     };
     reset(defaultValues);
   }, [reset, singleEmployeeData]);
