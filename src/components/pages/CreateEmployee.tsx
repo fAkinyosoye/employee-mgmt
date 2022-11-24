@@ -7,14 +7,8 @@ import {
   useCreateBOIEmployeeMutation,
   useFetchAllGradeLevelsQuery,
 } from "../../redux/services/mgmt-services";
-import {
-  Button,
-  CustomSelect,
-  Header1,
-  Input,
-  Loader,
-  Subtitle,
-} from "../atoms";
+import { Button, CustomSelect, Header1, Input, Subtitle } from "../atoms";
+import { staffStatus } from "../utilities/helper";
 
 const CreateEmployee = () => {
   const navigate = useNavigate();
@@ -22,11 +16,7 @@ const CreateEmployee = () => {
 
   const [createEmployeeIsLoading, setCreateEmployeeIsLoading] = useState(false);
 
-  const {
-    data: createEmployeeData,
-    refetch,
-    isLoading,
-  }: any = useFetchAllGradeLevelsQuery();
+  const { refetch, isLoading }: any = useFetchAllGradeLevelsQuery();
 
   const { data: gradeLevelData, refetch: refetchCreateEmployee }: any =
     useFetchAllGradeLevelsQuery();
@@ -49,15 +39,17 @@ const CreateEmployee = () => {
     register,
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
   const submitForm = async (values: CreateBOIEmployee): Promise<void> => {
+    setCreateEmployeeIsLoading(true);
     try {
       const variables = {
-        staffUsername: "estephanie",
-        employeeid: "1121",
+        staffUsername: currentUser?.personSAMAccountName,
+        employeeid: values?.employeeid,
         firstname: values?.firstname,
         middleinitial: values?.middleinitial,
         lastname: values?.lastname,
@@ -70,9 +62,10 @@ const CreateEmployee = () => {
         location: values?.location,
         accountnumber: values?.accountnumber,
         sortcode: values?.sortcode,
-        staffStatus: "Active",
+        staffStatus: values?.staffStatus,
         isDeleted: false,
       };
+
       const res: any = await createEmployee(variables).unwrap();
       if (res?.statusCode === 200) {
         setCreateEmployeeIsLoading(false);
@@ -95,6 +88,7 @@ const CreateEmployee = () => {
       <Button
         isLoading={false}
         text="Go back"
+        backBtn
         type="button"
         className="py-2 w-48 ml-auto mr-4 mb-6 lg:mr-12"
         size="sm"
@@ -131,6 +125,30 @@ const CreateEmployee = () => {
           })}
           showLabel
           error={errors?.lastname?.message}
+        />
+
+        <Input
+          type="text"
+          className="basis-[45%] lg:basis-[30%]"
+          label="Employee ID"
+          register={register("employeeid", {
+            required: "Employee ID is Required",
+          })}
+          showLabel
+          error={errors?.employeeid?.message}
+        />
+
+        <CustomSelect
+          control={control}
+          name="staffStatus"
+          options={staffStatus}
+          label="Status"
+          className="w-[45%] lg:w-[30%]"
+          isLoading={isLoading}
+          error={errors?.staffStatus?.message}
+          rules={{
+            required: "Status is required",
+          }}
         />
 
         <Input
@@ -224,16 +242,6 @@ const CreateEmployee = () => {
           showLabel
         />
       </div>
-
-      {/* <div className="flex items-center gap-10 mb-4">
-     
-      </div> */}
-
-      {/* <div className="flex items-center gap-10 mb-4">
-       
-      </div> */}
-
-      <div className="flex items-center gap-10 mb-4"></div>
 
       <div className="my-10 flex justify-center m-auto items-center">
         <Button

@@ -18,6 +18,7 @@ import {
   Loader,
   Subtitle,
 } from "../atoms";
+import { staffStatus } from "../utilities/helper";
 
 const EmployeeDetails = () => {
   const { id } = useParams();
@@ -56,22 +57,18 @@ const EmployeeDetails = () => {
       };
     });
 
-  const staffStatus = [
-    {
-      label: "Active",
-      value: "Active",
-    },
-    {
-      label: "Inactive",
-      value: "Inactive",
-    },
-  ];
-
-  const { register, control, handleSubmit, reset } = useForm({
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       firstname: singleEmployeeData && singleEmployeeData?.firstname,
       middleinitial: singleEmployeeData?.middleinitial,
       lastname: singleEmployeeData?.lastname,
+      employeeid: singleEmployeeData?.employeeid,
       username: singleEmployeeData?.username,
       role: singleEmployeeData?.role,
       grade: singleEmployeeData?.grade,
@@ -88,12 +85,12 @@ const EmployeeDetails = () => {
       lastUpdatedDateTime: singleEmployeeData?.lastUpdatedDateTime,
     },
   });
-
   useEffect(() => {
     const defaultValues = {
       firstname: singleEmployeeData && singleEmployeeData?.firstname,
       middleinitial: singleEmployeeData?.middleinitial,
       lastname: singleEmployeeData?.lastname,
+      employeeid: singleEmployeeData?.employeeid,
       username: singleEmployeeData?.username,
       role: singleEmployeeData?.role,
       grade: singleEmployeeData?.grade,
@@ -128,11 +125,13 @@ const EmployeeDetails = () => {
     reset(defaultValues);
   }, [reset, singleEmployeeData]);
 
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
   const submitForm = async (values: EditBOIEmployee): Promise<void> => {
     setEditEmployeeIsLoading(true);
     try {
       const variables = {
-        staffUsername: values?.username,
+        staffUsername: currentUser?.personSAMAccountName,
         employeeid: singleEmployeeData?.employeeid,
         firstname: values?.firstname,
         middleinitial: values.middleinitial,
@@ -192,7 +191,10 @@ const EmployeeDetails = () => {
               type="text"
               className="basis-[45%] lg:basis-[30%]"
               label="First Name"
-              register={register("firstname")}
+              register={register("firstname", {
+                required: "First name is required",
+              })}
+              error={errors?.firstname?.message}
               showLabel
             />
             <Input
@@ -207,61 +209,100 @@ const EmployeeDetails = () => {
               type="text"
               className="basis-[45%] lg:basis-[30%]"
               label="Last Name"
-              register={register("lastname")}
+              register={register("lastname", {
+                required: "Last Name is Required",
+              })}
               showLabel
+              error={errors?.lastname?.message}
+            />
+
+            <Input
+              type="text"
+              className="basis-[45%] lg:basis-[30%]"
+              label="Employee ID"
+              register={register("employeeid", {
+                required: "Employee ID is Required",
+              })}
+              showLabel
+              error={errors?.employeeid?.message}
             />
 
             <Input
               type="text"
               className="basis-[45%] lg:basis-[30%]"
               label="User Name"
-              register={register("username")}
+              register={register("username", {
+                required: "Username is Required",
+              })}
               showLabel
+              error={errors?.username?.message}
             />
 
             <Input
               type="text"
               className="basis-[45%] lg:basis-[30%]"
               label="Role"
-              register={register("role")}
+              register={register("role", {
+                required: "Role is Required",
+              })}
               showLabel
+              error={errors?.role?.message}
             />
 
             <CustomSelect
               control={control}
               name="grade"
               options={gradeLevelDataFormatted}
+              defaultValue={singleEmployeeData?.grade}
               label="Grade"
               className="w-[45%] lg:w-[30%]"
               isLoading={isLoading}
+              rules={{
+                required: "Grade is required",
+              }}
+              error={errors?.grade?.message}
             />
+
             <Input
               type="text"
               className="basis-[45%] lg:basis-[30%]"
               label="Division"
-              register={register("division")}
+              register={register("division", {
+                required: "Division is Required",
+              })}
               showLabel
+              error={errors?.division?.message}
             />
             <Input
               type="text"
               className="basis-[45%] lg:basis-[30%]"
               label="Department"
-              register={register("department")}
+              register={register("department", {
+                required: "Department is Required",
+              })}
               showLabel
+              error={errors?.department?.message}
             />
             <Input
               type="text"
               className="basis-[45%] lg:basis-[30%]"
               label="Unit"
-              register={register("unit")}
+              register={register("unit", {
+                required: "Unit is Required",
+              })}
               showLabel
+              error={errors?.unit?.message}
             />
             <Input
               type="text"
               className="basis-[45%] lg:basis-[30%]"
               label="Location"
-              register={register("location")}
               showLabel
+              register={register("location", {
+                required: "Location is Required",
+              })}
+              showLabel
+              error={errors?.location?.message}
             />
             <Input
               type="text"
@@ -284,6 +325,10 @@ const EmployeeDetails = () => {
               label="Status"
               className="w-[45%] lg:w-[30%]"
               isLoading={isLoading}
+              error={errors?.staffStatus?.message}
+              rules={{
+                required: "Status is required",
+              }}
             />
             <Input
               type="text"
@@ -318,8 +363,6 @@ const EmployeeDetails = () => {
               showLabel
             />
           </div>
-
-          <div className="flex items-center gap-10 mb-4"></div>
 
           <div className="my-10 flex justify-center m-auto items-center">
             <Button

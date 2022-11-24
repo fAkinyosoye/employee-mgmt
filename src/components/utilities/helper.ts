@@ -6,9 +6,15 @@ export const colourStyles = {
     backgroundColor: "white",
     borderRadius: "6px",
     height: 34,
-    border: state.isFocused
+    borderColor: state.isFocused
       ? `1px solid ${Colors.boiGreen}`
       : `1px solid ${Colors.lightBlack}`,
+    "&:hover": {
+      borderColor: state.isFocused
+        ? `${Colors.boiGreen}`
+        : `${Colors.boiGreen}`,
+    },
+    boxShadow: "none",
     paddingLeft: "10px",
     color: "#3B58A8",
     width: "100%",
@@ -42,3 +48,14 @@ export const getLoginData = () => {
   let user = JSON.parse(rawUserData);
   return user;
 };
+
+export const staffStatus = [
+  {
+    label: "Active",
+    value: "Active",
+  },
+  {
+    label: "Inactive",
+    value: "Inactive",
+  },
+];

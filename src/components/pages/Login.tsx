@@ -9,7 +9,14 @@ import {
   LoginRequest,
   useLoginMutation,
 } from "../../redux/services/auth-services";
-import { Button, Header1, Input, Label, Subtitle } from "../atoms";
+import {
+  Button,
+  Header1,
+  Input,
+  Label,
+  PasswordInput,
+  Subtitle,
+} from "../atoms";
 import { decodeLogin } from "../utilities/helper";
 import { dashboard } from "../utilities/routerPaths";
 
@@ -86,8 +93,7 @@ const Login = () => {
         />
 
         <Label>Password</Label>
-        <Input
-          type="password"
+        <PasswordInput
           placeholder="********"
           register={{
             ...register("password", {

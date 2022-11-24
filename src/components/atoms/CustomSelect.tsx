@@ -15,6 +15,7 @@ const CustomSelect = ({
   isMulti,
   isOptionDisabled,
   className,
+  defaultValue,
 }: any) => {
   const { field } = useController({ name, control, rules });
 
@@ -35,6 +36,8 @@ const CustomSelect = ({
         isMulti={isMulti}
         styles={colourStyles}
         isOptionDisabled={isOptionDisabled}
+        defaultValue={defaultValue}
+        // defaultValue={options.find(({ value }) => value === props.state)}
       />
       {error && (
         <span>
