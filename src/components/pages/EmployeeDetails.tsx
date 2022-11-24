@@ -114,13 +114,16 @@ const EmployeeDetails = () => {
               "MMMM Do YYYY, h:mm:ss a"
             ),
       lastUpdatedDateTime:
-        singleEmployeeData?.lastUpdatedDateTime &&
+        // singleEmployeeData?.lastUpdatedDateTime &&
         // new Date(singleEmployeeData?.lastUpdatedDateTime)
         //   ?.toISOString()
         //   .substring(0, 10),
-        moment(singleEmployeeData?.lastUpdatedDateTime).format(
-          "MMMM Do YYYY, h:mm:ss a"
-        ),
+        singleEmployeeData?.lastUpdatedDateTime &&
+        singleEmployeeData?.lastUpdatedDateTime === "0001-01-01T00:00:00+00:00"
+          ? null
+          : moment(singleEmployeeData?.lastUpdatedDateTime).format(
+              "MMMM Do YYYY, h:mm:ss a"
+            ),
     };
     reset(defaultValues);
   }, [reset, singleEmployeeData]);
