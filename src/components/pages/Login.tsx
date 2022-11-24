@@ -4,7 +4,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
-import logoImg from "../../assets/images/uploadedwebclientlogo.jpg";
+import logoImg from "../../assets/images/BOI-Animated-Logo.gif";
+import bgImg from "../../assets/images/Bank-of-Industry.jpg";
 import {
   LoginRequest,
   useLoginMutation,
@@ -122,6 +123,8 @@ const Login = () => {
 };
 
 const Wrapper = styled.section`
+  background-image: url(${bgImg});
+  background-size: cover;
   background-color: #09dc84;
   width: 100vw;
   height: 100vh;
