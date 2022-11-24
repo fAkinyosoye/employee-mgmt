@@ -1,5 +1,6 @@
 import { useController } from "react-hook-form";
 import Select from "react-select";
+
 import { colourStyles } from "../utilities/helper";
 
 const CustomSelect = ({
@@ -32,7 +33,7 @@ const CustomSelect = ({
             : field.onChange(val.value);
         }}
         isLoading={isLoading}
-        placeholder={placeholder}
+        placeholder={defaultValue ?? placeholder}
         isMulti={isMulti}
         styles={colourStyles}
         isOptionDisabled={isOptionDisabled}
