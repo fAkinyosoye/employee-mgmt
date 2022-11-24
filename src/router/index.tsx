@@ -7,8 +7,8 @@ import {
   EmployeeDetails,
   EmployeeRecords,
   Login,
+  NotFoundPage,
   Profile,
-  TestPageTwo,
 } from "../components/pages";
 import {
   components,
@@ -26,12 +26,12 @@ const PageRouter = () => {
       <Route path={dashboard} element={<AuthLayout />}>
         <Route index element={<EmployeeRecords />} />
         <Route path={`${records}/:id`} element={<EmployeeDetails />} />
-        <Route path={tablePath} element={<TestPageTwo />} />
+        {/* <Route path={tablePath} element={<TestPageTwo />} /> */}
         <Route path={createEmployee} element={<CreateEmployee />} />
         <Route path={components} element={<ComponentsPage />} />
         <Route path={profile} element={<Profile />} />
       </Route>
-      <Route path="*" element={<TestPageTwo />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };
