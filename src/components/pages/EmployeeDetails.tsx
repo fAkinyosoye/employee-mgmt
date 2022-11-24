@@ -125,7 +125,7 @@ const EmployeeDetails = () => {
     reset(defaultValues);
   }, [reset, singleEmployeeData]);
 
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const currentUser = JSON.parse(localStorage.getItem("user") ?? "");
 
   const submitForm = async (values: EditBOIEmployee): Promise<void> => {
     setEditEmployeeIsLoading(true);
@@ -301,7 +301,6 @@ const EmployeeDetails = () => {
               register={register("location", {
                 required: "Location is Required",
               })}
-              showLabel
               error={errors?.location?.message}
             />
             <Input

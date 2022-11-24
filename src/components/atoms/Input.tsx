@@ -7,7 +7,7 @@ interface InputProps {
   label?: string;
   placeholder?: string;
   required?: boolean;
-  error?: string;
+  error?: any;
   bgColor?: string;
   register?: object;
   id?: string;
