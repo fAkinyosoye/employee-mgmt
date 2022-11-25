@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -6,7 +7,6 @@ import {
   useFetchAllBOIEmployeesQuery,
 } from "../../redux/services/mgmt-services";
 import { Button, Header1, Input, Subtitle, Table } from "../atoms";
-import { SearchInput } from "../atoms/SearchInput";
 import Pagination from "../organisms/Pagination";
 // import { dummyData } from "../utilities/employeeDummyData";
 
@@ -23,21 +23,43 @@ const EmployeeRecords = () => {
     pageSize: 10,
   });
 
-  // lower, upper limits are the indices of the first element in the page and the first in the next page
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm();
 
   const {
-    data: employeeData,
-    refetch,
-    isLoading,
+    data: searchedData,
+    refetch: searchRefetch,
+    isLoading: searchLoading,
+  }: any = useFetchAllBOIEmployeesQuery(getValues().search);
+
+  const {
+    data: allData,
+    refetch: allRefetch,
+    isLoading: allLoading,
   }: any = useFetchAllBOIEmployeesQuery({
     pageNumber: currPageInfo.pageNo,
     pageSize: currPageInfo.pageSize,
   });
 
   useEffect(() => {
-    refetch();
+    allRefetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  let employeeData: any[] = allData;
+
+  const submitForm = async (values: any): Promise<void> => {
+    try {
+      searchRefetch();
+      employeeData = searchedData;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const goToEmployeePage = () => {
     navigate(`create-employee`);
@@ -172,27 +194,34 @@ const EmployeeRecords = () => {
         View all employee records here:
       </Subtitle>
 
-      <div className="flex justify-between mx-4 lg:mx-12">
+      <div className="flex flex-col lg:flex-row lg:justify-between mx-4 lg:mx-12">
         {/* <SearchInput placeholder="Enter employee username, email" /> */}
-        {/* <span className="flex flex-row align-middle ">
+
+        <form
+          className="flex flex-row align-middle mb-2 lg:mb-0"
+          onSubmit={handleSubmit(submitForm)}
+        >
           <Input
             type="text"
-            className="flex flex-col justify-center m-0 mr-2 h-full"
+            className="flex flex-col justify-center m-0 mr-2 h-full border-0 w-64 "
+            inputHeight="h-[45px]"
+            register={register("search")}
+            placeholder="Search by username, employeeID"
+            error={errors?.search?.message}
           />
           <Button
-            isLoading={false}
+            isLoading={searchLoading}
             text="Search"
-            type="button"
-            className="py-2 w-24 ml-auto mr-4 lg:mr-12"
+            type="submit"
+            className="py-2 w-24 m-0"
             size="sm"
-            onClick={goToEmployeePage}
           />
-        </span> */}
+        </form>
         <Button
           isLoading={false}
           text="Create Employee Record"
           type="button"
-          className="py-2 w-48 ml-auto"
+          className="py-2 w-48 lg:ml-auto"
           size="sm"
           onClick={goToEmployeePage}
         />
@@ -203,7 +232,7 @@ const EmployeeRecords = () => {
           data={data}
           columns={columns}
           emptyStateText="Employee Info"
-          isLoading={isLoading}
+          isLoading={allLoading}
           ifHover
           ifPagination
           // initialPage={pageNumber}
@@ -224,7 +253,7 @@ const EmployeeRecords = () => {
         setCurrPageInfo={setCurrPageInfo}
         pageLimit={Number(currPageInfo.pageSize)}
         currPageInfo={currPageInfo}
-        refetch={refetch}
+        refetch={allRefetch}
       />
     </div>
   );

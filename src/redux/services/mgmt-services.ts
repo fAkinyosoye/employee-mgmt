@@ -73,6 +73,12 @@ const urlTemplate = "/api/BOIEmployee";
 
 export const mgmtServiceApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    searchBOIEmployee: builder.query<void, string>({
+      query: (searchParam) => ({
+        url: `${urlTemplate}/BOIEmployee/SearchEmployee?SearchParam=${searchParam}`,
+      }),
+      transformResponse: (response: any) => response.data,
+    }),
     fetchBOIEmployeeById: builder.query<void, string>({
       query: (employeeId) => ({
         url: `${urlTemplate}/FetchBOIEmployeeByEmployeeId?employeeId=${employeeId}`,
@@ -117,6 +123,7 @@ export const mgmtServiceApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useSearchBOIEmployeeQuery,
   useFetchAllBOIEmployeesQuery,
   useFetchBOIEmployeeByIdQuery,
   useFetchAllGradeLevelsQuery,
