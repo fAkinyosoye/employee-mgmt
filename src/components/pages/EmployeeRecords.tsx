@@ -6,7 +6,7 @@ import {
   EmployeeDataType,
   useFetchAllBOIEmployeesQuery,
 } from "../../redux/services/mgmt-services";
-import { Button, Header1, Input, Subtitle, Table } from "../atoms";
+import { Button, Colors, Header1, Input, Subtitle, Table } from "../atoms";
 import Pagination from "../organisms/Pagination";
 
 type CurrPageInfoTypes = {
@@ -127,6 +127,7 @@ const EmployeeRecords = () => {
               <span
                 onClick={() => goToSinglePage(item)}
                 className="bg-boiGreen text-white text-xs font-medium mr-2 px-3 py-1 rounded"
+                style={{ backgroundColor: Colors.boiBlue }}
               >
                 Edit
               </span>
