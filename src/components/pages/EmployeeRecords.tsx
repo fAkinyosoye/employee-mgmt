@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
   EmployeeDataType,
   useFetchAllBOIEmployeesQuery,
+  useSearchBOIEmployeeQuery,
 } from "../../redux/services/mgmt-services";
 import { Button, Header1, Input, Subtitle, Table } from "../atoms";
 import Pagination from "../organisms/Pagination";
@@ -34,7 +35,7 @@ const EmployeeRecords = () => {
     data: searchedData,
     refetch: searchRefetch,
     isLoading: searchLoading,
-  }: any = useFetchAllBOIEmployeesQuery(getValues().search);
+  }: any = useSearchBOIEmployeeQuery(getValues().search);
 
   const {
     data: allData,
@@ -50,7 +51,7 @@ const EmployeeRecords = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let employeeData: any[] = allData;
+  let employeeData: any[] = [];
 
   const submitForm = async (values: any): Promise<void> => {
     try {

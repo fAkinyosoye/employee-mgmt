@@ -75,7 +75,7 @@ export const mgmtServiceApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     searchBOIEmployee: builder.query<void, string>({
       query: (searchParam) => ({
-        url: `${urlTemplate}/BOIEmployee/SearchEmployee?SearchParam=${searchParam}`,
+        url: `${urlTemplate}/SearchEmployee?SearchParam=${searchParam}`,
       }),
       transformResponse: (response: any) => response.data,
     }),

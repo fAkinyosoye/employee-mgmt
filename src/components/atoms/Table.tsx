@@ -24,7 +24,7 @@ const Table = ({
       <div className="h-full font-thin">
         {data.length < 1 ? (
           <div className="flex flex-col justify-center items-center w-full">
-            <img src={emptyImage} alt="emptyImage" />
+            {/* <img src={emptyImage} alt="emptyImage" /> */}
             <p className="font-medium text-xl text-black/80 pt-6">
               Nothing to show here
             </p>
