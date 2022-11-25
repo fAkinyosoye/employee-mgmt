@@ -134,12 +134,11 @@ const EmployeeDetails = () => {
   }, [reset, singleEmployeeData]);
 
   const currentUser = JSON.parse(localStorage.getItem("user") ?? "");
-
   const submitForm = async (values: EditBOIEmployee): Promise<void> => {
     setEditEmployeeIsLoading(true);
     try {
       const variables = {
-        staffUsername: currentUser?.personSAMAccountName,
+        lastUpdatedBy: currentUser?.personSAMAccountName,
         employeeid: singleEmployeeData?.employeeid,
         firstname: values?.firstname,
         middleinitial: values.middleinitial,
@@ -154,6 +153,8 @@ const EmployeeDetails = () => {
         accountnumber: values?.accountnumber,
         sortcode: values?.sortcode,
         staffStatus: values?.staffStatus,
+        createdBy: singleEmployeeData?.createdBy,
+        createdDateTime: singleEmployeeData?.createdDateTime,
         isDeleted: false,
       };
       const res: any = await editEmployee(variables).unwrap();
