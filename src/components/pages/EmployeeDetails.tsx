@@ -134,12 +134,11 @@ const EmployeeDetails = () => {
   }, [reset, singleEmployeeData]);
 
   const currentUser = JSON.parse(localStorage.getItem("user") ?? "");
-
   const submitForm = async (values: EditBOIEmployee): Promise<void> => {
     setEditEmployeeIsLoading(true);
     try {
       const variables = {
-        staffUsername: currentUser?.personSAMAccountName,
+        lastUpdatedBy: currentUser?.personSAMAccountName,
         employeeid: singleEmployeeData?.employeeid,
         firstname: values?.firstname,
         middleinitial: values.middleinitial,
@@ -154,6 +153,8 @@ const EmployeeDetails = () => {
         accountnumber: values?.accountnumber,
         sortcode: values?.sortcode,
         staffStatus: values?.staffStatus,
+        createdBy: singleEmployeeData?.createdBy,
+        createdDateTime: singleEmployeeData?.createdDateTime,
         isDeleted: false,
       };
       const res: any = await editEmployee(variables).unwrap();
@@ -209,7 +210,7 @@ const EmployeeDetails = () => {
             <Input
               type="text"
               className="basis-[45%] lg:basis-[30%]"
-              label="Middle Initial"
+              label="Middle Name"
               register={register("middleinitial")}
               showLabel
             />
@@ -339,9 +340,12 @@ const EmployeeDetails = () => {
                 required: "Status is required",
               }}
             />
+          </div>
+
+          <div className="flex items-center flex-wrap gap-4 lg:gap-10 mb-4">
             <Input
               type="text"
-              className="basis-[45%] lg:basis-[30%]"
+              className="basis-[45%] lg:basis-[22%]"
               label="Created By"
               register={register("createdBy")}
               readOnly
@@ -349,7 +353,7 @@ const EmployeeDetails = () => {
             />
             <Input
               type="text"
-              className="basis-[45%] lg:basis-[30%]"
+              className="basis-[45%] lg:basis-[22%]"
               label="Created Time"
               register={register("createdDateTime")}
               readOnly
@@ -357,7 +361,7 @@ const EmployeeDetails = () => {
             />
             <Input
               type="text"
-              className="basis-[45%] lg:basis-[30%]"
+              className="basis-[45%] lg:basis-[22%]"
               label="Updated By"
               register={register("lastUpdatedBy")}
               readOnly
@@ -365,7 +369,7 @@ const EmployeeDetails = () => {
             />
             <Input
               type="text"
-              className="basis-[45%] lg:basis-[30%]"
+              className="basis-[45%] lg:basis-[22%]"
               label="Last Updated Time"
               register={register("lastUpdatedDateTime")}
               readOnly

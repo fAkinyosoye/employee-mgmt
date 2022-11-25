@@ -29,7 +29,7 @@ const CreateEmployee = () => {
 
   const gradeLevelDataFormatted =
     gradeLevelData &&
-    gradeLevelData?.map((grade: any) => {
+    gradeLevelData?.slice(1).map((grade: any) => {
       return {
         value: grade?.gradedesc,
         label: grade?.gradedesc,
@@ -49,7 +49,7 @@ const CreateEmployee = () => {
     setCreateEmployeeIsLoading(true);
     try {
       const variables = {
-        staffUsername: currentUser?.personSAMAccountName,
+        createdBy: currentUser?.personSAMAccountName,
         employeeid: values?.employeeid,
         firstname: values?.firstname,
         middleinitial: values?.middleinitial,
@@ -112,7 +112,7 @@ const CreateEmployee = () => {
         <Input
           type="text"
           className="basis-[45%] lg:basis-[30%]"
-          label="Middle Initial"
+          label="Middle name"
           register={register("middleinitial")}
           showLabel
         />

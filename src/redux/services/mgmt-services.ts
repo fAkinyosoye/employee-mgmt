@@ -11,7 +11,7 @@ export type FetchAllBOIEmployees = {
 };
 
 export type CreateBOIEmployee = {
-  staffUsername: string;
+  createdBy: string;
   employeeid: string;
   firstname: string;
   middleinitial: string;
@@ -46,6 +46,8 @@ export type EditBOIEmployee = {
   sortcode?: string;
   staffStatus?: string;
   isDeleted?: boolean;
+  createdBy?: string;
+  createdDateTime: string;
 };
 
 export type EmployeeDataType = {
