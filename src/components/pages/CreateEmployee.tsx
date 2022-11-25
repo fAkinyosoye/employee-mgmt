@@ -70,7 +70,7 @@ const CreateEmployee = () => {
       const res: any = await createEmployee(variables).unwrap();
       if (res?.statusCode === 200) {
         setCreateEmployeeIsLoading(false);
-        toast(res?.responseMessage);
+        toast("Staff details created successfully");
         navigate("/");
       }
     } catch (error: any) {
