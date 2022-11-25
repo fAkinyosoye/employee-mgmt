@@ -45,7 +45,7 @@ const CreateEmployee = () => {
 
   const currentUser = JSON.parse(localStorage.getItem("user") ?? "");
 
-  const submitForm = async (values: CreateBOIEmployee): Promise<void> => {
+  const submitForm = async (values: any): Promise<void> => {
     setCreateEmployeeIsLoading(true);
     try {
       const variables = {
