@@ -9,81 +9,34 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.tsx"
   },
-  "eslintConfig": {
-    "plugins": [
-      "import"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "plugin:import/recommended",
-      "plugin:import/typescript"
-    ],
-    "rules": {
-      "no-duplicate-imports": "warn",
-      "no-unused-vars": "warn",
-      "no-multiple-empty-lines": [
-        "warn",
-        {
-          "max": 1,
-          "maxEOF": 0,
-          "maxBOF": 0
-        }
-      ],
-      "import/first": "warn",
-      "import/newline-after-import": "warn",
-      "import/no-duplicates": "warn",
-      "import/no-unassigned-import": "warn",
-      "import/order": [
-        "warn",
-        {
-          "groups": [
-            "builtin",
-            "external",
-            "parent",
-            "sibling",
-            "index"
-          ],
-          "pathGroups": [
-            {
-              "pattern": "@custom-lib/**",
-              "group": "external",
-              "position": "after"
-            }
-          ],
-          "pathGroupsExcludedImportTypes": [
-            "builtin"
-          ],
-          "alphabetize": {
-            "order": "asc"
-          },
-          "newlines-between": "always"
-        }
-      ],
-      "sort-imports": [
-        "warn",
-        {
-          "allowSeparatedGroups": true,
-          "ignoreDeclarationSort": true
-        }
-      ]
-    }
-  },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@reduxjs/toolkit": "^1.9.0",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.4",
+    "react-moment": "^1.1.2",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
-    "react-select": "^5.6.1"
+    "react-select": "^5.6.1",
+    "react-table": "^7.8.0",
+    "react-toastify": "^9.1.1",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
+    "@types/react-table": "^7.7.12",
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/parser": "^5.43.0",
     "@vitejs/plugin-react": "^2.2.0",
     "autoprefixer": "^10.4.13",
+    "eslint": "^8.0.0",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-import-resolver-typescript": "^3.5.2",
     "eslint-plugin-import": "^2.26.0",
     "postcss": "^8.4.19",

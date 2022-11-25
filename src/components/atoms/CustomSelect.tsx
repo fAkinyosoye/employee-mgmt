@@ -1,7 +1,7 @@
-import Select from "react-select";
 import { useController } from "react-hook-form";
+import Select from "react-select";
 
-// import { colourStyles } from "../helper/goToTop";
+import { colourStyles } from "../utilities/helper";
 
 const CustomSelect = ({
   options,
@@ -15,26 +15,30 @@ const CustomSelect = ({
   rules,
   isMulti,
   isOptionDisabled,
+  className,
+  defaultValue,
 }: any) => {
   const { field } = useController({ name, control, rules });
 
   return (
-    <div className="mt-4">
+    <div className={`${className}`}>
       <label className="text-sm font-normal text-blueTwo">{label}</label>
       <Select
         options={options}
-        onChange={(val) => {
+        onChange={(val: any) => {
           customOnChange && customOnChange(val);
           isMulti
             ? // onchange for react-select multi options
-              field.onChange(val.map((val) => val.value))
+              field.onChange(val.map((val: any) => val.value))
             : field.onChange(val.value);
         }}
         isLoading={isLoading}
-        placeholder={placeholder}
+        placeholder={defaultValue ?? placeholder}
         isMulti={isMulti}
-        // styles={colourStyles}
+        styles={colourStyles}
         isOptionDisabled={isOptionDisabled}
+        defaultValue={defaultValue}
+        // defaultValue={options.find(({ value }) => value === props.state)}
       />
       {error && (
         <span>

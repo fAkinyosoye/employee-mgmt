@@ -1,41 +1,78 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+table {
+  border-collapse: separate;
+  border-spacing: 0 20px;
+  background-color: #f8f8f8;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+table tr td {
+  padding: 10px !important;
+  background-color: #fcfcfc;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Toastify Styles */
+.Toastify__toast--warning {
+  background: #ffe8bc !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.Toastify__toast--success {
+  background: #8ed974 !important;
+  color: #201cff !important;
 }
 
-.card {
-  padding: 2em;
+.Toastify__toast--info {
+  background: #dde2e5 !important;
+  color: #121212 !important;
 }
 
-.read-the-docs {
-  color: #888;
+.Toastify__toast--info::before {
+  content: url("./assets/icons/notification.svg");
+  position: relative;
+  z-index: 100000;
+  left: 15px;
+  top: 10px;
+  padding-right: 20px;
+}
+
+.Toastify__toast--success::before {
+  content: url("./assets/icons/success.svg");
+  position: relative;
+  z-index: 100000;
+  left: 15px;
+  top: 10px;
+  padding-right: 20px;
+}
+
+.Toastify__toast--default {
+  background: #8ed974 !important;
+  color: #201cff !important;
+}
+
+.Toastify__toast--default::before {
+  content: url("./assets/icons/success.svg");
+  position: relative;
+  z-index: 100000;
+  left: 15px;
+  top: 10px;
+  padding-right: 20px;
+}
+
+.Toastify__toast--error {
+  background: #fae6e8 !important;
+  color: #ca0814 !important;
+}
+
+.Toastify__toast--error::before {
+  content: url("./assets/icons/error.svg");
+  position: relative;
+  z-index: 100000;
+  left: 15px;
+  top: 10px;
+  padding-right: 20px;
+}
+
+.toastBody {
+  font-size: 0.875rem !important;
+}
+.toastProgress {
+  background: #333f48 !important;
 }

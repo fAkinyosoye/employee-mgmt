@@ -7,7 +7,7 @@ interface InputProps {
   label?: string;
   placeholder?: string;
   required?: boolean;
-  error?: string;
+  error?: any;
   bgColor?: string;
   register?: object;
   id?: string;
@@ -19,6 +19,7 @@ interface InputProps {
   minLength?: number;
   maxLength?: number;
   ifRounded?: boolean;
+  showLabel?: boolean;
   // maxLength?: any;
   //   refs?: any;
   //   onKeyUp?: any;
@@ -39,31 +40,59 @@ const Input = (props: InputProps) => {
     readOnly,
     register,
     ifRounded,
+    showLabel,
+    disabled,
   } = props;
   return (
-    <div className="mb-4">
-      <label
-        htmlFor={name}
-        className="text-sm md:text-base font-normal text-grey pb-2 inline-block"
-      >
-        {label}
-      </label>
-      <input
-        readOnly={readOnly}
-        type={type}
-        name={name}
-        id={id}
-        {...register}
-        placeholder={placeholder}
-        className="h-[34px] placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-lightBlack rounded-md px-[6px] py-3 shadow-sm focus:outline-none focus:border-primary focus:ring-primary focus:ring-1 text-sm"
-        style={{
-          border: error ? "1px solid red" : "",
-          backgroundColor: readOnly ? "#ACB5BD" : "",
-          //   borderRadius: ifRounded && "6px",
-        }}
-      />
+    <div className={`${className}`}>
+      {showLabel && (
+        <label
+          htmlFor={name}
+          className="text-sm md:text-base font-normal text-grey pb-2 inline-block"
+        >
+          {label}
+        </label>
+      )}
+
+      {type === "textarea" ? (
+        <textarea
+          readOnly={readOnly}
+          cols={10}
+          rows={5}
+          name={name}
+          disabled={disabled}
+          id={id}
+          {...register}
+          placeholder={placeholder}
+          className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-lightBlack rounded-md px-[6px] shadow-sm focus:outline-none focus:border-primary focus:ring-primary focus:ring-1 text-sm"
+          style={{
+            border: error ? "1px solid red" : "",
+            backgroundColor: readOnly ? "hsl(0, 0%, 90%)" : "",
+            cursor: readOnly ? "not-allowed" : "initial",
+            //   borderRadius: ifRounded && "6px",
+          }}
+        />
+      ) : (
+        <input
+          readOnly={readOnly}
+          type={type}
+          name={name}
+          disabled={disabled}
+          id={id}
+          {...register}
+          placeholder={placeholder}
+          className="h-[34px] placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-lightBlack rounded-md px-[6px] shadow-sm focus:outline-none focus:border-primary focus:ring-primary focus:ring-1 text-sm"
+          style={{
+            border: error ? "1px solid red" : "",
+            backgroundColor: readOnly ? "hsl(0, 0%, 90%)" : "",
+            cursor: readOnly ? "not-allowed" : "initial",
+            //   borderRadius: ifRounded && "6px",
+          }}
+        />
+      )}
+
       <span>
-        <p className="text-red-500 text-xs"> {error}</p>
+        <p className="text-red-500 mt-3 text-sm">{error}</p>
       </span>
     </div>
   );

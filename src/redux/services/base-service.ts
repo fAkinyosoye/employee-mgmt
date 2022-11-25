@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const baseApi = createApi({
   reducerPath: "mainApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BASE_URL,
+    baseUrl: import.meta.env.VITE_BOI_BASE_URL,
     prepareHeaders: (headers) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       // const clientJwtToken = process.env.REACT_APP_AUTH_TOKEN;
