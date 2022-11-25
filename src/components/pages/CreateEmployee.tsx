@@ -112,7 +112,7 @@ const CreateEmployee = () => {
         <Input
           type="text"
           className="basis-[45%] lg:basis-[30%]"
-          label="Middle Initial"
+          label="Middle name"
           register={register("middleinitial")}
           showLabel
         />
