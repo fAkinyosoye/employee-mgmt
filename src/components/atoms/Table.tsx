@@ -28,7 +28,7 @@ const Table = ({
             <p className="font-medium text-xl text-black/80 pt-6">
               Nothing to show here
             </p>
-            <p className="font-light text-sm text-black/80 pt-2">
+            {/* <p className="font-light text-sm text-black/80 pt-2">
               Click the button below to learn more
             </p>
             <Button
@@ -38,7 +38,7 @@ const Table = ({
               bgColor="#201CFF"
               paddingX="12"
               paddingY="2"
-            />
+            /> */}
           </div>
         ) : null}
       </div>
