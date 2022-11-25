@@ -161,7 +161,7 @@ const EmployeeDetails = () => {
 
       if (res?.statusCode === 200) {
         setEditEmployeeIsLoading(false);
-        toast("Staff details edited successfully");
+        toast("Staff details updated successfully");
         refetchSingleEmployee();
       }
     } catch (error: any) {

@@ -9,6 +9,7 @@ interface InputProps {
   required?: boolean;
   error?: any;
   bgColor?: string;
+  inputHeight?: string;
   register?: object;
   id?: string;
   pattern?: any;
@@ -36,10 +37,11 @@ const Input = (props: InputProps) => {
     id,
     error,
     label,
-    bgColor = "bg-s",
+    // bgColor = "bg-s",
+    inputHeight,
     readOnly,
     register,
-    ifRounded,
+    // ifRounded,
     showLabel,
     disabled,
   } = props;
@@ -81,7 +83,9 @@ const Input = (props: InputProps) => {
           id={id}
           {...register}
           placeholder={placeholder}
-          className="h-[34px] placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-lightBlack rounded-md px-[6px] shadow-sm focus:outline-none focus:border-primary focus:ring-primary focus:ring-1 text-sm"
+          className={`${
+            inputHeight ?? "h-[34px]"
+          } placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-lightBlack rounded-md px-[6px] shadow-sm focus:outline-none focus:border-primary focus:ring-primary focus:ring-1 text-sm`}
           style={{
             border: error ? "1px solid red" : "",
             backgroundColor: readOnly ? "hsl(0, 0%, 90%)" : "",
@@ -91,9 +95,11 @@ const Input = (props: InputProps) => {
         />
       )}
 
-      <span>
-        <p className="text-red-500 mt-3 text-sm">{error}</p>
-      </span>
+      {error && (
+        <span>
+          <p className="text-red-500 mt-3 text-sm">{error}</p>
+        </span>
+      )}
     </div>
   );
 };

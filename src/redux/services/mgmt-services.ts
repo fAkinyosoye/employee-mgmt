@@ -7,6 +7,7 @@ export type FetchBOIEmployeeById = {
 export type FetchAllBOIEmployees = {
   pageNumber: number;
   pageSize: number;
+  SearchParam: string;
 };
 
 export type CreateBOIEmployee = {
@@ -75,6 +76,12 @@ const urlTemplate = "/api/BOIEmployee";
 
 export const mgmtServiceApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // searchBOIEmployee: builder.query<void, string>({
+    //   query: (searchParam) => ({
+    //     url: `${urlTemplate}/SearchEmployee?SearchParam=${searchParam}`,
+    //   }),
+    //   transformResponse: (response: any) => response.data,
+    // }),
     fetchBOIEmployeeById: builder.query<void, string>({
       query: (employeeId) => ({
         url: `${urlTemplate}/FetchBOIEmployeeByEmployeeId?employeeId=${employeeId}`,
@@ -86,9 +93,9 @@ export const mgmtServiceApi = baseApi.injectEndpoints({
       FetchAllBOIEmployees
     >({
       query: (body) => ({
-        url: `${urlTemplate}/FetchAllBOIEmployee?pageNumber=${body.pageNumber}&pageSize=${body.pageSize}`,
+        url: `${urlTemplate}/FetchAllBOIEmployee?pageNumber=${body.pageNumber}&pageSize=${body.pageSize}&SearchParam=${body.SearchParam}`,
       }),
-      transformResponse: (response: any) => response.data,
+      transformResponse: (response: any) => response,
     }),
     fetchAllGradeLevels: builder.query<void, void>({
       query: () => ({
@@ -119,6 +126,7 @@ export const mgmtServiceApi = baseApi.injectEndpoints({
 });
 
 export const {
+  // useSearchBOIEmployeeQuery,
   useFetchAllBOIEmployeesQuery,
   useFetchBOIEmployeeByIdQuery,
   useFetchAllGradeLevelsQuery,
