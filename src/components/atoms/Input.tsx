@@ -37,11 +37,11 @@ const Input = (props: InputProps) => {
     id,
     error,
     label,
-    bgColor = "bg-s",
+    // bgColor = "bg-s",
     inputHeight,
     readOnly,
     register,
-    ifRounded,
+    // ifRounded,
     showLabel,
     disabled,
   } = props;

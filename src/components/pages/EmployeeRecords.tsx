@@ -5,15 +5,14 @@ import { useNavigate } from "react-router-dom";
 import {
   EmployeeDataType,
   useFetchAllBOIEmployeesQuery,
-  useSearchBOIEmployeeQuery,
 } from "../../redux/services/mgmt-services";
 import { Button, Header1, Input, Subtitle, Table } from "../atoms";
 import Pagination from "../organisms/Pagination";
-// import { dummyData } from "../utilities/employeeDummyData";
 
 type CurrPageInfoTypes = {
   pageNo: number;
   pageSize: number;
+  SearchParam: string;
 };
 
 const EmployeeRecords = () => {
@@ -22,20 +21,14 @@ const EmployeeRecords = () => {
   const [currPageInfo, setCurrPageInfo] = useState<CurrPageInfoTypes>({
     pageNo: 1,
     pageSize: 10,
+    SearchParam: "",
   });
 
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm();
-
-  const {
-    data: searchedData,
-    refetch: searchRefetch,
-    isLoading: searchLoading,
-  }: any = useSearchBOIEmployeeQuery(getValues().search);
 
   const {
     data: allData,
@@ -44,6 +37,7 @@ const EmployeeRecords = () => {
   }: any = useFetchAllBOIEmployeesQuery({
     pageNumber: currPageInfo.pageNo,
     pageSize: currPageInfo.pageSize,
+    SearchParam: currPageInfo.SearchParam,
   });
 
   useEffect(() => {
@@ -51,12 +45,19 @@ const EmployeeRecords = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let employeeData: any[] = [];
+  let employeeData: EmployeeDataType[] = allData?.data;
+  let dataLength = employeeData?.length <= 1 ? 1 : allData?.count;
+  // this is to cater for when it returns a search value, which usually returns one element that matches totally. So, 1 page.
+  let lastPage = Math.ceil(dataLength / currPageInfo.pageSize);
 
   const submitForm = async (values: any): Promise<void> => {
     try {
-      searchRefetch();
-      employeeData = searchedData;
+      setCurrPageInfo({
+        pageNo: 1,
+        pageSize: 10,
+        SearchParam: values.search,
+      });
+      allRefetch();
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +70,6 @@ const EmployeeRecords = () => {
   const getData = useCallback(() => {
     const goToSinglePage = (item: any) => {
       const encoded = encodeURIComponent(item?.employeeid);
-      // console.log("encoded", encoded);
       navigate(`employee-records/${encoded}`, {
         state: item,
       });
@@ -211,7 +211,7 @@ const EmployeeRecords = () => {
             error={errors?.search?.message}
           />
           <Button
-            isLoading={searchLoading}
+            isLoading={allLoading}
             text="Search"
             type="submit"
             className="py-2 w-24 m-0"
@@ -248,9 +248,9 @@ const EmployeeRecords = () => {
       </div>
       <Pagination
         transPerPage={currPageInfo.pageSize}
-        totalTrans={672}
+        totalTrans={dataLength}
         currentPage={currPageInfo.pageNo}
-        lastPage={5}
+        lastPage={lastPage}
         setCurrPageInfo={setCurrPageInfo}
         pageLimit={Number(currPageInfo.pageSize)}
         currPageInfo={currPageInfo}
