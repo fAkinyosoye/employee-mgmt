@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Colors } from "../atoms";
 
 import usePagination, { DOTS } from "../helpers/usePagination";
 // import { CurrPageInfoTypes } from "../TransactionTable";
@@ -117,7 +118,7 @@ const Lists = styled.ul`
   button {
     padding: 0.5rem 1rem;
     margin-right: 1rem;
-    color: #33277b;
+    color: #000;
     border: none;
     font-weight: bold;
     font-size: 16px;
@@ -125,7 +126,7 @@ const Lists = styled.ul`
     border-radius: 5px;
   }
   .active {
-    color: #059157;
+    color: ${Colors.primary};
     background-color: white;
   }
   .disabled {
