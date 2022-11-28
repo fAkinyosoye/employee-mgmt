@@ -9,7 +9,7 @@ import {
   useEditBOIEmployeeMutation,
   useFetchAllGradeLevelsQuery,
   useFetchBOIEmployeeByIdQuery,
-} from "../../redux/services/mgmt-services";
+} from "../../../redux/services/mgmt-services";
 import {
   Button,
   CustomSelect,
@@ -17,8 +17,8 @@ import {
   Input,
   Loader,
   Subtitle,
-} from "../atoms";
-import { staffStatus } from "../utilities/helper";
+} from "../../atoms";
+import { staffStatus } from "../../utilities/helper";
 
 const EmployeeDetails = () => {
   const { id } = useParams();
