@@ -7,9 +7,9 @@ import {
   CreateBOIEmployee,
   useCreateBOIEmployeeMutation,
   useFetchAllGradeLevelsQuery,
-} from "../../redux/services/mgmt-services";
-import { Button, CustomSelect, Header1, Input, Subtitle } from "../atoms";
-import { staffStatus } from "../utilities/helper";
+} from "../../../redux/services/mgmt-services";
+import { Button, CustomSelect, Header1, Input, Subtitle } from "../../atoms";
+import { staffStatus } from "../../utilities/helper";
 
 const CreateEmployee = () => {
   const navigate = useNavigate();

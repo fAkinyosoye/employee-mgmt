@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-import { Button, CustomSelect, Input, PasswordInput, Table } from "../atoms";
+import { Button, CustomSelect, Input, PasswordInput, Table } from "../../atoms";
 
 const ComponentsPage = () => {
   const { control } = useForm();

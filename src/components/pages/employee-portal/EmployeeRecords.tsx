@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import {
   EmployeeDataType,
   useFetchAllBOIEmployeesQuery,
-} from "../../redux/services/mgmt-services";
-import { Button, Colors, Header1, Input, Subtitle, Table } from "../atoms";
-import Pagination from "../organisms/Pagination";
+} from "../../../redux/services/mgmt-services";
+import { Button, Colors, Header1, Input, Subtitle, Table } from "../../atoms";
+import Pagination from "../../organisms/Pagination";
 
 type CurrPageInfoTypes = {
   pageNo: number;
