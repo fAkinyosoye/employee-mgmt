@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import notFoundImage from "../../assets/images/notFoundImage.jpg";
 import { Label } from "../atoms";
 
