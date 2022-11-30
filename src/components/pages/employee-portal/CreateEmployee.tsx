@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import {
-  CreateBOIEmployee,
   useCreateBOIEmployeeMutation,
   useFetchAllGradeLevelsQuery,
 } from "../../../redux/services/mgmt-services";
@@ -17,10 +16,11 @@ const CreateEmployee = () => {
 
   const [createEmployeeIsLoading, setCreateEmployeeIsLoading] = useState(false);
 
-  const { refetch, isLoading }: any = useFetchAllGradeLevelsQuery();
-
-  const { data: gradeLevelData, refetch: refetchCreateEmployee }: any =
-    useFetchAllGradeLevelsQuery();
+  const {
+    data: gradeLevelData,
+    refetch,
+    isLoading,
+  }: any = useFetchAllGradeLevelsQuery();
 
   useEffect(() => {
     refetch();
@@ -243,8 +243,6 @@ const CreateEmployee = () => {
           showLabel
         />
       </div>
-
-     
 
       <div className="my-10 flex justify-center m-auto items-center">
         <Button

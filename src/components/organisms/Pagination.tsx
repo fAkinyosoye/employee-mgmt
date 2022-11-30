@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Colors } from "../atoms";
 
+import { Colors } from "../atoms";
 import usePagination, { DOTS } from "../helpers/usePagination";
 // import { CurrPageInfoTypes } from "../TransactionTable";
 
@@ -142,6 +142,7 @@ const Lists = styled.ul`
 
   @media screen and (max-width: 500px) {
     margin: 0 auto;
+    margin-bottom: 2rem;
     button {
       padding: 0.25rem 0.5rem;
       margin-right: 0.5rem;
