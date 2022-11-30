@@ -16,7 +16,6 @@ import {
   dashboard,
   profile,
   records,
-  // tablePath,
 } from "../components/utilities/routerPaths";
 
 const PageRouter = () => {

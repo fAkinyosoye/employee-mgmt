@@ -119,10 +119,6 @@ const EmployeeDetails = () => {
               "MMMM Do YYYY, h:mm:ss a"
             ),
       lastUpdatedDateTime:
-        // singleEmployeeData?.lastUpdatedDateTime &&
-        // new Date(singleEmployeeData?.lastUpdatedDateTime)
-        //   ?.toISOString()
-        //   .substring(0, 10),
         singleEmployeeData?.lastUpdatedDateTime &&
         singleEmployeeData?.lastUpdatedDateTime === "0001-01-01T00:00:00+00:00"
           ? null
@@ -157,6 +153,7 @@ const EmployeeDetails = () => {
         createdDateTime: singleEmployeeData?.createdDateTime,
         isDeleted: false,
       };
+
       const res: any = await editEmployee(variables).unwrap();
 
       if (res?.statusCode === 200) {
@@ -228,6 +225,7 @@ const EmployeeDetails = () => {
 
             <Input
               type="text"
+              readOnly
               className="basis-[45%] lg:basis-[30%]"
               label="Employee ID"
               register={register("employeeid", {
