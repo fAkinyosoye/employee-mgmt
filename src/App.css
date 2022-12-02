@@ -76,3 +76,8 @@ table tr td {
 .toastProgress {
   background: #333f48 !important;
 }
+
+input::-ms-clear,
+input::-ms-reveal {
+  display: none;
+}
