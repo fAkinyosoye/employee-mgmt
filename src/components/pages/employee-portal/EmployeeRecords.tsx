@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import CsvDownloader from "react-csv-downloader";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -24,6 +25,12 @@ const EmployeeRecords = () => {
     SearchParam: "",
   });
 
+  const [csvParams, setCsvParams] = useState<CurrPageInfoTypes>({
+    pageNo: 1,
+    pageSize: 1000000,
+    SearchParam: "",
+  });
+
   const {
     register,
     handleSubmit,
@@ -38,6 +45,16 @@ const EmployeeRecords = () => {
     pageNumber: currPageInfo.pageNo,
     pageSize: currPageInfo.pageSize,
     SearchParam: currPageInfo.SearchParam,
+  });
+
+  const {
+    data: allCsvData,
+    // refetch: allRefetch,
+    isFetching: allCsvFetching,
+  }: any = useFetchAllBOIEmployeesQuery({
+    pageNumber: csvParams.pageNo,
+    pageSize: csvParams.pageSize,
+    SearchParam: csvParams.SearchParam,
   });
 
   // useEffect(() => {
@@ -66,6 +83,102 @@ const EmployeeRecords = () => {
   const goToEmployeePage = () => {
     navigate(`create-employee`);
   };
+
+  const csvColumns = React.useMemo(
+    () => [
+      {
+        displayName: "S/N",
+        id: "idx",
+      },
+      {
+        displayName: "Employee ID",
+        id: "employeeid",
+      },
+      {
+        displayName: "Name",
+        id: "employeeName",
+      },
+      {
+        displayName: "Username",
+        id: "username",
+      },
+      {
+        displayName: "Division",
+        id: "division",
+      },
+      {
+        displayName: "Unit",
+        id: "unit",
+      },
+      {
+        displayName: "Role",
+        id: "role",
+      },
+      {
+        displayName: "Grade",
+        id: "grade",
+      },
+      {
+        displayName: "Status",
+        id: "staffStatus",
+      },
+    ],
+    []
+  );
+
+  // const fetchCsvData = () => {
+  //   setCurrPageInfo((curr) => {
+  //     return {
+  //       ...curr,
+  //       pageSize: 100000,
+  //     };
+  //   });
+  // };
+
+  const getCsvData = useCallback(() => {
+    let csvDataArr: any[] = [];
+
+    // setCurrPageInfo((curr) => {
+    //   return {
+    //     ...curr,
+    //     pageSize: 100000,
+    //   };
+    // });
+    // this is causing too many re-renders, may have to create a new query where pageSize is permanently 1000000
+
+    allCsvData?.data?.forEach((item: EmployeeDataType, index: number) => {
+      const {
+        firstname,
+        middleinitial,
+        lastname,
+        username,
+        division,
+        unit,
+        employeeid,
+        role,
+        grade,
+        staffStatus,
+      } = item;
+
+      csvDataArr.push({
+        idx: index + 1,
+        employeeid,
+        employeeName: `${firstname} ${middleinitial ?? ""} ${lastname}`,
+        username,
+        division,
+        unit,
+        role,
+        grade,
+        staffStatus,
+      });
+    });
+
+    return [...(csvDataArr || [])];
+  }, [allCsvData?.data]);
+
+  const csvData = React.useMemo(() => getCsvData(), [getCsvData]);
+
+  console.log(csvData);
 
   const getData = useCallback(() => {
     const goToSinglePage = (item: any) => {
@@ -219,14 +332,27 @@ const EmployeeRecords = () => {
             size="sm"
           />
         </form>
-        <Button
-          isLoading={false}
-          text="Create Employee Record"
-          type="button"
-          className="py-2 w-48 lg:ml-auto"
-          size="sm"
-          onClick={goToEmployeePage}
-        />
+        <div>
+          <CsvDownloader
+            filename="employeeRecords"
+            extension=".csv"
+            separator=";"
+            wrapColumnChar="'"
+            columns={csvColumns}
+            datas={csvData}
+          >
+            <button>Download CSV format</button>
+          </CsvDownloader>
+
+          <Button
+            isLoading={false}
+            text="Create Employee Record"
+            type="button"
+            className="py-2 w-48 lg:ml-auto"
+            size="sm"
+            onClick={goToEmployeePage}
+          />
+        </div>
       </div>
 
       <div className="px-4 lg:px-12 py-5">

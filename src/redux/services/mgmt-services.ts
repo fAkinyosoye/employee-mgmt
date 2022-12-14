@@ -98,6 +98,16 @@ export const mgmtServiceApi = baseApi.injectEndpoints({
       }),
       transformResponse: (response: any) => response,
     }),
+    fetchAllBOIEmployeesAsCsv: builder.query<
+      EmployeeDataType[],
+      FetchAllBOIEmployees
+    >({
+      query: (body) => ({
+        url: `${urlTemplate}/FetchAllBOIEmployee?pageNumber=${body.pageNumber}&pageSize=${body.pageSize}&SearchParam=${body.SearchParam}`,
+        refetchOnMountOrArgChange: true,
+      }),
+      transformResponse: (response: any) => response,
+    }),
     fetchAllGradeLevels: builder.query<void, void>({
       query: () => ({
         url: `${urlTemplate}/FetchAllGradeLevels`,
@@ -130,6 +140,7 @@ export const {
   // useSearchBOIEmployeeQuery,
   useFetchAllBOIEmployeesQuery,
   useFetchBOIEmployeeByIdQuery,
+  useFetchAllBOIEmployeesAsCsvQuery,
   useFetchAllGradeLevelsQuery,
   useCreateBOIEmployeeMutation,
   useEditBOIEmployeeMutation,
