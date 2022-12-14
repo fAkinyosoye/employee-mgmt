@@ -94,6 +94,7 @@ export const mgmtServiceApi = baseApi.injectEndpoints({
     >({
       query: (body) => ({
         url: `${urlTemplate}/FetchAllBOIEmployee?pageNumber=${body.pageNumber}&pageSize=${body.pageSize}&SearchParam=${body.SearchParam}`,
+        refetchOnMountOrArgChange: true,
       }),
       transformResponse: (response: any) => response,
     }),

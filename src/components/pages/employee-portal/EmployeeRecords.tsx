@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -32,7 +32,7 @@ const EmployeeRecords = () => {
 
   const {
     data: allData,
-    refetch: allRefetch,
+    // refetch: allRefetch,
     isLoading: allLoading,
   }: any = useFetchAllBOIEmployeesQuery({
     pageNumber: currPageInfo.pageNo,
@@ -40,10 +40,10 @@ const EmployeeRecords = () => {
     SearchParam: currPageInfo.SearchParam,
   });
 
-  useEffect(() => {
-    allRefetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   allRefetch();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   let employeeData: EmployeeDataType[] = allData?.data;
   let dataLength = employeeData?.length <= 1 ? 1 : allData?.count;
@@ -57,7 +57,7 @@ const EmployeeRecords = () => {
         pageSize: 10,
         SearchParam: values.search,
       });
-      allRefetch();
+      // allRefetch();
     } catch (error) {
       console.log(error);
     }
@@ -255,7 +255,7 @@ const EmployeeRecords = () => {
         setCurrPageInfo={setCurrPageInfo}
         pageLimit={Number(currPageInfo.pageSize)}
         currPageInfo={currPageInfo}
-        refetch={allRefetch}
+        // refetch={allRefetch}
       />
     </div>
   );

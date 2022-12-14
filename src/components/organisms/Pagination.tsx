@@ -13,7 +13,7 @@ type PaginationProps = {
   currentPage: number;
   lastPage: number;
   pageLimit: number;
-  refetch: Function;
+  // refetch: Function;
 };
 
 const Pagination = (props: PaginationProps) => {
@@ -25,7 +25,7 @@ const Pagination = (props: PaginationProps) => {
     currPageInfo,
     // pageLimit,
     lastPage,
-    refetch,
+    // refetch,
   } = props;
 
   const currPage = currPageInfo.pageNo;
@@ -48,7 +48,7 @@ const Pagination = (props: PaginationProps) => {
         pageNo: currInfo.pageNo - 1,
       };
     });
-    refetch();
+    // refetch();
   };
 
   const nextPage = () => {
@@ -58,7 +58,7 @@ const Pagination = (props: PaginationProps) => {
         pageNo: currInfo.pageNo + 1,
       };
     });
-    refetch();
+    // refetch();
   };
 
   const changePage = (page: number) => {
@@ -68,7 +68,7 @@ const Pagination = (props: PaginationProps) => {
         pageNo: page,
       };
     });
-    refetch();
+    // refetch();
   };
 
   return (
