@@ -126,15 +126,6 @@ const EmployeeRecords = () => {
     []
   );
 
-  // const fetchCsvData = () => {
-  //   setCurrPageInfo((curr) => {
-  //     return {
-  //       ...curr,
-  //       pageSize: 100000,
-  //     };
-  //   });
-  // };
-
   const getCsvData = useCallback(() => {
     let csvDataArr: any[] = [];
 
@@ -144,7 +135,7 @@ const EmployeeRecords = () => {
     //     pageSize: 100000,
     //   };
     // });
-    // this is causing too many re-renders, may have to create a new query where pageSize is permanently 1000000
+    // this is causing too many re-renders, had to create a new query where pageSize is permanently 1000000
 
     allCsvData?.data?.forEach((item: EmployeeDataType, index: number) => {
       const {
@@ -177,8 +168,6 @@ const EmployeeRecords = () => {
   }, [allCsvData?.data]);
 
   const csvData = React.useMemo(() => getCsvData(), [getCsvData]);
-
-  console.log(csvData);
 
   const getData = useCallback(() => {
     const goToSinglePage = (item: any) => {
@@ -300,6 +289,11 @@ const EmployeeRecords = () => {
 
   const data = React.useMemo(() => getData(), [getData]);
 
+  const getTime = () => {
+    const today = new Date();
+    return today.toISOString();
+  };
+
   return (
     <div className="mt-20">
       <Header1 className="text-center" mt="2rem" mb="0">
@@ -332,16 +326,26 @@ const EmployeeRecords = () => {
             size="sm"
           />
         </form>
-        <div>
+        <div className="flex flex-row">
           <CsvDownloader
-            filename="employeeRecords"
+            filename={`Employee_Records_${getTime()}`}
             extension=".csv"
             separator=";"
-            wrapColumnChar="'"
+            // wrapColumnChar="'"
             columns={csvColumns}
             datas={csvData}
+            meta
           >
-            <button>Download CSV format</button>
+            <Button
+              isLoading={allCsvFetching}
+              text="Download CSV format"
+              type="button"
+              className="py-2 w-48 mr-4"
+              size="sm"
+            />
+            {/* <button>
+              {allCsvFetching ? "Loading" : "Download CSV format"}
+            </button> */}
           </CsvDownloader>
 
           <Button
